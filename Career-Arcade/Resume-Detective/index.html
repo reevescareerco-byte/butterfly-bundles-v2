@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Resume Detective — an interactive ButterflyOS Career Arcade game." />
+  <title>Resume Detective | ButterflyOS Career Arcade</title>
+  <style>
+    :root {
+      --mocha-950: #241410;
+      --mocha-900: #321d18;
+      --mocha-800: #472a23;
+      --mocha-700: #5d372e;
+      --cream-50: #fffaf0;
+      --cream-100: #f8ecd7;
+      --cream-200: #ead8b8;
+      --gold-500: #c89b3c;
+      --gold-400: #ddb65f;
+      --gold-300: #efd590;
+      --ink: #211714;
+      --white: #ffffff;
+      --success: #2f7d58;
+      --danger: #a23a3a;
+      --warning: #9b6b1b;
+      --shadow: 0 22px 55px rgba(31, 17, 12, 0.2);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 15%, rgba(239, 213, 144, 0.2), transparent 25%),
+        radial-gradient(circle at 85% 8%, rgba(255, 255, 255, 0.08), transparent 24%),
+        linear-gradient(135deg, var(--mocha-950), var(--mocha-800) 52%, var(--mocha-900));
+      overflow-x: hidden;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    button:focus-visible {
+      outline: 3px solid var(--gold-300);
+      outline-offset: 3px;
+    }
+
+    .page-shell {
+      width: min(1180px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 22px 0 34px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .butterfly {
+      position: fixed;
+      pointer-events: none;
+      opacity: 0.16;
+      font-size: clamp(30px, 4vw, 54px);
+      animation: float 7s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    .butterfly.one { top: 8%; left: 3%; animation-delay: 0s; }
+    .butterfly.two { top: 28%; right: 4%; animation-delay: 1.5s; }
+    .butterfly.three { bottom: 10%; left: 7%; animation-delay: 3s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(-5deg); }
+      50% { transform: translateY(-18px) rotate(5deg); }
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      color: var(--cream-50);
+      margin-bottom: 18px;
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: linear-gradient(145deg, var(--gold-300), var(--gold-500));
+      color: var(--mocha-950);
+      box-shadow: 0 8px 24px rgba(200, 155, 60, 0.25);
+      font-size: 24px;
+      flex: 0 0 auto;
+    }
+
+    .brand-copy strong,
+    .brand-copy span {
+      display: block;
+    }
+
+    .brand-copy strong {
+      font-size: 15px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-copy span {
+      font-size: 13px;
+      color: var(--cream-200);
+    }
+
+    .ghost-button {
+      border: 1px solid rgba(255, 250, 240, 0.35);
+      color: var(--cream-50);
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 999px;
+      padding: 10px 15px;
+      cursor: pointer;
+      transition: 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .ghost-button:hover {
+      border-color: var(--gold-300);
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .game-card {
+      background: linear-gradient(180deg, rgba(255,250,240,0.99), rgba(248,236,215,0.98));
+      border: 1px solid rgba(239, 213, 144, 0.65);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      min-height: 680px;
+    }
+
+    .screen {
+      display: none;
+      min-height: 680px;
+      padding: clamp(24px, 5vw, 60px);
+    }
+
+    .screen.active {
+      display: block;
+      animation: screenIn 0.35s ease;
+    }
+
+    @keyframes screenIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .start-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: clamp(28px, 6vw, 70px);
+      align-items: center;
+      min-height: 560px;
+    }
+
+    .eyebrow {
+      color: var(--mocha-700);
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin: 0 0 12px;
+    }
+
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: clamp(42px, 8vw, 78px);
+      line-height: 0.95;
+      margin-bottom: 18px;
+      color: var(--mocha-950);
+      letter-spacing: -0.04em;
+    }
+
+    h2 {
+      color: var(--mocha-950);
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    h3 {
+      color: var(--mocha-900);
+      margin-bottom: 8px;
+    }
+
+    .lead {
+      font-size: clamp(17px, 2vw, 20px);
+      line-height: 1.65;
+      color: #5d4c44;
+      max-width: 680px;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 24px 0;
+    }
+
+    .meta-pill {
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--cream-200);
+      background: rgba(255,255,255,0.72);
+      color: var(--mocha-700);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .primary-button,
+    .secondary-button {
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 20px;
+      cursor: pointer;
+      font-weight: 800;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .primary-button {
+      background: linear-gradient(135deg, var(--mocha-800), var(--mocha-950));
+      color: var(--cream-50);
+      box-shadow: 0 10px 22px rgba(50, 29, 24, 0.24);
+    }
+
+    .primary-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px rgba(50, 29, 24, 0.28);
+    }
+
+    .secondary-button {
+      background: transparent;
+      color: var(--mocha-800);
+      border: 1px solid var(--mocha-700);
+    }
+
+    .secondary-button:hover {
+      background: rgba(93, 55, 46, 0.08);
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .detective-board {
+      background:
+        linear-gradient(120deg, rgba(36,20,16,0.92), rgba(71,42,35,0.96)),
+        repeating-linear-gradient(90deg, transparent 0 44px, rgba(255,255,255,0.02) 44px 45px);
+      border-radius: 24px;
+      padding: 26px;
+      color: var(--cream-50);
+      min-height: 430px;
+      position: relative;
+      box-shadow: inset 0 0 0 1px rgba(239,213,144,0.25);
+    }
+
+    .board-label {
+      color: var(--gold-300);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .case-folder {
+      margin: 24px auto 0;
+      background: linear-gradient(145deg, #d7b466, #b88d34);
+      color: var(--mocha-950);
+      border-radius: 8px 8px 18px 18px;
+      padding: 28px 22px;
+      position: relative;
+      max-width: 320px;
+      min-height: 255px;
+      transform: rotate(-2deg);
+      box-shadow: 0 16px 28px rgba(0,0,0,0.22);
+    }
+
+    .case-folder::before {
+      content: "";
+      position: absolute;
+      top: -18px;
+      left: 0;
+      width: 45%;
+      height: 30px;
+      background: #c99e49;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .folder-stamp {
+      display: inline-block;
+      border: 3px solid var(--danger);
+      color: var(--danger);
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      transform: rotate(-7deg);
+      margin-bottom: 24px;
+    }
+
+    .paper-lines {
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(255,255,255,0.88) 0,
+          rgba(255,255,255,0.88) 24px,
+          rgba(70,50,40,0.16) 25px
+        );
+      height: 120px;
+      border-radius: 6px;
+      padding: 14px;
+      color: var(--mocha-800);
+      font-size: 13px;
+      line-height: 25px;
+      overflow: hidden;
+    }
+
+    .game-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: start;
+      margin-bottom: 28px;
+    }
+
+    .hud {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .hud-card {
+      min-width: 95px;
+      border: 1px solid var(--cream-200);
+      background: rgba(255,255,255,0.72);
+      border-radius: 14px;
+      padding: 10px 12px;
+      text-align: center;
+    }
+
+    .hud-card span,
+    .hud-card strong {
+      display: block;
+    }
+
+    .hud-card span {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #77655d;
+      margin-bottom: 3px;
+    }
+
+    .hud-card strong {
+      color: var(--mocha-950);
+      font-size: 20px;
+    }
+
+    .progress-track {
+      height: 10px;
+      background: #e6d7bd;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--gold-500), var(--mocha-700));
+      transition: width 0.35s ease;
+    }
+
+    .case-layout {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .resume-panel,
+    .evidence-panel {
+      border-radius: 20px;
+      border: 1px solid var(--cream-200);
+      background: rgba(255,255,255,0.78);
+      padding: 22px;
+    }
+
+    .resume-panel {
+      position: relative;
+    }
+
+    .case-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--mocha-900);
+      color: var(--cream-50);
+      border-radius: 999px;
+      padding: 8px 11px;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    .resume-paper {
+      background: var(--white);
+      border: 1px solid #ddcfb8;
+      border-radius: 12px;
+      padding: 22px;
+      min-height: 360px;
+      box-shadow: 0 12px 24px rgba(50,29,24,0.08);
+    }
+
+    .resume-name {
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--mocha-950);
+      border-bottom: 2px solid var(--mocha-800);
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+    }
+
+    .resume-section {
+      margin-bottom: 16px;
+    }
+
+    .resume-section-title {
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--mocha-700);
+      margin-bottom: 8px;
+    }
+
+    .resume-copy {
+      font-size: 15px;
+      line-height: 1.55;
+      color: #423731;
+    }
+
+    .evidence-panel h3 {
+      margin-bottom: 4px;
+    }
+
+    .evidence-panel > p {
+      color: #6b5951;
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .choice-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .choice-button {
+      width: 100%;
+      text-align: left;
+      border: 1px solid #d8c7aa;
+      background: rgba(255,255,255,0.9);
+      border-radius: 14px;
+      padding: 14px 15px;
+      color: var(--ink);
+      cursor: pointer;
+      line-height: 1.45;
+      transition: 0.18s ease;
+    }
+
+    .choice-button:hover:not(:disabled) {
+      transform: translateY(-2px);
+      border-color: var(--gold-500);
+      box-shadow: 0 8px 18px rgba(50,29,24,0.08);
+    }
+
+    .choice-button:disabled {
+      cursor: default;
+      opacity: 0.85;
+    }
+
+    .choice-button.correct {
+      border-color: var(--success);
+      background: rgba(47,125,88,0.1);
+    }
+
+    .choice-button.incorrect {
+      border-color: var(--danger);
+      background: rgba(162,58,58,0.1);
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 18px;
+      border-radius: 14px;
+      padding: 16px;
+      line-height: 1.55;
+      border-left: 5px solid var(--gold-500);
+      background: #f7ecd8;
+    }
+
+    .feedback.show {
+      display: block;
+      animation: screenIn 0.25s ease;
+    }
+
+    .feedback.correct {
+      border-left-color: var(--success);
+      background: rgba(47,125,88,0.1);
+    }
+
+    .feedback.incorrect {
+      border-left-color: var(--danger);
+      background: rgba(162,58,58,0.09);
+    }
+
+    .next-row {
+      display: none;
+      justify-content: flex-end;
+      margin-top: 16px;
+    }
+
+    .next-row.show {
+      display: flex;
+    }
+
+    .results-wrap {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 34px;
+      align-items: center;
+      min-height: 560px;
+    }
+
+    .badge-panel {
+      background: linear-gradient(145deg, var(--mocha-950), var(--mocha-700));
+      border-radius: 24px;
+      padding: 34px;
+      color: var(--cream-50);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .badge-panel::after {
+      content: "🦋";
+      position: absolute;
+      right: -14px;
+      bottom: -24px;
+      font-size: 120px;
+      opacity: 0.1;
+      transform: rotate(-15deg);
+    }
+
+    .rank-medallion {
+      width: 180px;
+      height: 180px;
+      margin: 10px auto 24px;
+      border-radius: 50%;
+      border: 10px solid var(--gold-400);
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle, #f8ecd7 0 48%, #c89b3c 49% 56%, #4a2a23 57%);
+      color: var(--mocha-950);
+      font-size: 60px;
+      box-shadow: 0 0 0 8px rgba(255,255,255,0.08);
+    }
+
+    .rank-label {
+      color: var(--gold-300);
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      font-size: 12px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .rank-title {
+      font-size: 30px;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .score-card {
+      border: 1px solid var(--cream-200);
+      background: rgba(255,255,255,0.75);
+      border-radius: 16px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .score-card strong,
+    .score-card span {
+      display: block;
+    }
+
+    .score-card strong {
+      font-size: 28px;
+      color: var(--mocha-950);
+    }
+
+    .score-card span {
+      font-size: 12px;
+      color: #77655d;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-top: 4px;
+    }
+
+    .coaching-box {
+      background: #fff7e8;
+      border: 1px solid var(--gold-300);
+      border-radius: 16px;
+      padding: 18px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .instruction-list {
+      display: grid;
+      gap: 14px;
+      margin: 26px 0;
+    }
+
+    .instruction-item {
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .instruction-number {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: var(--mocha-800);
+      color: var(--cream-50);
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+    }
+
+    .instruction-item p {
+      margin: 3px 0 0;
+      color: #625149;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 860px) {
+      .start-grid,
+      .case-layout,
+      .results-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .detective-board {
+        min-height: 360px;
+      }
+
+      .game-header {
+        grid-template-columns: 1fr;
+      }
+
+      .hud {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .page-shell {
+        width: min(100% - 16px, 1180px);
+        padding-top: 10px;
+      }
+
+      .topbar {
+        align-items: flex-start;
+      }
+
+      .brand-copy span {
+        display: none;
+      }
+
+      .ghost-button {
+        padding: 9px 11px;
+        font-size: 13px;
+      }
+
+      .game-card,
+      .screen {
+        min-height: auto;
+      }
+
+      .screen {
+        padding: 22px 16px;
+      }
+
+      h1 {
+        font-size: 44px;
+      }
+
+      .score-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hud {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .hud-card {
+        min-width: 0;
+        padding: 9px 7px;
+      }
+
+      .resume-paper {
+        padding: 17px;
+      }
+
+      .button-row > button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="butterfly one" aria-hidden="true">🦋</div>
+  <div class="butterfly two" aria-hidden="true">🦋</div>
+  <div class="butterfly three" aria-hidden="true">🦋</div>
+
+  <main class="page-shell">
+    <header class="topbar">
+      <div class="brand-lockup">
+        <div class="brand-mark" aria-hidden="true">🦋</div>
+        <div class="brand-copy">
+          <strong>ButterflyOS</strong>
+          <span>Career Arcade</span>
+        </div>
+      </div>
+      <button class="ghost-button" id="exitButton" type="button">← Exit Game</button>
+    </header>
+
+    <section class="game-card" aria-live="polite">
+      <div class="screen active" id="startScreen">
+        <div class="start-grid">
+          <div>
+            <p class="eyebrow">Career Investigation Unit</p>
+            <h1>Resume<br />Detective</h1>
+            <p class="lead">
+              Examine five suspicious resume case files. Identify the evidence holding each candidate back, earn XP, and prove you can think like a recruiter.
+            </p>
+
+            <div class="meta-row">
+              <span class="meta-pill">5 Case Files</span>
+              <span class="meta-pill">Beginner–Intermediate</span>
+              <span class="meta-pill">5–7 Minutes</span>
+            </div>
+
+            <div class="button-row">
+              <button class="primary-button" id="startButton" type="button">Open the First Case</button>
+              <button class="secondary-button" id="instructionsButton" type="button">How to Play</button>
+            </div>
+          </div>
+
+          <aside class="detective-board" aria-label="Decorative detective case board">
+            <span class="board-label">Confidential Case Board</span>
+            <div class="case-folder">
+              <div class="folder-stamp">NEEDS REVIEW</div>
+              <div class="paper-lines">
+                Candidate: Jordan Taylor<br />
+                Target: Customer Service<br />
+                Evidence: Missing impact<br />
+                Status: Unsolved
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <div class="screen" id="instructionsScreen">
+        <p class="eyebrow">Field Briefing</p>
+        <h2>How to Play</h2>
+        <p class="lead">Each case contains one resume issue that could weaken the candidate’s chances.</p>
+
+        <div class="instruction-list">
+          <div class="instruction-item">
+            <div class="instruction-number">1</div>
+            <div>
+              <h3>Review the evidence</h3>
+              <p>Read the resume excerpt and consider what a recruiter or ATS would notice first.</p>
+            </div>
+          </div>
+
+          <div class="instruction-item">
+            <div class="instruction-number">2</div>
+            <div>
+              <h3>Select the strongest finding</h3>
+              <p>Choose the issue that creates the greatest risk for the candidate.</p>
+            </div>
+          </div>
+
+          <div class="instruction-item">
+            <div class="instruction-number">3</div>
+            <div>
+              <h3>Study the coaching note</h3>
+              <p>Every answer includes an explanation so you can apply the lesson to a real resume.</p>
+            </div>
+          </div>
+
+          <div class="instruction-item">
+            <div class="instruction-number">4</div>
+            <div>
+              <h3>Build your detective rank</h3>
+              <p>Correct answers earn 100 XP. Your final accuracy determines your title.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="button-row">
+          <button class="primary-button" id="beginFromInstructions" type="button">Begin Investigation</button>
+          <button class="secondary-button" id="backToStart" type="button">Back</button>
+        </div>
+      </div>
+
+      <div class="screen" id="gameScreen">
+        <div class="game-header">
+          <div>
+            <p class="eyebrow" id="caseEyebrow">Case File 1 of 5</p>
+            <h2 id="caseTitle">The Empty Claim</h2>
+            <p class="lead" id="casePrompt">Review the resume evidence and identify the most serious issue.</p>
+          </div>
+
+          <div class="hud" aria-label="Game status">
+            <div class="hud-card">
+              <span>Score</span>
+              <strong id="scoreValue">0</strong>
+            </div>
+            <div class="hud-card">
+              <span>XP</span>
+              <strong id="xpValue">0</strong>
+            </div>
+            <div class="hud-card">
+              <span>Streak</span>
+              <strong id="streakValue">0</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="progress-track" aria-label="Case progress">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="case-layout">
+          <article class="resume-panel">
+            <span class="case-tag" id="caseTag">🔎 Customer Service Resume</span>
+            <div class="resume-paper" id="resumePaper"></div>
+          </article>
+
+          <aside class="evidence-panel">
+            <h3>What is the strongest evidence?</h3>
+            <p>Select the issue most likely to reduce the candidate’s interview chances.</p>
+            <div class="choice-list" id="choiceList"></div>
+            <div class="feedback" id="feedbackBox"></div>
+            <div class="next-row" id="nextRow">
+              <button class="primary-button" id="nextButton" type="button">Next Case</button>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <div class="screen" id="resultsScreen">
+        <div class="results-wrap">
+          <div class="badge-panel">
+            <p class="rank-label">Investigation Complete</p>
+            <div class="rank-medallion" aria-hidden="true">🕵🏽</div>
+            <div class="rank-title" id="rankTitle">Senior Resume Detective</div>
+            <p id="rankMessage">You identified the patterns recruiters notice and built a strong evidence record.</p>
+          </div>
+
+          <div>
+            <p class="eyebrow">Final Case Report</p>
+            <h2>Your Detective Results</h2>
+            <p class="lead">Use this report to strengthen the next resume you review or write.</p>
+
+            <div class="score-grid">
+              <div class="score-card">
+                <strong id="finalScore">0</strong>
+                <span>Total Score</span>
+              </div>
+              <div class="score-card">
+                <strong id="finalAccuracy">0%</strong>
+                <span>Accuracy</span>
+              </div>
+              <div class="score-card">
+                <strong id="finalXp">0</strong>
+                <span>XP Earned</span>
+              </div>
+            </div>
+
+            <div class="coaching-box" id="coachingBox"></div>
+
+            <div class="button-row">
+              <button class="primary-button" id="replayButton" type="button">Replay Game</button>
+              <button class="secondary-button" id="resultsExitButton" type="button">Return to Career Arcade</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const cases = [
+      {
+        title: "The Empty Claim",
+        tag: "🔎 Customer Service Resume",
+        prompt: "This candidate wants a remote customer service role.",
+        resume: `
+          <div class="resume-name">Jordan Taylor</div>
+          <div class="resume-section">
+            <div class="resume-section-title">Professional Summary</div>
+            <div class="resume-copy">Hardworking team player seeking a position where I can use my skills and grow with a company.</div>
+          </div>
+          <div class="resume-section">
+            <div class="resume-section-title">Experience</div>
+            <div class="resume-copy"><strong>Customer Service Associate</strong><br />Helped customers with questions and problems. Answered phones and completed other duties as assigned.</div>
+          </div>
+        `,
+        choices: [
+          "The resume uses too many numerical achievements.",
+          "The content is vague and does not prove skills, scope, or impact.",
+          "The job title is too specific for customer service roles.",
+          "The summary includes too many industry keywords."
+        ],
+        answer: 1,
+        feedback: "Correct. The resume makes broad claims but provides no volume, tools, outcomes, or evidence. Recruiters cannot tell what Jordan handled or how well the work was performed."
+      },
+      {
+        title: "The Missing Match",
+        tag: "🧠 ATS Review",
+        prompt: "The target job repeatedly requires Salesforce CRM and first-contact resolution.",
+        resume: `
+          <div class="resume-name">Morgan Lee</div>
+          <div class="resume-section">
+            <div class="resume-section-title">Core Competencies</div>
+            <div class="resume-copy">Customer Service • Communication • Multitasking • Problem Solving</div>
+          </div>
+          <div class="resume-section">
+            <div class="resume-section-title">Experience</div>
+            <div class="resume-copy"><strong>Remote Support Specialist</strong><br />Resolved account questions, updated customer records, and escalated complex concerns to the appropriate department.</div>
+          </div>
+        `,
+        choices: [
+          "The resume does not include the exact relevant keywords the job requires.",
+          "The resume should remove all skills from the competencies section.",
+          "The resume should include the candidate's full street address.",
+          "The experience should be written as one long paragraph."
+        ],
+        answer: 0,
+        feedback: "Correct. ATS alignment depends on relevant exact-match terminology. If Morgan actually used Salesforce CRM and achieved first-contact resolution, those terms should be proven naturally in the resume."
+      },
+      {
+        title: "The Time Traveler",
+        tag: "⏳ Resume Consistency",
+        prompt: "The candidate is still employed in this position.",
+        resume: `
+          <div class="resume-name">Avery Brooks</div>
+          <div class="resume-section">
+            <div class="resume-section-title">Experience</div>
+            <div class="resume-copy"><strong>Claims Support Specialist | 2024–Present</strong><br />Processed 90+ claims daily and maintained 97% quality.<br />Resolved escalated billing issues and documented outcomes in Salesforce.</div>
+          </div>
+        `,
+        choices: [
+          "The current position is written in past tense instead of present tense.",
+          "The metrics should be removed because they are too specific.",
+          "Salesforce should never appear in an experience bullet.",
+          "The date range should omit the word Present."
+        ],
+        answer: 0,
+        feedback: "Correct. Current responsibilities should generally use present tense. Prior roles should use past tense. Consistent tense improves clarity and credibility."
+      },
+      {
+        title: "The Hidden Outcome",
+        tag: "📈 Achievement Evidence",
+        prompt: "The candidate has strong performance results, but the bullet does not show them.",
+        resume: `
+          <div class="resume-name">Cameron Reed</div>
+          <div class="resume-section">
+            <div class="resume-section-title">Experience</div>
+            <div class="resume-copy"><strong>Billing Representative</strong><br />Answered customer calls about invoices and processed payments using company systems.</div>
+          </div>
+          <div class="resume-section">
+            <div class="resume-section-title">Known Performance Data</div>
+            <div class="resume-copy">80+ calls daily • 96% QA score • 18% reduction in repeat contacts</div>
+          </div>
+        `,
+        choices: [
+          "Move all numbers to the education section.",
+          "Turn the bullet into a paragraph with more responsibilities.",
+          "Integrate the metrics into an achievement-focused bullet.",
+          "Replace the performance data with generic soft skills."
+        ],
+        answer: 2,
+        feedback: "Correct. The metrics should be incorporated directly into the experience bullet—for example: “Resolved 80+ billing inquiries daily while maintaining 96% QA and reducing repeat contacts by 18%.”"
+      },
+      {
+        title: "The Formatting Trap",
+        tag: "⚠️ ATS Formatting",
+        prompt: "The resume is being submitted through a standard applicant tracking system.",
+        resume: `
+          <div class="resume-name">Riley Morgan</div>
+          <div class="resume-section">
+            <div class="resume-section-title">Resume Layout</div>
+            <div class="resume-copy">Two-column design<br />Contact details inside the header<br />Skills displayed as graphics<br />Employment dates placed in text boxes</div>
+          </div>
+          <div class="resume-section">
+            <div class="resume-section-title">Target</div>
+            <div class="resume-copy">High-volume remote customer support role</div>
+          </div>
+        `,
+        choices: [
+          "The design may interfere with ATS parsing and should use a cleaner structure.",
+          "Every ATS requires colorful graphics and text boxes.",
+          "Employment dates should be removed from the resume.",
+          "The resume should use more columns to fit additional content."
+        ],
+        answer: 0,
+        feedback: "Correct. Complex columns, graphics, headers, and text boxes can disrupt parsing. A clean, single-column structure is generally safer for ATS submissions."
+      }
+    ];
+
+    const startScreen = document.getElementById("startScreen");
+    const instructionsScreen = document.getElementById("instructionsScreen");
+    const gameScreen = document.getElementById("gameScreen");
+    const resultsScreen = document.getElementById("resultsScreen");
+
+    const startButton = document.getElementById("startButton");
+    const instructionsButton = document.getElementById("instructionsButton");
+    const beginFromInstructions = document.getElementById("beginFromInstructions");
+    const backToStart = document.getElementById("backToStart");
+    const nextButton = document.getElementById("nextButton");
+    const replayButton = document.getElementById("replayButton");
+    const exitButton = document.getElementById("exitButton");
+    const resultsExitButton = document.getElementById("resultsExitButton");
+
+    const caseEyebrow = document.getElementById("caseEyebrow");
+    const caseTitle = document.getElementById("caseTitle");
+    const casePrompt = document.getElementById("casePrompt");
+    const caseTag = document.getElementById("caseTag");
+    const resumePaper = document.getElementById("resumePaper");
+    const choiceList = document.getElementById("choiceList");
+    const feedbackBox = document.getElementById("feedbackBox");
+    const nextRow = document.getElementById("nextRow");
+    const progressFill = document.getElementById("progressFill");
+    const scoreValue = document.getElementById("scoreValue");
+    const xpValue = document.getElementById("xpValue");
+    const streakValue = document.getElementById("streakValue");
+
+    let currentCase = 0;
+    let score = 0;
+    let xp = 0;
+    let streak = 0;
+    let correctAnswers = 0;
+    let answered = false;
+
+    function showScreen(screen) {
+      [startScreen, instructionsScreen, gameScreen, resultsScreen].forEach(item => {
+        item.classList.remove("active");
+      });
+      screen.classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function resetGame() {
+      currentCase = 0;
+      score = 0;
+      xp = 0;
+      streak = 0;
+      correctAnswers = 0;
+      answered = false;
+      updateHud();
+      renderCase();
+      showScreen(gameScreen);
+    }
+
+    function updateHud() {
+      scoreValue.textContent = score;
+      xpValue.textContent = xp;
+      streakValue.textContent = streak;
+      progressFill.style.width = `${(currentCase / cases.length) * 100}%`;
+    }
+
+    function renderCase() {
+      answered = false;
+      const current = cases[currentCase];
+
+      caseEyebrow.textContent = `Case File ${currentCase + 1} of ${cases.length}`;
+      caseTitle.textContent = current.title;
+      casePrompt.textContent = current.prompt;
+      caseTag.textContent = current.tag;
+      resumePaper.innerHTML = current.resume;
+      choiceList.innerHTML = "";
+      feedbackBox.className = "feedback";
+      feedbackBox.innerHTML = "";
+      nextRow.classList.remove("show");
+      nextButton.textContent = currentCase === cases.length - 1 ? "View Final Report" : "Next Case";
+
+      current.choices.forEach((choice, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "choice-button";
+        button.textContent = choice;
+        button.addEventListener("click", () => selectAnswer(index, button));
+        choiceList.appendChild(button);
+      });
+
+      progressFill.style.width = `${(currentCase / cases.length) * 100}%`;
+    }
+
+    function selectAnswer(selectedIndex, selectedButton) {
+      if (answered) return;
+      answered = true;
+
+      const current = cases[currentCase];
+      const buttons = [...choiceList.querySelectorAll(".choice-button")];
+      buttons.forEach(button => {
+        button.disabled = true;
+      });
+
+      const isCorrect = selectedIndex === current.answer;
+
+      if (isCorrect) {
+        selectedButton.classList.add("correct");
+        score += 100 + (streak * 20);
+        xp += 100;
+        streak += 1;
+        correctAnswers += 1;
+        feedbackBox.classList.add("show", "correct");
+        feedbackBox.innerHTML = `<strong>Evidence confirmed.</strong><br>${current.feedback}`;
+      } else {
+        selectedButton.classList.add("incorrect");
+        buttons[current.answer].classList.add("correct");
+        streak = 0;
+        feedbackBox.classList.add("show", "incorrect");
+        feedbackBox.innerHTML = `<strong>Case correction.</strong><br>${current.feedback}`;
+      }
+
+      updateHud();
+      nextRow.classList.add("show");
+    }
+
+    function showResults() {
+      progressFill.style.width = "100%";
+      const accuracy = Math.round((correctAnswers / cases.length) * 100);
+
+      let rank = "Resume Rookie";
+      let rankMessage = "You completed the investigation. Review the coaching notes and replay to sharpen your eye.";
+      let coaching = "Focus on the evidence recruiters can verify: relevant keywords, measurable performance, clear formatting, strong action verbs, and consistent tense.";
+
+      if (accuracy === 100) {
+        rank = "Butterfly Bureau Chief";
+        rankMessage = "Flawless investigation. You identified every resume risk and demonstrated expert-level judgment.";
+        coaching = "Your review instincts are highly developed. Continue applying this same standard to ATS alignment, quantified impact, and recruiter readability.";
+      } else if (accuracy >= 80) {
+        rank = "Senior Resume Detective";
+        rankMessage = "Strong investigation. You recognized the patterns most likely to affect interview conversion.";
+        coaching = "You are close to expert level. Pay special attention to whether every claimed skill is supported by evidence and whether current roles use present tense.";
+      } else if (accuracy >= 60) {
+        rank = "Evidence Analyst";
+        rankMessage = "Solid foundation. You identified several important risks and can improve with another case review.";
+        coaching = "Prioritize the highest-impact issue first: vague content, missing target keywords, weak metrics, or formatting that may block ATS parsing.";
+      }
+
+      document.getElementById("rankTitle").textContent = rank;
+      document.getElementById("rankMessage").textContent = rankMessage;
+      document.getElementById("finalScore").textContent = score;
+      document.getElementById("finalAccuracy").textContent = `${accuracy}%`;
+      document.getElementById("finalXp").textContent = xp;
+      document.getElementById("coachingBox").innerHTML = `<strong>Detective Coaching:</strong><br>${coaching}`;
+
+      showScreen(resultsScreen);
+    }
+
+    function exitGame() {
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = "../";
+      }
+    }
+
+    startButton.addEventListener("click", resetGame);
+    instructionsButton.addEventListener("click", () => showScreen(instructionsScreen));
+    beginFromInstructions.addEventListener("click", resetGame);
+    backToStart.addEventListener("click", () => showScreen(startScreen));
+
+    nextButton.addEventListener("click", () => {
+      if (currentCase < cases.length - 1) {
+        currentCase += 1;
+        renderCase();
+        updateHud();
+      } else {
+        showResults();
+      }
+    });
+
+    replayButton.addEventListener("click", resetGame);
+    exitButton.addEventListener("click", exitGame);
+    resultsExitButton.addEventListener("click", exitGame);
+  </script>
+</body>
+</html>

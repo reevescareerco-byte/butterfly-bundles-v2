@@ -208,10 +208,10 @@
             <p class="eyebrow">Career Jungle Expedition</p>
             <h1>Keyword<br />Hunter</h1>
             <p class="lead">
-              Search three job descriptions for high-value ATS keywords. Find the right terms, avoid decoys, and build the strongest possible match score.
+              Search five job-description missions for high-value ATS keywords. Find the right terms, avoid decoys, and build the strongest possible match score.
             </p>
             <div class="meta-row">
-              <span class="pill">3 Hunting Rounds</span>
+              <span class="pill">5 Jungle Missions</span>
               <span class="pill">Intermediate</span>
               <span class="pill">6–8 Minutes</span>
             </div>
@@ -238,7 +238,7 @@
       <div class="screen" id="instructionsScreen">
         <p class="eyebrow">Expedition Briefing</p>
         <h2>How to Play</h2>
-        <p class="lead">Each round contains a job description with valuable keywords hidden in plain sight.</p>
+        <p class="lead">Each mission contains valuable ATS keywords hidden in plain sight.</p>
 
         <div class="instruction-list">
           <div class="instruction-item">
@@ -266,7 +266,7 @@
             <div class="instruction-number">4</div>
             <div>
               <h3>Finish the hunt</h3>
-              <p>Complete all three rounds to earn your final Keyword Hunter rank.</p>
+              <p>Complete all five missions to earn your final Keyword Hunter rank.</p>
             </div>
           </div>
         </div>
@@ -280,7 +280,7 @@
       <div class="screen" id="gameScreen">
         <div class="game-header">
           <div>
-            <p class="eyebrow" id="roundEyebrow">Round 1 of 3</p>
+            <p class="eyebrow" id="roundEyebrow">Mission 1 of 5</p>
             <h2 id="roundTitle">Customer Support Trail</h2>
             <p class="lead" id="roundPrompt"></p>
           </div>
@@ -320,7 +320,7 @@
             <div class="found-list" id="foundList"></div>
 
             <div class="finish-row">
-              <button class="primary" id="finishRoundButton" type="button">Finish Round</button>
+              <button class="primary" id="finishRoundButton" type="button">Finish Mission</button>
             </div>
           </aside>
         </div>
@@ -361,7 +361,7 @@
   <script>
     const rounds = [
       {
-        title: "Customer Support Trail",
+        title: "Customer Service Expedition",
         prompt: "Find the terms most likely to matter for a remote customer support resume.",
         jobTitle: "Remote Customer Support Specialist",
         text: [
@@ -375,7 +375,7 @@
         ]
       },
       {
-        title: "Healthcare Operations Trail",
+        title: "Healthcare Jungle",
         prompt: "Find the healthcare and workflow keywords a recruiter would expect to see.",
         jobTitle: "Patient Support Representative",
         text: [
@@ -390,7 +390,7 @@
         ]
       },
       {
-        title: "Claims & Finance Trail",
+        title: "Claims Canyon",
         prompt: "Find the high-value claims, financial, and performance terms.",
         jobTitle: "Claims Resolution Specialist",
         text: [
@@ -401,6 +401,33 @@
           ["and", false], ["document", false], ["resolution", false], ["outcomes", false],
           ["while", false], ["processing 120+ claims daily", true, "metric"], ["and", false],
           ["maintaining 98% accuracy", true, "metric"], [".", false]
+        ]
+      },
+      {
+        title: "Sales Summit",
+        prompt: "Find the terms that signal strong sales execution and measurable pipeline impact.",
+        jobTitle: "Remote Inside Sales Representative",
+        text: [
+          ["Manage", false], ["inbound", false], ["and", false], ["outbound", false], ["leads", false],
+          ["using", false], ["Salesforce CRM", true, "software"], ["and", false], ["AI-guided sales tools", true, "software"],
+          [".", false], ["Conduct", false], ["lead qualification", true, "skill"], [",", false],
+          ["objection handling", true, "skill"], [",", false], ["and", false], ["pipeline management", true, "industry"],
+          ["to", false], ["convert", false], ["prospects", false], ["and", false],
+          ["exceed monthly revenue targets", true, "metric"], ["while", false],
+          ["maintaining 95% CRM accuracy", true, "metric"], [".", false]
+        ]
+      },
+      {
+        title: "Recruiter's Treasure",
+        prompt: "Final mission: identify the keywords missing from the resume but required by the job description.",
+        jobTitle: "Client Success Specialist — Final Boss",
+        text: [
+          ["Job requires:", false], ["client retention", true, "industry"], [",", false],
+          ["relationship management", true, "skill"], [",", false], ["Zendesk", true, "software"], [",", false],
+          ["renewal support", true, "industry"], [",", false], ["cross-functional collaboration", true, "skill"], [",", false],
+          ["and", false], ["90%+ customer satisfaction", true, "metric"], [".", false],
+          ["Resume currently says:", false], ["helped customers", false], [",", false],
+          ["answered questions", false], [",", false], ["and", false], ["worked with teams", false], [".", false]
         ]
       }
     ];
@@ -449,7 +476,7 @@
       roundLocked = false;
       foundThisRound = [];
       const round = rounds[currentRound];
-      document.getElementById("roundEyebrow").textContent = `Round ${currentRound+1} of ${rounds.length}`;
+      document.getElementById("roundEyebrow").textContent = `Mission ${currentRound+1} of ${rounds.length}`;
       document.getElementById("roundTitle").textContent = round.title;
       document.getElementById("roundPrompt").textContent = round.prompt;
       document.getElementById("jobTitle").textContent = round.jobTitle;
@@ -472,7 +499,7 @@
       document.getElementById("statusBox").className = "status-box";
       document.getElementById("statusBox").textContent = "Click the job-description terms you believe are strong ATS keywords.";
       document.getElementById("foundList").innerHTML = "";
-      document.getElementById("finishRoundButton").textContent = currentRound === rounds.length-1 ? "Finish Game" : "Finish Round";
+      document.getElementById("finishRoundButton").textContent = currentRound === rounds.length-1 ? "Finish Game" : "Finish Mission";
       updateHud();
     }
 
@@ -540,10 +567,10 @@
       if(missed.length===0){
         score += 100;
         status.className = "status-box";
-        status.innerHTML = "<strong>Perfect round.</strong> You captured every high-value keyword and earned a 100-point completion bonus.";
+        status.innerHTML = "<strong>Perfect mission.</strong> You captured every high-value keyword and earned a 100-point completion bonus.";
       } else {
         status.className = "status-box warning";
-        status.innerHTML = `<strong>Round review.</strong> You missed ${missed.length} keyword${missed.length===1?"":"s"}. The highlighted terms are the strongest resume-targeting opportunities.`;
+        status.innerHTML = `<strong>Mission review.</strong> You missed ${missed.length} keyword${missed.length===1?"":"s"}. The highlighted terms are the strongest resume-targeting opportunities.`;
       }
 
       updateHud();

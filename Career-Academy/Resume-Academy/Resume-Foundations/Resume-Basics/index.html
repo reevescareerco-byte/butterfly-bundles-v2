@@ -4,252 +4,690 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Resume Basics | Butterfly University</title>
-<meta name="description" content="Interactive Butterfly University lesson introducing resume purpose, formats, sections, and preparation.">
+<meta name="description" content="A detailed, interactive Butterfly University lesson on resume purpose, formats, preparation, and strategy.">
 <style>
 :root{
   --mocha:#3b211b;--mocha2:#5a382e;--cream:#fff8eb;--cream2:#f0dfc2;
   --green:#2f7158;--green2:#68a386;--gold:#d3aa4d;--blue:#3f6f8f;
-  --red:#a94747;--amber:#ad7725;--ink:#281a16;--muted:#75665e;--line:#e4d5bc;--white:#fff;
+  --purple:#6c5a88;--red:#a94747;--amber:#ad7725;--ink:#281a16;
+  --muted:#75665e;--line:#e4d5bc;--white:#fff;--soft:#edf5f0;
 }
 *{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
-  margin:0;min-height:100vh;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);
+  margin:0;min-height:100vh;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--ink);
   background:
     radial-gradient(circle at 12% 10%,rgba(104,163,134,.18),transparent 26%),
     radial-gradient(circle at 88% 4%,rgba(211,170,77,.16),transparent 23%),
     linear-gradient(135deg,#25130f,#4a2a22 55%,#311a15);
 }
-button{font:inherit}
-button:focus-visible{outline:3px solid #f0d58d;outline-offset:3px}
+button,a{font:inherit}
+a{text-decoration:none}
+button:focus-visible,a:focus-visible{outline:3px solid #f0d58d;outline-offset:3px}
 .shell{width:min(1260px,calc(100% - 24px));margin:auto;padding:18px 0 34px}
 .top{display:flex;justify-content:space-between;align-items:center;color:var(--cream);margin-bottom:14px}
 .brand{display:flex;align-items:center;gap:10px}
 .logo{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(145deg,var(--green2),var(--green));font-size:22px}
-.brand strong,.brand span{display:block}.brand strong{font-size:14px;letter-spacing:.1em;text-transform:uppercase}.brand span{font-size:12px;color:#deccb3}
+.brand strong,.brand span{display:block}
+.brand strong{font-size:14px;letter-spacing:.1em;text-transform:uppercase}
+.brand span{font-size:12px;color:#deccb3}
 .exit{border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.05);color:var(--cream);padding:9px 14px;border-radius:999px;cursor:pointer}
-.app{background:linear-gradient(180deg,#fffaf1,#f5e8d3);border-radius:28px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.25);min-height:800px}
+.app{background:linear-gradient(180deg,#fffaf1,#f5e8d3);border-radius:28px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.25)}
 .screen{display:none;min-height:800px;padding:clamp(22px,4vw,48px)}
 .screen.active{display:block;animation:fade .28s ease}
 @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .ey{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:900;color:var(--green);margin:0 0 10px}
-h1,h2,h3,p{margin-top:0}
+h1,h2,h3,h4,p{margin-top:0}
 h1{font-size:clamp(46px,6vw,78px);line-height:.94;letter-spacing:-.05em;margin-bottom:18px}
 h2{font-size:clamp(30px,4vw,44px);line-height:1.05;margin-bottom:10px}
 h3{margin-bottom:8px;color:var(--mocha)}
-.lead{font-size:clamp(16px,2vw,19px);line-height:1.6;color:#63534b;max-width:780px}
-.start{display:grid;grid-template-columns:1fr 1fr;gap:42px;align-items:center;min-height:660px}
+h4{margin-bottom:6px}
+.lead{font-size:clamp(16px,2vw,19px);line-height:1.65;color:#63534b;max-width:800px}
+.start{display:grid;grid-template-columns:1.05fr .95fr;gap:42px;align-items:center;min-height:650px}
 .tags{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0}
 .tag{background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 12px;font-size:13px;font-weight:800}
 .btnrow{display:flex;gap:12px;flex-wrap:wrap}
-.primary,.secondary,.card,.answer,.sort-card{
+.primary,.secondary,.answer,.tab,.format-card,.myth-card{
   border:0;border-radius:14px;padding:13px 17px;font-weight:900;cursor:pointer;transition:.17s
 }
 .primary{background:linear-gradient(135deg,var(--green),var(--mocha));color:white;box-shadow:0 11px 24px rgba(47,113,88,.22)}
 .secondary{background:transparent;border:1px solid var(--mocha2);color:var(--mocha2)}
-.primary:hover,.card:hover,.answer:hover,.sort-card:hover{transform:translateY(-2px)}
-.preview{background:linear-gradient(145deg,#203d31,var(--mocha2));padding:24px;border-radius:24px;color:white;min-height:540px}
+.primary:hover,.secondary:hover,.answer:hover,.tab:hover,.format-card:hover,.myth-card:hover{transform:translateY(-2px)}
+.preview{background:linear-gradient(145deg,#203d31,var(--mocha2));padding:24px;border-radius:24px;color:white;min-height:530px}
 .preview-card{background:#fff;color:var(--ink);border-radius:18px;padding:20px;box-shadow:0 18px 36px rgba(0,0,0,.25)}
 .preview-step{display:grid;grid-template-columns:42px 1fr;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}
 .preview-step:last-child{border-bottom:0}
 .preview-num{width:38px;height:38px;border-radius:12px;background:#edf5f0;color:var(--green);display:grid;place-items:center;font-weight:900}
-.preview-step strong,.preview-step span{display:block}.preview-step span{font-size:12px;color:var(--muted);margin-top:3px}
-.instructions{display:grid;gap:14px;margin:25px 0}
-.instruction{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:14px;border:1px solid var(--line);border-radius:14px;background:#fff}
-.num{width:44px;height:44px;border-radius:13px;background:var(--green);color:white;display:grid;place-items:center;font-weight:900}
-.instruction strong{display:block;margin-bottom:4px}.instruction p{margin:0;color:#62534b;line-height:1.55}
+.preview-step strong,.preview-step span{display:block}
+.preview-step span{font-size:12px;color:var(--muted);margin-top:3px;line-height:1.45}
 .lesson-head{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:start;margin-bottom:16px}
 .hud{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}
 .hudcard{min-width:105px;background:#fff;border:1px solid var(--line);border-radius:13px;padding:10px;text-align:center}
-.hudcard span,.hudcard strong{display:block}.hudcard span{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}.hudcard strong{font-size:20px}
-.progress{height:9px;background:#e2d3b8;border-radius:999px;overflow:hidden;margin-bottom:18px}.progress div{height:100%;background:linear-gradient(90deg,var(--green),var(--gold));transition:.25s}
-.panel{background:rgba(255,255,255,.82);border:1px solid var(--line);border-radius:18px;padding:18px}
-.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.card{background:#fff;border:1px solid #dfceb2;color:var(--ink);text-align:left;min-height:185px}
-.card.selected{background:#edf5f0;border:2px solid var(--green)}
-.card strong,.card span{display:block}.card strong{font-size:19px}.card span{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5}
+.hudcard span,.hudcard strong{display:block}
+.hudcard span{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.hudcard strong{font-size:20px}
+.progress{height:9px;background:#e2d3b8;border-radius:999px;overflow:hidden;margin-bottom:18px}
+.progress div{height:100%;background:linear-gradient(90deg,var(--green),var(--gold));transition:.25s}
+.panel{background:rgba(255,255,255,.84);border:1px solid var(--line);border-radius:18px;padding:20px}
+.professor{display:grid;grid-template-columns:62px 1fr;gap:14px;align-items:start;padding:18px;border-radius:17px;background:linear-gradient(135deg,#f8f3e5,#edf5f0);border:1px solid #d9d0b6;margin:18px 0}
+.prof-avatar{width:62px;height:62px;border-radius:20px;background:linear-gradient(145deg,var(--green2),var(--green));display:grid;place-items:center;font-size:30px;color:white}
+.professor strong{display:block;color:var(--green);font-size:17px;margin-bottom:4px}
+.professor p{margin:0;line-height:1.6;color:#51453f}
+.objectives{display:grid;gap:10px;margin-top:16px}
+.objective{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start}
+.check{width:34px;height:34px;border-radius:11px;background:var(--soft);display:grid;place-items:center;color:var(--green);font-weight:900}
+.content-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.concept-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}
+.concept-card p{line-height:1.65;color:#5d4f47}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:center;margin:18px 0}
+.flow-step{background:white;border:1px solid var(--line);border-radius:15px;padding:16px;text-align:center;min-height:110px;display:flex;flex-direction:column;justify-content:center}
+.flow-step strong{color:var(--green)}
+.arrow{text-align:center;font-size:26px;color:var(--gold);font-weight:900}
+.callout{padding:16px;border-radius:14px;line-height:1.6;margin:16px 0}
+.insight{background:#eef4f8;border:1px solid #c9dbe6}
+.warning{background:#fff3df;border:1px solid #e2c18b}
+.tip{background:#edf5f0;border:1px solid #c7ddd0}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tab{background:#fff;border:1px solid var(--line);color:var(--ink)}
+.tab.active{background:var(--green);color:white}
+.tab-panel{display:none;background:white;border:1px solid var(--line);border-radius:16px;padding:18px}
+.tab-panel.active{display:block}
+.resume-mini{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:12px}
+.resume-mini .name{font-size:22px;font-weight:900}
+.resume-mini .line{height:8px;background:#e5ded3;border-radius:999px;margin:7px 0}
+.w90{width:90%}.w80{width:80%}.w70{width:70%}.w60{width:60%}
+.procon{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.procon div{padding:13px;border-radius:13px;border:1px solid var(--line);background:#fffaf1}
+.format-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.format-card{background:#fff;border:1px solid #dfceb2;color:var(--ink);text-align:left;min-height:220px}
+.format-card.selected{background:#edf5f0;border:2px solid var(--green)}
+.format-card strong,.format-card span{display:block}
+.format-card strong{font-size:19px}
+.format-card span{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5}
+.myth-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.myth-card{background:#fff;border:1px solid #dfceb2;color:var(--ink);text-align:left}
+.myth-card.revealed{background:#f8fcfa;border:2px solid var(--green)}
+.myth-card strong,.myth-card span{display:block}
+.myth-card span{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.45}
 .compare{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .compare-box{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}
-.compare-box h3{margin-bottom:12px}
-.compare-row{padding:10px 0;border-bottom:1px solid var(--line)}.compare-row:last-child{border-bottom:0}
-.sort-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:18px}
-.sort-pool{display:grid;gap:10px}
-.sort-card{background:#fff;border:1px solid #dfceb2;color:var(--ink);text-align:left}
-.sort-card.selected{outline:3px solid var(--gold)}
-.drop-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.drop-zone{border:2px dashed #c8b89f;border-radius:15px;padding:12px;min-height:220px;background:#fffaf1}
-.drop-zone h3{margin-bottom:8px}
-.drop-zone.over{border-color:var(--green);background:#edf5f0}
-.drop-list{display:grid;gap:8px}
-.drop-list .sort-card{padding:10px;font-size:13px}
+.compare-row{padding:10px 0;border-bottom:1px solid var(--line)}
+.compare-row:last-child{border-bottom:0}
 .answer-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 .answer{background:#fff;border:1px solid #dfceb2;color:var(--ink);text-align:left;line-height:1.45}
-.answer.good{background:#e9f5ed;border-color:var(--green)}.answer.bad{background:#fbeaea;border-color:var(--red)}
-.feedback{display:none;margin-top:14px;border-radius:14px;padding:16px;line-height:1.55}.feedback.show{display:block}.feedback.good{background:#e9f5ed;border:1px solid #bddbc7}.feedback.mid{background:#fff3df;border:1px solid #e2c18b}.feedback.bad{background:#fbeaea;border:1px solid #e1b8b8}
+.answer.selected{outline:3px solid var(--gold)}
+.answer.good{background:#e9f5ed;border-color:var(--green)}
+.answer.bad{background:#fbeaea;border-color:var(--red)}
+.feedback{display:none;margin-top:14px;border-radius:14px;padding:16px;line-height:1.55}
+.feedback.show{display:block}
+.feedback.good{background:#e9f5ed;border:1px solid #bddbc7}
+.feedback.mid{background:#fff3df;border:1px solid #e2c18b}
+.feedback.bad{background:#fbeaea;border:1px solid #e1b8b8}
+.reflection{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.reflection button{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px;text-align:left;font-weight:800;cursor:pointer}
+.reflection button.selected{background:#edf5f0;border:2px solid var(--green)}
+.resource-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.resource{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}
+.resource a{display:inline-block;margin-top:10px;color:var(--green);font-weight:900}
 .quiz-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:18px}
 .quiz-side{background:linear-gradient(145deg,#203d31,var(--mocha2));color:white;border-radius:16px;padding:20px}
-.quiz-side p{color:#d8ecdf;line-height:1.5}
-.quiz-dots{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.quiz-dot{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.1);font-weight:900}.quiz-dot.on{background:var(--gold);color:#3f2d0f}
+.quiz-side p{color:#d8ecdf;line-height:1.55}
+.quiz-dots{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.quiz-dot{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.1);font-weight:900}
+.quiz-dot.on{background:var(--gold);color:#3f2d0f}
 .results{display:grid;grid-template-columns:.9fr 1.1fr;gap:32px;align-items:center;min-height:640px}
 .rank{background:linear-gradient(145deg,#203d31,var(--mocha2));color:white;border-radius:24px;padding:34px;text-align:center}
 .rank-badge{width:170px;height:170px;border-radius:50%;margin:10px auto 20px;display:grid;place-items:center;background:radial-gradient(circle,#fff3d4 0 45%,var(--green2) 46% 57%,#203d31 58%);border:9px solid #edd18a;font-size:54px}
-.ranktitle{font-size:30px;font-weight:900}.rank p{color:#d8ecdf;line-height:1.5}
-.scoregrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}.scorecard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px;text-align:center}.scorecard strong,.scorecard span{display:block}.scorecard strong{font-size:27px}.scorecard span{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
-.takeaways{padding:16px;border-radius:14px;background:#edf5f0;border:1px solid #c7ddd0;line-height:1.6;margin-bottom:18px}
-@media(max-width:980px){.start,.sort-grid,.quiz-layout,.results{grid-template-columns:1fr}.lesson-head{grid-template-columns:1fr}.hud{justify-content:flex-start}}
-@media(max-width:760px){.card-grid,.compare,.drop-grid,.answer-grid,.scoregrid{grid-template-columns:1fr}.hud{display:grid;grid-template-columns:repeat(2,1fr)}.hudcard{min-width:0}}
-@media(max-width:620px){.shell{width:calc(100% - 12px)}.screen{padding:20px 14px;min-height:auto}.app{min-height:auto}.brand span{display:none}.btnrow button{width:100%}}
+.ranktitle{font-size:30px;font-weight:900}
+.rank p{color:#d8ecdf;line-height:1.5}
+.scoregrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
+.scorecard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px;text-align:center}
+.scorecard strong,.scorecard span{display:block}
+.scorecard strong{font-size:27px}
+.scorecard span{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.takeaways{padding:16px;border-radius:14px;background:#edf5f0;border:1px solid #c7ddd0;line-height:1.65;margin-bottom:18px}
+@media(max-width:980px){
+  .start,.content-grid,.quiz-layout,.results{grid-template-columns:1fr}
+  .lesson-head{grid-template-columns:1fr}
+  .hud{justify-content:flex-start}
+  .flow{grid-template-columns:1fr}
+  .arrow{transform:rotate(90deg)}
+}
+@media(max-width:760px){
+  .format-grid,.myth-grid,.compare,.answer-grid,.reflection,.resource-grid,.scoregrid,.procon{grid-template-columns:1fr}
+  .hud{display:grid;grid-template-columns:repeat(2,1fr)}
+  .hudcard{min-width:0}
+}
+@media(max-width:620px){
+  .shell{width:calc(100% - 12px)}
+  .screen{padding:20px 14px;min-height:auto}
+  .brand span{display:none}
+  .btnrow button,.btnrow a{width:100%}
+}
 </style>
 </head>
 <body>
 <div class="shell">
-<header class="top"><div class="brand"><div class="logo">🦋</div><div><strong>Butterfly University</strong><span>College of Resume Strategy · RES 101</span></div></div><button class="exit" id="exitBtn">← Exit Lesson</button></header>
+<header class="top">
+  <div class="brand">
+    <div class="logo">🦋</div>
+    <div><strong>Butterfly University</strong><span>College of Resume Strategy · RES 101</span></div>
+  </div>
+  <button class="exit" id="exitBtn">← Exit Lesson</button>
+</header>
+
 <main class="app">
 
 <section class="screen active" id="start">
-<div class="start">
-<div>
-<p class="ey">Foundation Path · Lesson 1</p>
-<h1>Resume<br>Basics</h1>
-<p class="lead">Learn what a resume is designed to do, how it differs from a job application, which format fits different career situations, and what information to gather before writing.</p>
-<div class="tags"><span class="tag">Resume Purpose</span><span class="tag">Resume Formats</span><span class="tag">Required Sections</span><span class="tag">Preparation Checklist</span></div>
-<div class="btnrow"><button class="primary" id="startBtn">Start Lesson 1</button><button class="secondary" id="howBtn">Read Instructions</button></div>
-</div>
-<div class="preview">
-<p class="ey" style="color:#d8ecdf">Resume Foundations</p>
-<div class="preview-card">
-<div class="preview-step"><div class="preview-num">1</div><div><strong>Understand the Purpose</strong><span>A resume earns attention and supports the next step.</span></div></div>
-<div class="preview-step"><div class="preview-num">2</div><div><strong>Choose the Format</strong><span>Match structure to career history and target role.</span></div></div>
-<div class="preview-step"><div class="preview-num">3</div><div><strong>Gather the Evidence</strong><span>Collect dates, duties, metrics, tools, and achievements.</span></div></div>
-<div class="preview-step"><div class="preview-num">4</div><div><strong>Build the Core Sections</strong><span>Contact, summary, skills, experience, and education.</span></div></div>
-</div>
-</div>
-</div>
+  <div class="start">
+    <div>
+      <p class="ey">Foundation Path · Lesson 1</p>
+      <h1>Resume<br>Basics</h1>
+      <p class="lead">Learn what a resume is, what it is designed to accomplish, why employers use it, how the major resume formats differ, and what information you need before writing one.</p>
+      <div class="tags">
+        <span class="tag">Detailed Instruction</span>
+        <span class="tag">Visual Examples</span>
+        <span class="tag">Guided Practice</span>
+        <span class="tag">Downloadable Resources</span>
+      </div>
+      <div class="btnrow">
+        <button class="primary" id="startBtn">Begin Lesson</button>
+        <button class="secondary" id="howBtn">View Lesson Roadmap</button>
+      </div>
+    </div>
+
+    <div class="preview">
+      <p class="ey" style="color:#d8ecdf">Today’s Learning Journey</p>
+      <div class="preview-card">
+        <div class="preview-step"><div class="preview-num">1</div><div><strong>What Is a Resume?</strong><span>Definition, purpose, and role in the hiring process.</span></div></div>
+        <div class="preview-step"><div class="preview-num">2</div><div><strong>Why It Matters</strong><span>How recruiters and employers use resumes.</span></div></div>
+        <div class="preview-step"><div class="preview-num">3</div><div><strong>Resume Formats</strong><span>Reverse chronological, combination, and functional.</span></div></div>
+        <div class="preview-step"><div class="preview-num">4</div><div><strong>Preparation</strong><span>What to gather before writing.</span></div></div>
+        <div class="preview-step"><div class="preview-num">5</div><div><strong>Apply It</strong><span>Scenario, reflection, and knowledge check.</span></div></div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section class="screen" id="how">
-<p class="ey">Clear Lesson Instructions</p>
-<h2>Exactly How to Complete This Lesson</h2>
-<p class="lead">Complete four activities and one knowledge check.</p>
-<div class="instructions">
-<div class="instruction"><div class="num">1</div><div><strong>Choose the purpose of a resume.</strong><p>Select the statement that best explains what a resume is designed to accomplish.</p></div></div>
-<div class="instruction"><div class="num">2</div><div><strong>Compare a resume and job application.</strong><p>Review how each document is used and what information belongs in each.</p></div></div>
-<div class="instruction"><div class="num">3</div><div><strong>Choose the right resume format.</strong><p>Select the best format for three different career situations.</p></div></div>
-<div class="instruction"><div class="num">4</div><div><strong>Sort preparation items.</strong><p>Move each information card into Gather Before Writing or Add Later.</p></div></div>
-<div class="instruction"><div class="num">5</div><div><strong>Pass the knowledge check.</strong><p>Answer five questions. A score of 80% or higher completes the lesson.</p></div></div>
-</div>
-<div class="btnrow"><button class="primary" id="beginBtn">I Understand — Begin Lesson</button><button class="secondary" id="backBtn">Back to Start</button></div>
+  <p class="ey">Lesson Roadmap</p>
+  <h2>How This Lesson Works</h2>
+  <p class="lead">This lesson teaches the concept first. Activities appear only after the material has been explained and demonstrated.</p>
+
+  <div class="content-grid">
+    <div class="concept-card"><h3>1. Learn</h3><p>Read clear explanations about resume purpose, hiring-process context, formats, and preparation.</p></div>
+    <div class="concept-card"><h3>2. Explore</h3><p>Open visual examples, compare formats, and review Professor Butterfly’s guidance.</p></div>
+    <div class="concept-card"><h3>3. Practice</h3><p>Apply what you learned to realistic career situations.</p></div>
+    <div class="concept-card"><h3>4. Reflect</h3><p>Connect the lesson to your own career history.</p></div>
+    <div class="concept-card"><h3>5. Check Understanding</h3><p>Complete a short final knowledge check after instruction and practice.</p></div>
+    <div class="concept-card"><h3>6. Download Resources</h3><p>Keep the planning worksheet and format guide for future use.</p></div>
+  </div>
+
+  <div class="professor">
+    <div class="prof-avatar">🦋</div>
+    <div>
+      <strong>Professor Butterfly</strong>
+      <p>You are not expected to know the answers before the lesson teaches them. Move through each section in order, and use the examples to build your understanding.</p>
+    </div>
+  </div>
+
+  <div class="btnrow">
+    <button class="primary" id="beginBtn">Start Learning</button>
+    <button class="secondary" id="backBtn">Back</button>
+  </div>
+</section>
+
+<section class="screen" id="welcome">
+  <div class="lesson-head">
+    <div>
+      <p class="ey">Section 1 of 7</p>
+      <h2>Welcome to Resume Basics</h2>
+      <p class="lead">Before writing a resume, you need to understand what it is supposed to do—and what it cannot do by itself.</p>
+    </div>
+    <div class="hud">
+      <div class="hudcard"><span>Progress</span><strong>10%</strong></div>
+      <div class="hudcard"><span>Estimated Time</span><strong>15 min</strong></div>
+    </div>
+  </div>
+  <div class="progress"><div style="width:10%"></div></div>
+
+  <div class="professor">
+    <div class="prof-avatar">🦋</div>
+    <div>
+      <strong>Professor Butterfly</strong>
+      <p>One of the most common resume myths is that a resume gets someone hired. It does not. A strong resume earns attention and helps the candidate reach the next stage—usually an interview.</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>By the end of this lesson, you will be able to:</h3>
+    <div class="objectives">
+      <div class="objective"><div class="check">✓</div><div>Explain the real purpose of a resume.</div></div>
+      <div class="objective"><div class="check">✓</div><div>Describe how a resume supports the hiring process.</div></div>
+      <div class="objective"><div class="check">✓</div><div>Distinguish reverse chronological, combination, and functional formats.</div></div>
+      <div class="objective"><div class="check">✓</div><div>Identify the information needed before writing.</div></div>
+      <div class="objective"><div class="check">✓</div><div>Select a format that supports a specific career situation.</div></div>
+    </div>
+  </div>
+
+  <div class="btnrow" style="margin-top:18px">
+    <button class="primary" data-next="purpose">Continue: What Is a Resume?</button>
+  </div>
 </section>
 
 <section class="screen" id="purpose">
-<div class="lesson-head">
-<div><p class="ey">Activity 1 of 4</p><h2>What Is a Resume Supposed to Do?</h2><p class="lead">Select the strongest definition.</p></div>
-<div class="hud"><div class="hudcard"><span>Progress</span><strong>20%</strong></div><div class="hudcard"><span>XP</span><strong id="xp1">0</strong></div></div>
-</div>
-<div class="progress"><div style="width:20%"></div></div>
-<div class="panel">
-<div class="answer-grid">
-<button class="answer" data-purpose="0">Tell the employer everything that has ever happened in your career.</button>
-<button class="answer" data-purpose="1">Present relevant qualifications and achievements clearly enough to earn the next step.</button>
-<button class="answer" data-purpose="2">Replace the job application and background-check process.</button>
-<button class="answer" data-purpose="3">List duties exactly as they appeared in every job description.</button>
-</div>
-<div class="feedback" id="purposeFeedback"></div>
-<div class="btnrow" style="margin-top:14px"><button class="primary" id="purposeNext" style="display:none">Continue</button></div>
-</div>
+  <div class="lesson-head">
+    <div>
+      <p class="ey">Section 2 of 7</p>
+      <h2>What Is a Resume?</h2>
+      <p class="lead">A resume is a targeted professional marketing document—not a complete autobiography.</p>
+    </div>
+    <div class="hud">
+      <div class="hudcard"><span>Progress</span><strong>25%</strong></div>
+      <div class="hudcard"><span>Concept</span><strong>Purpose</strong></div>
+    </div>
+  </div>
+  <div class="progress"><div style="width:25%"></div></div>
+
+  <div class="content-grid">
+    <div class="concept-card">
+      <h3>The definition</h3>
+      <p>A resume is a concise document that presents the qualifications most relevant to a specific opportunity. It usually includes professional experience, skills, achievements, education, and credentials.</p>
+      <p>The resume is selective. It does not need to include every task, every job, or every detail from a person’s life.</p>
+    </div>
+    <div class="concept-card">
+      <h3>The goal</h3>
+      <p>The immediate goal is to help the employer answer one question:</p>
+      <div class="callout tip"><strong>“Does this candidate appear qualified enough to move forward?”</strong></div>
+      <p>For most jobs, moving forward means an interview, recruiter screen, assessment, or hiring-manager review.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:22px">Where the resume fits</h3>
+  <div class="flow">
+    <div class="flow-step"><strong>Job Search</strong><span>Find a suitable opening</span></div>
+    <div class="arrow">→</div>
+    <div class="flow-step"><strong>Resume</strong><span>Show relevant value</span></div>
+    <div class="arrow">→</div>
+    <div class="flow-step"><strong>Interview</strong><span>Evaluate fit more deeply</span></div>
+  </div>
+
+  <div class="callout insight">
+    <strong>Recruiter perspective:</strong> A recruiter may review many applicants for one role. The resume should make relevant qualifications easy to identify quickly.
+  </div>
+
+  <div class="professor">
+    <div class="prof-avatar">🦋</div>
+    <div>
+      <strong>Professor Butterfly</strong>
+      <p>Think of the resume as a bridge. It connects your experience to the employer’s need. The stronger and clearer that connection is, the easier it is for the employer to justify moving you forward.</p>
+    </div>
+  </div>
+
+  <h3>Common resume myths</h3>
+  <p style="color:var(--muted)">Select each card to reveal the correction.</p>
+  <div class="myth-grid" id="mythGrid">
+    <button class="myth-card" data-myth="0"><strong>Myth: A resume must include every job.</strong><span>Select to reveal.</span></button>
+    <button class="myth-card" data-myth="1"><strong>Myth: A resume gets you hired.</strong><span>Select to reveal.</span></button>
+    <button class="myth-card" data-myth="2"><strong>Myth: One resume works for every role.</strong><span>Select to reveal.</span></button>
+    <button class="myth-card" data-myth="3"><strong>Myth: Duties are enough.</strong><span>Select to reveal.</span></button>
+  </div>
+
+  <div class="feedback" id="mythFeedback"></div>
+
+  <div class="btnrow" style="margin-top:18px">
+    <button class="primary" id="purposeNext" style="display:none">Continue: Resume vs. Application</button>
+  </div>
 </section>
 
-<section class="screen" id="compare">
-<div class="lesson-head">
-<div><p class="ey">Activity 2 of 4</p><h2>Resume vs. Job Application</h2><p class="lead">Review the difference before continuing.</p></div>
-<div class="hud"><div class="hudcard"><span>Progress</span><strong>40%</strong></div><div class="hudcard"><span>XP</span><strong id="xp2">50</strong></div></div>
-</div>
-<div class="progress"><div style="width:40%"></div></div>
-<div class="compare">
-<div class="compare-box"><h3>Resume</h3>
-<div class="compare-row"><strong>Purpose:</strong> Market relevant qualifications.</div>
-<div class="compare-row"><strong>Content:</strong> Selected experience, achievements, skills, and education.</div>
-<div class="compare-row"><strong>Strategy:</strong> Tailored to the target role.</div>
-<div class="compare-row"><strong>Format:</strong> Designed for readability and impact.</div>
-</div>
-<div class="compare-box"><h3>Job Application</h3>
-<div class="compare-row"><strong>Purpose:</strong> Collect standardized employment information.</div>
-<div class="compare-row"><strong>Content:</strong> Complete dates, employers, duties, and required disclosures.</div>
-<div class="compare-row"><strong>Strategy:</strong> Answer every required field accurately.</div>
-<div class="compare-row"><strong>Format:</strong> Controlled by the employer’s system.</div>
-</div>
-</div>
-<div class="feedback show good"><strong>Key distinction:</strong><br>A resume is a targeted marketing document. A job application is a formal employer record. The information must remain consistent across both.</div>
-<div class="btnrow" style="margin-top:14px"><button class="primary" id="compareNext">Continue to Formats</button></div>
+<section class="screen" id="application">
+  <div class="lesson-head">
+    <div>
+      <p class="ey">Section 3 of 7</p>
+      <h2>Resume vs. Job Application</h2>
+      <p class="lead">These documents work together, but they serve different purposes.</p>
+    </div>
+    <div class="hud">
+      <div class="hudcard"><span>Progress</span><strong>40%</strong></div>
+      <div class="hudcard"><span>Concept</span><strong>Accuracy</strong></div>
+    </div>
+  </div>
+  <div class="progress"><div style="width:40%"></div></div>
+
+  <div class="compare">
+    <div class="compare-box">
+      <h3>Resume</h3>
+      <div class="compare-row"><strong>Purpose:</strong> Market relevant qualifications.</div>
+      <div class="compare-row"><strong>Content:</strong> Selected experience, achievements, skills, education, and credentials.</div>
+      <div class="compare-row"><strong>Strategy:</strong> Tailored to the target job.</div>
+      <div class="compare-row"><strong>Format:</strong> Designed for clarity, hierarchy, and impact.</div>
+      <div class="compare-row"><strong>Length:</strong> Usually concise and selective.</div>
+    </div>
+
+    <div class="compare-box">
+      <h3>Job Application</h3>
+      <div class="compare-row"><strong>Purpose:</strong> Create a standardized employer record.</div>
+      <div class="compare-row"><strong>Content:</strong> Complete dates, employers, duties, contact information, and required disclosures.</div>
+      <div class="compare-row"><strong>Strategy:</strong> Answer every required field accurately.</div>
+      <div class="compare-row"><strong>Format:</strong> Controlled by the employer’s application system.</div>
+      <div class="compare-row"><strong>Length:</strong> Determined by the questions asked.</div>
+    </div>
+  </div>
+
+  <div class="callout warning">
+    <strong>Consistency matters:</strong> Employer names, job titles, dates, and education should not conflict across the resume and application. Differences can create credibility or verification concerns.
+  </div>
+
+  <div class="professor">
+    <div class="prof-avatar">🦋</div>
+    <div>
+      <strong>Professor Butterfly</strong>
+      <p>Your resume can be selective, but it must still be truthful. The job application may request a fuller history. Tailoring means emphasizing relevance—not changing facts.</p>
+    </div>
+  </div>
+
+  <div class="btnrow">
+    <button class="primary" data-next="formats">Continue: Resume Formats</button>
+  </div>
 </section>
 
 <section class="screen" id="formats">
-<div class="lesson-head">
-<div><p class="ey">Activity 3 of 4</p><h2>Choose the Right Resume Format</h2><p class="lead">Select the best format for each situation.</p></div>
-<div class="hud"><div class="hudcard"><span>Progress</span><strong>60%</strong></div><div class="hudcard"><span>Correct</span><strong id="formatCorrect">0/3</strong></div></div>
-</div>
-<div class="progress"><div style="width:60%"></div></div>
-<div class="panel">
-<h3 id="scenarioTitle"></h3>
-<p id="scenarioCopy" style="line-height:1.6;color:var(--muted)"></p>
-<div class="card-grid" id="formatCards"></div>
-<div class="feedback" id="formatFeedback"></div>
-<div class="btnrow" style="margin-top:14px"><button class="primary" id="formatNext" style="display:none">Next Scenario</button></div>
-</div>
+  <div class="lesson-head">
+    <div>
+      <p class="ey">Section 4 of 7</p>
+      <h2>The Three Main Resume Formats</h2>
+      <p class="lead">The format determines how information is organized and what the recruiter notices first.</p>
+    </div>
+    <div class="hud">
+      <div class="hudcard"><span>Progress</span><strong>55%</strong></div>
+      <div class="hudcard"><span>Concept</span><strong>Structure</strong></div>
+    </div>
+  </div>
+  <div class="progress"><div style="width:55%"></div></div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="chrono">Reverse Chronological</button>
+    <button class="tab" data-tab="combo">Combination</button>
+    <button class="tab" data-tab="functional">Functional</button>
+  </div>
+
+  <div class="tab-panel active" id="chrono">
+    <h3>Reverse Chronological Resume</h3>
+    <p>This format organizes professional experience from the most recent role backward. It is the most widely recognized and usually the safest choice when the candidate has a clear, relevant work history.</p>
+
+    <div class="resume-mini">
+      <div class="name">Jordan Ellis</div>
+      <strong>Customer Success Specialist</strong>
+      <div class="line w90"></div><div class="line w80"></div>
+      <strong>Professional Experience</strong>
+      <p>2024–Present · Current Role</p>
+      <p>2021–2024 · Previous Role</p>
+      <p>2019–2021 · Earlier Role</p>
+    </div>
+
+    <div class="procon">
+      <div><strong>Best for</strong><br>Steady employment, similar target roles, visible progression, and recent relevant experience.</div>
+      <div><strong>Watch for</strong><br>Large gaps or frequent short roles may be more noticeable because dates are prominent.</div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="combo">
+    <h3>Combination Resume</h3>
+    <p>This format combines a strong skills or qualifications section with a clear reverse-chronological work history. It helps a candidate emphasize transferable strengths without hiding employment details.</p>
+
+    <div class="resume-mini">
+      <div class="name">Taylor Morgan</div>
+      <strong>Corporate Training Specialist</strong>
+      <div class="line w90"></div><div class="line w80"></div>
+      <strong>Relevant Qualifications</strong>
+      <p>Facilitation · Curriculum Development · Coaching</p>
+      <strong>Professional Experience</strong>
+      <p>2022–Present · Educator</p>
+      <p>2019–2022 · Training Assistant</p>
+    </div>
+
+    <div class="procon">
+      <div><strong>Best for</strong><br>Career changes, transferable skills, diverse experience, and candidates who need both skills emphasis and transparent chronology.</div>
+      <div><strong>Watch for</strong><br>The page can become crowded if the skills section repeats the same information found in experience.</div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="functional">
+    <h3>Functional Resume</h3>
+    <p>This format emphasizes skill categories more than employers and dates. It may help in limited situations, but many recruiters prefer visible chronology and may question what the format is trying to hide.</p>
+
+    <div class="resume-mini">
+      <div class="name">Morgan Reed</div>
+      <strong>Operations Support Professional</strong>
+      <div class="line w90"></div><div class="line w70"></div>
+      <strong>Customer Service Skills</strong>
+      <div class="line w80"></div><div class="line w60"></div>
+      <strong>Administrative Skills</strong>
+      <div class="line w80"></div><div class="line w70"></div>
+    </div>
+
+    <div class="procon">
+      <div><strong>May help with</strong><br>Severe gaps, limited traditional experience, project-based work, or highly unusual career circumstances.</div>
+      <div><strong>Watch for</strong><br>Recruiters and ATS workflows may still expect employer names, titles, and dates. Use cautiously.</div>
+    </div>
+  </div>
+
+  <div class="callout tip">
+    <strong>Practical recommendation:</strong> Reverse chronological is appropriate for most candidates. Combination is often the best alternative for career changers. Functional should be used only when there is a clear strategic reason.
+  </div>
+
+  <div class="btnrow">
+    <button class="primary" data-next="prepare">Continue: Prepare Before Writing</button>
+  </div>
 </section>
 
-<section class="screen" id="sort">
-<div class="lesson-head">
-<div><p class="ey">Activity 4 of 4</p><h2>What Should You Gather Before Writing?</h2><p class="lead">Drag every card into the correct column. On mobile, tap a card and then tap a column.</p></div>
-<div class="hud"><div class="hudcard"><span>Progress</span><strong>80%</strong></div><div class="hudcard"><span>Placed</span><strong id="placedCount">0/8</strong></div></div>
-</div>
-<div class="progress"><div style="width:80%"></div></div>
-<div class="sort-grid">
-<div class="panel"><h3>Information Cards</h3><div class="sort-pool" id="sortPool"></div></div>
-<div class="panel">
-<div class="drop-grid">
-<div class="drop-zone" data-zone="gather"><h3>Gather Before Writing</h3><div class="drop-list" id="gatherList"></div></div>
-<div class="drop-zone" data-zone="later"><h3>Add Later or Only If Relevant</h3><div class="drop-list" id="laterList"></div></div>
-</div>
-<div class="btnrow" style="margin-top:14px"><button class="primary" id="sortSubmit">Check My Sorting</button></div>
-<div class="feedback" id="sortFeedback"></div>
-<div class="btnrow" style="margin-top:14px"><button class="primary" id="sortNext" style="display:none">Start Knowledge Check</button></div>
-</div>
-</div>
+<section class="screen" id="prepare">
+  <div class="lesson-head">
+    <div>
+      <p class="ey">Section 5 of 7</p>
+      <h2>What to Gather Before Writing</h2>
+      <p class="lead">Strong resume writing depends on evidence. Gather the facts before trying to write polished language.</p>
+    </div>
+    <div class="hud">
+      <div class="hudcard"><span>Progress</span><strong>70%</strong></div>
+      <div class="hudcard"><span>Concept</span><strong>Evidence</strong></div>
+    </div>
+  </div>
+  <div class="progress"><div style="width:70%"></div></div>
+
+  <div class="content-grid">
+    <div class="concept-card">
+      <h3>Employment facts</h3>
+      <p>Employer names, job titles, locations, start dates, end dates, promotions, and major responsibilities.</p>
+    </div>
+    <div class="concept-card">
+      <h3>Achievements and metrics</h3>
+      <p>Volume handled, quality scores, revenue, savings, time reductions, customer satisfaction, accuracy, deadlines, team size, or project scope.</p>
+    </div>
+    <div class="concept-card">
+      <h3>Tools and systems</h3>
+      <p>CRM platforms, office software, ticketing systems, healthcare systems, machinery, technical tools, or industry platforms.</p>
+    </div>
+    <div class="concept-card">
+      <h3>Education and credentials</h3>
+      <p>Degrees, diplomas, certifications, licenses, relevant training, continuing education, and expiration dates when applicable.</p>
+    </div>
+  </div>
+
+  <div class="professor">
+    <div class="prof-avatar">🦋</div>
+    <div>
+      <strong>Professor Butterfly</strong>
+      <p>Do not wait until you are writing the bullet point to search for proof. Build an evidence bank first. The more specific your evidence is, the stronger your resume can become.</p>
+    </div>
+  </div>
+
+  <h3>Preparation checklist</h3>
+  <div class="panel">
+    <div class="objectives">
+      <div class="objective"><div class="check">1</div><div>List every employer, title, and date range.</div></div>
+      <div class="objective"><div class="check">2</div><div>Write down major duties in plain language.</div></div>
+      <div class="objective"><div class="check">3</div><div>Identify achievements, improvements, recognition, and difficult problems solved.</div></div>
+      <div class="objective"><div class="check">4</div><div>Estimate measurable scope: customers, calls, claims, orders, projects, dollars, percentages, or time.</div></div>
+      <div class="objective"><div class="check">5</div><div>Collect tools, systems, education, licenses, and certifications.</div></div>
+      <div class="objective"><div class="check">6</div><div>Review the target job description for required skills and keywords.</div></div>
+    </div>
+  </div>
+
+  <div class="btnrow" style="margin-top:18px">
+    <button class="primary" data-next="practice">Continue: Guided Practice</button>
+  </div>
+</section>
+
+<section class="screen" id="practice">
+  <div class="lesson-head">
+    <div>
+      <p class="ey">Section 6 of 7</p>
+      <h2>Guided Practice</h2>
+      <p class="lead">Now apply what you learned to three realistic career situations.</p>
+    </div>
+    <div class="hud">
+      <div class="hudcard"><span>Progress</span><strong>85%</strong></div>
+      <div class="hudcard"><span>Practice</span><strong id="practiceScore">0/3</strong></div>
+    </div>
+  </div>
+  <div class="progress"><div style="width:85%"></div></div>
+
+  <div class="panel">
+    <h3 id="scenarioTitle"></h3>
+    <p id="scenarioText" style="line-height:1.65;color:var(--muted)"></p>
+
+    <div class="format-grid" id="scenarioOptions"></div>
+    <div class="feedback" id="scenarioFeedback"></div>
+
+    <div class="btnrow" style="margin-top:16px">
+      <button class="primary" id="scenarioNext" style="display:none">Next Scenario</button>
+    </div>
+  </div>
+
+  <div class="professor">
+    <div class="prof-avatar">🦋</div>
+    <div>
+      <strong>Professor Butterfly</strong>
+      <p>The goal is not to memorize format names. The goal is to understand which structure gives the employer the clearest, most credible view of the candidate’s value.</p>
+    </div>
+  </div>
+</section>
+
+<section class="screen" id="reflection">
+  <div class="lesson-head">
+    <div>
+      <p class="ey">Section 7 of 7</p>
+      <h2>Apply the Lesson to Your Career</h2>
+      <p class="lead">Choose the option that most closely matches your current career situation.</p>
+    </div>
+    <div class="hud">
+      <div class="hudcard"><span>Progress</span><strong>95%</strong></div>
+      <div class="hudcard"><span>Reflection</span><strong>Personal</strong></div>
+    </div>
+  </div>
+  <div class="progress"><div style="width:95%"></div></div>
+
+  <div class="panel">
+    <div class="reflection" id="reflectionOptions">
+      <button data-reflection="chronological"><strong>Steady work history</strong><br><span style="color:var(--muted)">I am pursuing a role similar to work I have already done.</span></button>
+      <button data-reflection="combination"><strong>Career change</strong><br><span style="color:var(--muted)">I need to emphasize transferable skills and relevant experience.</span></button>
+      <button data-reflection="functional"><strong>Unusual history</strong><br><span style="color:var(--muted)">I have major gaps, limited traditional experience, or a project-based background.</span></button>
+    </div>
+
+    <div class="feedback" id="reflectionFeedback"></div>
+  </div>
+
+  <div class="resource-grid" style="margin-top:18px">
+    <div class="resource">
+      <h3>Resume Planning Worksheet</h3>
+      <p>Use this guided worksheet to collect employment history, tools, metrics, achievements, education, and target-role information.</p>
+      <a href="resources/resume-planning-worksheet.html" target="_blank">Open printable worksheet →</a>
+    </div>
+    <div class="resource">
+      <h3>Resume Format Comparison Guide</h3>
+      <p>Keep a concise comparison of reverse chronological, combination, and functional formats.</p>
+      <a href="resources/resume-format-guide.html" target="_blank">Open format guide →</a>
+    </div>
+  </div>
+
+  <div class="btnrow" style="margin-top:18px">
+    <button class="primary" id="quizStart" style="display:none">Begin Final Knowledge Check</button>
+  </div>
 </section>
 
 <section class="screen" id="quiz">
-<div class="lesson-head">
-<div><p class="ey">Final Activity</p><h2>Knowledge Check</h2><p class="lead">Answer all five questions. You need 80% or higher to pass.</p></div>
-<div class="hud"><div class="hudcard"><span>Question</span><strong id="quizNum">1/5</strong></div><div class="hudcard"><span>Correct</span><strong id="quizCorrect">0</strong></div></div>
-</div>
-<div class="progress"><div style="width:90%"></div></div>
-<div class="quiz-layout">
-<div class="quiz-side"><h3 style="color:white">RES 101 Check</h3><p>Choose one answer per question. Read the explanation before moving forward.</p><div class="quiz-dots" id="quizDots"></div></div>
-<div class="panel">
-<h3 id="quizQuestion"></h3>
-<div class="answer-grid" id="quizAnswers"></div>
-<div class="feedback" id="quizFeedback"></div>
-<div class="btnrow" style="margin-top:14px"><button class="primary" id="quizNext" style="display:none">Next Question</button></div>
-</div>
-</div>
+  <div class="lesson-head">
+    <div>
+      <p class="ey">Final Knowledge Check</p>
+      <h2>Check Your Understanding</h2>
+      <p class="lead">You have completed the instruction and practice. Answer five questions to complete the lesson.</p>
+    </div>
+    <div class="hud">
+      <div class="hudcard"><span>Question</span><strong id="quizNum">1/5</strong></div>
+      <div class="hudcard"><span>Correct</span><strong id="quizCorrect">0</strong></div>
+    </div>
+  </div>
+  <div class="progress"><div style="width:98%"></div></div>
+
+  <div class="quiz-layout">
+    <div class="quiz-side">
+      <h3 style="color:white">Resume Basics Check</h3>
+      <p>Choose one answer per question. Read the explanation before continuing.</p>
+      <div class="quiz-dots" id="quizDots"></div>
+    </div>
+
+    <div class="panel">
+      <h3 id="quizQuestion"></h3>
+      <div class="answer-grid" id="quizAnswers"></div>
+      <div class="feedback" id="quizFeedback"></div>
+      <div class="btnrow" style="margin-top:16px">
+        <button class="primary" id="quizNext" style="display:none">Next Question</button>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section class="screen" id="results">
-<div class="results">
-<div class="rank"><p class="ey" style="color:#d8ecdf">Lesson Complete</p><div class="rank-badge">📄</div><div class="ranktitle" id="rankTitle"></div><p id="rankMsg"></p></div>
-<div>
-<p class="ey">Butterfly University · RES 101</p>
-<h2>Resume Basics</h2>
-<p class="lead">You completed the purpose, comparison, format, preparation, and knowledge-check activities.</p>
-<div class="scoregrid">
-<div class="scorecard"><strong id="finalScore">0%</strong><span>Knowledge Check</span></div>
-<div class="scorecard"><strong id="finalXP">0</strong><span>XP Earned</span></div>
-<div class="scorecard"><strong id="finalStatus">Complete</strong><span>Lesson Status</span></div>
-</div>
-<div class="takeaways"><strong>Key Takeaways</strong><br>A resume is a targeted marketing document designed to earn the next step. Choose a format that supports your career story, keep information consistent with applications, and gather dates, tools, metrics, accomplishments, education, and certifications before writing.</div>
-<div class="btnrow"><button class="primary" id="replayBtn">Replay Lesson</button><button class="secondary" id="resultsExitBtn">Return to Career Academy</button></div>
-</div>
-</div>
+  <div class="results">
+    <div class="rank">
+      <p class="ey" style="color:#d8ecdf">Lesson Complete</p>
+      <div class="rank-badge">📄</div>
+      <div class="ranktitle" id="rankTitle"></div>
+      <p id="rankMsg"></p>
+    </div>
+
+    <div>
+      <p class="ey">Butterfly University · RES 101</p>
+      <h2>Resume Basics</h2>
+      <p class="lead">You learned the purpose of a resume, its role in hiring, the three major formats, and the information required before writing.</p>
+
+      <div class="scoregrid">
+        <div class="scorecard"><strong id="finalScore">0%</strong><span>Knowledge Check</span></div>
+        <div class="scorecard"><strong id="finalXP">0</strong><span>XP Earned</span></div>
+        <div class="scorecard"><strong id="finalStatus">Complete</strong><span>Lesson Status</span></div>
+      </div>
+
+      <div class="takeaways">
+        <strong>What you should remember</strong><br>
+        A resume is a targeted marketing document designed to earn the next step. Reverse chronological is best for most candidates; combination is useful for many career changers; functional should be used cautiously. Strong writing begins with accurate facts, measurable evidence, tools, achievements, education, and target-role research.
+      </div>
+
+      <div class="professor">
+        <div class="prof-avatar">🦋</div>
+        <div>
+          <strong>Professor Butterfly</strong>
+          <p>Lesson 1 is complete. Next, you will learn how every major resume section works and how those sections fit together on the page.</p>
+        </div>
+      </div>
+
+      <div class="btnrow">
+        <button class="primary" id="replayBtn">Review Lesson Again</button>
+        <button class="secondary" id="resultsExitBtn">Return to Career Academy</button>
+      </div>
+    </div>
+  </div>
 </section>
 
 </main>
@@ -257,77 +695,78 @@ h3{margin-bottom:8px;color:var(--mocha)}
 
 <script>
 const $=id=>document.getElementById(id);
-const screens={start:$("start"),how:$("how"),purpose:$("purpose"),compare:$("compare"),formats:$("formats"),sort:$("sort"),quiz:$("quiz"),results:$("results")};
+const screens={
+  start:$("start"),how:$("how"),welcome:$("welcome"),purpose:$("purpose"),
+  application:$("application"),formats:$("formats"),prepare:$("prepare"),
+  practice:$("practice"),reflection:$("reflection"),quiz:$("quiz"),results:$("results")
+};
 
-let xp=0,formatIndex=0,formatCorrect=0,placements={},selectedCard=null,quizIndex=0,quizCorrect=0,quizAnswered=false;
-
-const formatScenarios=[
-{
-title:"Steady Work History",
-copy:"A customer-service professional has six years of consistent experience and is targeting a similar role.",
-correct:"chronological"
-},
-{
-title:"Career Change",
-copy:"A teacher is transitioning into corporate training and needs to highlight transferable skills while still showing work history.",
-correct:"combination"
-},
-{
-title:"Severe Employment Gaps",
-copy:"A candidate has several large gaps and needs to emphasize capabilities, projects, and relevant skills carefully.",
-correct:"functional"
-}
+const myths=[
+  "Correction: Include the experience that supports the target role. Older or unrelated work may be shortened or omitted when appropriate.",
+  "Correction: The resume earns consideration. The interview, assessment, references, and hiring process determine the final decision.",
+  "Correction: A master resume can store everything, but the submitted version should be tailored to the specific role.",
+  "Correction: Duties explain what the job required. Achievements and metrics show how well the candidate performed."
 ];
 
-const formats=[
-["chronological","Reverse Chronological","Leads with recent experience and shows career progression."],
-["combination","Combination","Balances transferable skills with a clear work-history section."],
-["functional","Functional","Emphasizes skills more than dates; use cautiously because recruiters may expect full chronology."]
-];
-
-const sortItems=[
-["Exact employment dates","gather"],
-["Job titles and employer names","gather"],
-["Metrics and achievements","gather"],
-["Tools and software used","gather"],
-["Education and certifications","gather"],
-["Unrelated hobbies","later"],
-["Personal references","later"],
-["Salary history","later"]
+const scenarios=[
+  {
+    title:"Scenario 1: Similar Career Path",
+    text:"Danielle has worked in remote customer service for six years and is applying for another remote customer service role. Her employment history is steady and directly relevant.",
+    correct:"Reverse Chronological",
+    explanation:"Reverse chronological is the strongest choice because it makes her recent, directly relevant experience easy to evaluate."
+  },
+  {
+    title:"Scenario 2: Career Change",
+    text:"Marcus is a classroom teacher transitioning into corporate training. He needs to highlight facilitation, coaching, curriculum development, and technology skills while still showing a clear work history.",
+    correct:"Combination",
+    explanation:"A combination format can lead with transferable qualifications while preserving transparent chronology."
+  },
+  {
+    title:"Scenario 3: Unusual Work History",
+    text:"Tanya has a long employment gap, several short-term projects, and limited traditional experience. She needs to organize relevant capabilities carefully while still providing honest history.",
+    correct:"Functional",
+    explanation:"A functional format may help organize capabilities, but it should be used cautiously and still include a clear employment-history section."
+  }
 ];
 
 const quizQuestions=[
-{
-q:"What is the primary purpose of a resume?",
-answers:["To document every career detail","To earn the next step by presenting relevant value","To replace the job application","To provide references"],
-correct:1,
-why:"A resume should present relevant qualifications clearly enough to earn further consideration."
-},
-{
-q:"Which format is usually strongest for a steady work history?",
-answers:["Reverse chronological","Functional","Portfolio only","Reference sheet"],
-correct:0,
-why:"Reverse chronological structure helps recruiters see recent experience and progression quickly."
-},
-{
-q:"Why must a resume and job application remain consistent?",
-answers:["They are reviewed as part of the same hiring record","They must use identical formatting","The resume replaces all application fields","Consistency only matters for education"],
-correct:0,
-why:"Conflicting dates, titles, or employers can create credibility and verification problems."
-},
-{
-q:"Which item should be gathered before writing bullets?",
-answers:["Unrelated hobbies","Personal references","Metrics, tools, and achievements","Desired salary"],
-correct:2,
-why:"Metrics, tools, and achievements provide the evidence needed for strong bullets."
-},
-{
-q:"Which statement about functional resumes is most accurate?",
-answers:["They are always preferred by recruiters","They emphasize skills but may raise questions if chronology is unclear","They are required for remote jobs","They should never include work history"],
-correct:1,
-why:"Functional resumes can support some career transitions or gaps, but employers still expect transparent chronology."
-}
+  {
+    q:"What is the primary purpose of a resume?",
+    answers:["To guarantee a job offer","To present relevant value and earn the next step","To document every career detail","To replace the job application"],
+    correct:1,
+    why:"A resume helps the employer decide whether the candidate appears qualified enough to move forward."
+  },
+  {
+    q:"Why should a resume and job application remain consistent?",
+    answers:["They must use the same font","They are part of the same hiring record","The resume replaces required application fields","Consistency only matters for education"],
+    correct:1,
+    why:"Conflicting dates, titles, employers, or education can create credibility and verification concerns."
+  },
+  {
+    q:"Which format is usually best for a steady, relevant work history?",
+    answers:["Reverse chronological","Functional","Portfolio-only","Reference-based"],
+    correct:0,
+    why:"Reverse chronological makes recent experience and progression easy to evaluate."
+  },
+  {
+    q:"Which format is often useful for a career changer?",
+    answers:["Combination","Functional only","No work history","Chronological without skills"],
+    correct:0,
+    why:"Combination resumes can emphasize transferable skills while still showing transparent chronology."
+  },
+  {
+    q:"What should be gathered before writing achievement-focused bullets?",
+    answers:["Unrelated hobbies","References and salary history","Metrics, tools, achievements, and scope","Only the official job description"],
+    correct:2,
+    why:"Specific evidence allows the writer to show scale, performance, and impact."
+  }
 ];
+
+let mythsOpened=new Set();
+let scenarioIndex=0,practiceScore=0;
+let reflectionChoice=null;
+let quizIndex=0,quizCorrect=0,quizAnswered=false;
+let xp=0;
 
 function show(name){
   Object.values(screens).forEach(s=>s.classList.remove("active"));
@@ -335,120 +774,99 @@ function show(name){
   window.scrollTo({top:0,behavior:"smooth"});
 }
 
-function startLesson(){show("purpose")}
+document.querySelectorAll("[data-next]").forEach(btn=>{
+  btn.addEventListener("click",()=>show(btn.dataset.next));
+});
 
-function answerPurpose(i,b){
-  document.querySelectorAll("[data-purpose]").forEach(x=>x.disabled=true);
-  const good=i===1;
-  b.classList.add(good?"good":"bad");
-  if(!good)document.querySelector('[data-purpose="1"]').classList.add("good");
-  $("purposeFeedback").className=`feedback show ${good?"good":"bad"}`;
-  $("purposeFeedback").innerHTML=good
-    ?"<strong>Correct.</strong><br>A resume is a targeted document designed to show relevant value and earn the next step."
-    :"<strong>Not quite.</strong><br>A resume should present relevant qualifications and achievements clearly enough to earn further consideration.";
-  if(good)xp+=50;
-  $("xp1").textContent=xp;
-  $("purposeNext").style.display="inline-block";
-}
+$("startBtn").onclick=()=>show("welcome");
+$("beginBtn").onclick=()=>show("welcome");
+$("howBtn").onclick=()=>show("how");
+$("backBtn").onclick=()=>show("start");
 
-function renderFormat(){
-  const s=formatScenarios[formatIndex];
+document.querySelectorAll("[data-myth]").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const id=btn.dataset.myth;
+    mythsOpened.add(id);
+    btn.classList.add("revealed");
+    btn.innerHTML=`<strong>${myths[Number(id)]}</strong>`;
+    $("mythFeedback").className="feedback show good";
+    $("mythFeedback").innerHTML=`<strong>${mythsOpened.size} of 4 myths reviewed.</strong><br>Open all four cards before continuing.`;
+    if(mythsOpened.size===4){
+      xp+=50;
+      $("purposeNext").style.display="inline-block";
+    }
+  });
+});
+$("purposeNext").onclick=()=>show("application");
+
+document.querySelectorAll("[data-tab]").forEach(tab=>{
+  tab.addEventListener("click",()=>{
+    document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+    document.querySelectorAll(".tab-panel").forEach(p=>p.classList.remove("active"));
+    tab.classList.add("active");
+    $(tab.dataset.tab).classList.add("active");
+  });
+});
+
+function renderScenario(){
+  const s=scenarios[scenarioIndex];
   $("scenarioTitle").textContent=s.title;
-  $("scenarioCopy").textContent=s.copy;
-  $("formatCards").innerHTML=formats.map(f=>`<button class="card" data-format="${f[0]}"><strong>${f[1]}</strong><span>${f[2]}</span></button>`).join("");
-  $("formatFeedback").className="feedback";
-  $("formatFeedback").innerHTML="";
-  $("formatNext").style.display="none";
-  document.querySelectorAll("[data-format]").forEach(b=>b.onclick=()=>chooseFormat(b.dataset.format,b));
-}
-
-function chooseFormat(format,b){
-  const correct=formatScenarios[formatIndex].correct;
-  document.querySelectorAll("[data-format]").forEach(x=>x.disabled=true);
-  const good=format===correct;
-  b.classList.add("selected");
-  if(good){
-    formatCorrect++;
-    xp+=40;
-  }
-  $("formatCorrect").textContent=`${formatCorrect}/3`;
-  $("formatFeedback").className=`feedback show ${good?"good":"bad"}`;
-  $("formatFeedback").innerHTML=good
-    ?"<strong>Correct format.</strong><br>This structure best supports the candidate’s career story."
-    :`<strong>Better option: ${formats.find(f=>f[0]===correct)[1]}.</strong><br>That format presents the candidate’s experience more clearly.`;
-  $("formatNext").style.display="inline-block";
-  $("formatNext").textContent=formatIndex===2?"Continue to Preparation":"Next Scenario";
-}
-
-function nextFormat(){
-  if(formatIndex<2){formatIndex++;renderFormat()}
-  else{show("sort");renderSort()}
-}
-
-function makeSortCard(text,id){
-  const b=document.createElement("button");
-  b.className="sort-card";
-  b.draggable=true;
-  b.dataset.id=id;
-  b.textContent=text;
-  b.addEventListener("dragstart",e=>{
-    selectedCard=id;
-    e.dataTransfer.setData("text/plain",id);
-  });
-  b.addEventListener("click",()=>{
-    selectedCard=id;
-    document.querySelectorAll(".sort-card").forEach(x=>x.classList.remove("selected"));
-    b.classList.add("selected");
-  });
-  return b;
-}
-
-function renderSort(){
-  placements={};
-  selectedCard=null;
-  $("sortPool").innerHTML="";
-  $("gatherList").innerHTML="";
-  $("laterList").innerHTML="";
-  $("sortFeedback").className="feedback";
-  $("sortNext").style.display="none";
-  sortItems.forEach((item,i)=>$("sortPool").appendChild(makeSortCard(item[0],String(i))));
-  document.querySelectorAll(".drop-zone").forEach(zone=>{
-    zone.addEventListener("dragover",e=>{e.preventDefault();zone.classList.add("over")});
-    zone.addEventListener("dragleave",()=>zone.classList.remove("over"));
-    zone.addEventListener("drop",e=>{
-      e.preventDefault();zone.classList.remove("over");
-      placeCard(e.dataTransfer.getData("text/plain"),zone.dataset.zone);
-    });
-    zone.addEventListener("click",()=>{
-      if(selectedCard!==null)placeCard(selectedCard,zone.dataset.zone);
-    });
+  $("scenarioText").textContent=s.text;
+  $("scenarioOptions").innerHTML=["Reverse Chronological","Combination","Functional"].map(name=>
+    `<button class="format-card" data-choice="${name}">
+      <strong>${name}</strong>
+      <span>Select this format for the candidate.</span>
+    </button>`
+  ).join("");
+  $("scenarioFeedback").className="feedback";
+  $("scenarioFeedback").innerHTML="";
+  $("scenarioNext").style.display="none";
+  document.querySelectorAll("[data-choice]").forEach(btn=>{
+    btn.onclick=()=>answerScenario(btn.dataset.choice,btn);
   });
 }
 
-function placeCard(id,zone){
-  placements[id]=zone;
-  const old=document.querySelector(`.sort-card[data-id="${id}"]`);
-  if(old)old.remove();
-  const card=makeSortCard(sortItems[Number(id)][0],id);
-  $(`${zone}List`).appendChild(card);
-  selectedCard=null;
-  $("placedCount").textContent=`${Object.keys(placements).length}/8`;
+function answerScenario(choice,btn){
+  const s=scenarios[scenarioIndex];
+  document.querySelectorAll("[data-choice]").forEach(b=>b.disabled=true);
+  btn.classList.add("selected");
+  const good=choice===s.correct;
+  if(good){practiceScore++;xp+=50}
+  $("practiceScore").textContent=`${practiceScore}/3`;
+  $("scenarioFeedback").className=`feedback show ${good?"good":"bad"}`;
+  $("scenarioFeedback").innerHTML=`<strong>${good?"Correct.":"Best choice: "+s.correct+"."}</strong><br>${s.explanation}`;
+  $("scenarioNext").style.display="inline-block";
+  $("scenarioNext").textContent=scenarioIndex===2?"Continue to Reflection":"Next Scenario";
 }
 
-function checkSort(){
-  if(Object.keys(placements).length<sortItems.length){
-    $("sortFeedback").className="feedback show mid";
-    $("sortFeedback").innerHTML="<strong>Place all eight cards first.</strong><br>Every item must be sorted before checking the activity.";
-    return;
-  }
-  let correct=0;
-  sortItems.forEach((item,i)=>{if(placements[String(i)]===item[1])correct++});
-  const accuracy=Math.round(correct/sortItems.length*100);
-  $("sortFeedback").className=`feedback show ${accuracy===100?"good":"mid"}`;
-  $("sortFeedback").innerHTML=`<strong>${accuracy===100?"Perfect preparation checklist.":"Preparation checklist reviewed."}</strong><br>You sorted ${correct} of 8 items correctly. Gather dates, employers, titles, achievements, metrics, tools, education, and certifications before writing.`;
-  if(accuracy===100)xp+=80;
-  $("sortNext").style.display="inline-block";
-}
+$("scenarioNext").onclick=()=>{
+  if(scenarioIndex<2){scenarioIndex++;renderScenario()}
+  else show("reflection");
+};
+
+document.querySelectorAll("[data-reflection]").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    reflectionChoice=btn.dataset.reflection;
+    document.querySelectorAll("[data-reflection]").forEach(b=>b.classList.remove("selected"));
+    btn.classList.add("selected");
+
+    const messages={
+      chronological:"Reverse chronological is likely your strongest starting point because it highlights recent, relevant experience.",
+      combination:"A combination format may help you lead with transferable skills while keeping your work history visible.",
+      functional:"A functional structure may be worth considering carefully, but maintain transparent dates and employers whenever possible."
+    };
+
+    $("reflectionFeedback").className="feedback show good";
+    $("reflectionFeedback").innerHTML=`<strong>Your likely starting point:</strong><br>${messages[reflectionChoice]}`;
+    $("quizStart").style.display="inline-block";
+    xp+=25;
+  });
+});
+
+$("quizStart").onclick=()=>{
+  show("quiz");
+  renderQuiz();
+};
 
 function renderQuiz(){
   quizAnswered=false;
@@ -460,42 +878,57 @@ function renderQuiz(){
   $("quizFeedback").innerHTML="";
   $("quizNext").style.display="none";
   $("quizDots").innerHTML=quizQuestions.map((_,i)=>`<div class="quiz-dot ${i===quizIndex?"on":""}">${i+1}</div>`).join("");
-  document.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>answerQuiz(+b.dataset.q,b));
+  document.querySelectorAll("[data-q]").forEach(btn=>{
+    btn.onclick=()=>answerQuiz(Number(btn.dataset.q),btn);
+  });
 }
 
-function answerQuiz(i,b){
+function answerQuiz(i,btn){
   if(quizAnswered)return;
   quizAnswered=true;
   const q=quizQuestions[quizIndex];
-  document.querySelectorAll("[data-q]").forEach(x=>x.disabled=true);
+  document.querySelectorAll("[data-q]").forEach(b=>b.disabled=true);
+
   if(i===q.correct){
     quizCorrect++;
-    b.classList.add("good");
+    btn.classList.add("good");
     $("quizFeedback").className="feedback show good";
     $("quizFeedback").innerHTML=`<strong>Correct.</strong><br>${q.why}`;
   }else{
-    b.classList.add("bad");
+    btn.classList.add("bad");
     document.querySelector(`[data-q="${q.correct}"]`).classList.add("good");
     $("quizFeedback").className="feedback show bad";
     $("quizFeedback").innerHTML=`<strong>Not quite.</strong><br>${q.why}`;
   }
+
   $("quizCorrect").textContent=quizCorrect;
   $("quizNext").style.display="inline-block";
-  $("quizNext").textContent=quizIndex===4?"View Results":"Next Question";
+  $("quizNext").textContent=quizIndex===4?"View Lesson Results":"Next Question";
 }
 
-function nextQuiz(){
+$("quizNext").onclick=()=>{
   if(quizIndex<4){quizIndex++;renderQuiz()}
   else finishLesson();
-}
+};
 
 function finishLesson(){
   const score=Math.round(quizCorrect/5*100);
   if(score>=80)xp+=200;
-  let rank="Resume Foundations Learner",msg="You completed Resume Basics and built a clear foundation for the rest of RES 101.";
-  if(score===100){rank="Resume Basics Expert";msg="Perfect knowledge-check score and strong understanding of resume purpose, structure, and preparation."}
-  else if(score>=80){rank="Resume Foundations Ready";msg="You passed Lesson 1 and are ready to continue to resume sections."}
-  else{rank="Review Recommended";msg="You completed the activities, but review the lesson before advancing."}
+
+  let rank="Resume Foundations Learner";
+  let msg="You completed the full Resume Basics lesson and built a practical foundation for the rest of RES 101.";
+
+  if(score===100){
+    rank="Resume Basics Expert";
+    msg="You completed the instructional material, practice, reflection, and knowledge check with a perfect score.";
+  }else if(score>=80){
+    rank="Resume Foundations Ready";
+    msg="You passed Lesson 1 and are ready to continue to Understanding Resume Sections.";
+  }else{
+    rank="Review Recommended";
+    msg="You completed the lesson, but reviewing the format and purpose sections will strengthen your foundation.";
+  }
+
   $("rankTitle").textContent=rank;
   $("rankMsg").textContent=msg;
   $("finalScore").textContent=score+"%";
@@ -505,35 +938,41 @@ function finishLesson(){
 }
 
 function resetLesson(){
-  xp=0;formatIndex=0;formatCorrect=0;placements={};selectedCard=null;quizIndex=0;quizCorrect=0;
-  $("formatCorrect").textContent="0/3";
-  $("quizCorrect").textContent="0";
-  $("placedCount").textContent="0/8";
-  document.querySelectorAll("[data-purpose]").forEach(x=>{x.disabled=false;x.className="answer"});
-  $("purposeFeedback").className="feedback";
+  mythsOpened=new Set();
+  scenarioIndex=0;
+  practiceScore=0;
+  reflectionChoice=null;
+  quizIndex=0;
+  quizCorrect=0;
+  quizAnswered=false;
+  xp=0;
+
+  document.querySelectorAll("[data-myth]").forEach((btn,i)=>{
+    btn.className="myth-card";
+    btn.innerHTML=`<strong>Myth: ${[
+      "A resume must include every job.",
+      "A resume gets you hired.",
+      "One resume works for every role.",
+      "Duties are enough."
+    ][i]}</strong><span>Select to reveal.</span>`;
+  });
+
+  $("mythFeedback").className="feedback";
   $("purposeNext").style.display="none";
+  $("practiceScore").textContent="0/3";
+  $("quizCorrect").textContent="0";
+  $("quizStart").style.display="none";
+  document.querySelectorAll("[data-reflection]").forEach(b=>b.classList.remove("selected"));
+  $("reflectionFeedback").className="feedback";
   show("start");
 }
 
-function exit(){
-  if(history.length>1)history.back();
-  else location.href="../";
-}
-
-$("startBtn").onclick=startLesson;
-$("beginBtn").onclick=startLesson;
-$("howBtn").onclick=()=>show("how");
-$("backBtn").onclick=()=>show("start");
-document.querySelectorAll("[data-purpose]").forEach(b=>b.onclick=()=>answerPurpose(+b.dataset.purpose,b));
-$("purposeNext").onclick=()=>show("compare");
-$("compareNext").onclick=()=>{show("formats");renderFormat()};
-$("formatNext").onclick=nextFormat;
-$("sortSubmit").onclick=checkSort;
-$("sortNext").onclick=()=>{show("quiz");renderQuiz()};
-$("quizNext").onclick=nextQuiz;
 $("replayBtn").onclick=resetLesson;
-$("exitBtn").onclick=exit;
-$("resultsExitBtn").onclick=exit;
+$("exitBtn").onclick=()=>{if(history.length>1)history.back();else location.href="../"};
+$("resultsExitBtn").onclick=()=>{if(history.length>1)history.back();else location.href="../"};
+
+show("start");
+renderScenario();
 </script>
 </body>
 </html>

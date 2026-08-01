@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Claims Processor | ButterflyOS Career Arcade</title>
+<meta name="description" content="Claims Processor — a ButterflyOS healthcare claims simulation.">
+<style>
+:root{
+  --mocha:#3b211b;--mocha2:#5a382e;--cream:#fff8eb;--cream2:#f0dfc2;
+  --navy:#2e5673;--navy2:#6e9bb8;--gold:#d3aa4d;--green:#2f7158;
+  --red:#a94747;--amber:#ad7725;--ink:#281a16;--muted:#75665e;--line:#e4d5bc;--white:#fff;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100vh;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);
+  background:
+    radial-gradient(circle at 12% 10%,rgba(110,155,184,.18),transparent 26%),
+    radial-gradient(circle at 88% 4%,rgba(211,170,77,.16),transparent 23%),
+    linear-gradient(135deg,#25130f,#4a2a22 55%,#311a15);
+}
+button{font:inherit}
+button:focus-visible{outline:3px solid #f0d58d;outline-offset:3px}
+.shell{width:min(1240px,calc(100% - 24px));margin:auto;padding:18px 0 34px}
+.top{display:flex;justify-content:space-between;align-items:center;color:var(--cream);margin-bottom:14px}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(145deg,var(--navy2),var(--navy));font-size:22px}
+.brand strong,.brand span{display:block}.brand strong{font-size:14px;letter-spacing:.1em;text-transform:uppercase}.brand span{font-size:12px;color:#deccb3}
+.exit{border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.05);color:var(--cream);padding:9px 14px;border-radius:999px;cursor:pointer}
+.app{background:linear-gradient(180deg,#fffaf1,#f5e8d3);border-radius:28px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.25);min-height:780px}
+.screen{display:none;min-height:780px;padding:clamp(22px,4vw,48px)}
+.screen.active{display:block;animation:fade .28s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.ey{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:900;color:var(--navy);margin:0 0 10px}
+h1,h2,h3,p{margin-top:0}
+h1{font-size:clamp(48px,7vw,82px);line-height:.92;letter-spacing:-.05em;margin-bottom:18px}
+h2{font-size:clamp(30px,4vw,44px);line-height:1.05;margin-bottom:10px}
+h3{margin-bottom:8px;color:var(--mocha)}
+.lead{font-size:clamp(16px,2vw,19px);line-height:1.6;color:#63534b;max-width:760px}
+.start{display:grid;grid-template-columns:1fr 1fr;gap:42px;align-items:center;min-height:650px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0}
+.tag{background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 12px;font-size:13px;font-weight:800}
+.btnrow{display:flex;gap:12px;flex-wrap:wrap}
+.primary,.secondary,.decision,.check{
+  border:0;border-radius:14px;padding:13px 17px;font-weight:900;cursor:pointer;transition:.17s
+}
+.primary{background:linear-gradient(135deg,var(--navy),var(--mocha));color:white;box-shadow:0 11px 24px rgba(46,86,115,.22)}
+.secondary{background:transparent;border:1px solid var(--mocha2);color:var(--mocha2)}
+.primary:hover,.decision:hover,.check:hover{transform:translateY(-2px)}
+.preview{background:linear-gradient(145deg,#203746,var(--mocha2));padding:24px;border-radius:24px;color:white;min-height:530px}
+.queue-card{background:#fff;color:var(--ink);border-radius:18px;padding:20px;box-shadow:0 18px 36px rgba(0,0,0,.25)}
+.queue-head{display:flex;justify-content:space-between;gap:10px;align-items:start;border-bottom:1px solid var(--line);padding-bottom:12px}
+.queue-head strong{font-size:22px}.queue-head span{font-size:12px;color:var(--muted)}
+.claim-row{display:grid;grid-template-columns:1fr auto;gap:10px;padding:14px 0;border-bottom:1px solid var(--line)}
+.claim-row:last-child{border-bottom:0}.claim-row strong,.claim-row span{display:block}.claim-row span{font-size:12px;color:var(--muted);margin-top:4px}
+.status-pill{padding:7px 10px;border-radius:999px;background:#eaf2f7;color:var(--navy);font-weight:900;font-size:12px;height:max-content}
+.instructions{display:grid;gap:14px;margin:25px 0}
+.instruction{display:grid;grid-template-columns:38px 1fr;gap:12px}.num{width:38px;height:38px;border-radius:12px;background:var(--navy);color:white;display:grid;place-items:center;font-weight:900}
+.gamehead{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:start;margin-bottom:16px}
+.hud{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}
+.hudcard{min-width:100px;background:#fff;border:1px solid var(--line);border-radius:13px;padding:10px;text-align:center}
+.hudcard span,.hudcard strong{display:block}.hudcard span{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}.hudcard strong{font-size:20px}
+.progress{height:9px;background:#e2d3b8;border-radius:999px;overflow:hidden;margin-bottom:18px}.progress div{height:100%;background:linear-gradient(90deg,var(--navy),var(--gold));transition:.25s}
+.gamegrid{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
+.panel{background:rgba(255,255,255,.78);border:1px solid var(--line);border-radius:18px;padding:18px}
+.claim-form{background:#fff;border:1px solid var(--line);border-radius:15px;padding:18px}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.field{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fffaf1}
+.field strong,.field span{display:block}.field strong{font-size:15px}.field span{font-size:12px;color:var(--muted);margin-top:4px}
+.alert{margin-top:12px;padding:14px;border-radius:13px;background:#fff3df;border:1px solid #e2c18b;line-height:1.5}
+.checklist{display:grid;gap:9px;margin-top:10px}
+.check{background:#fff;border:1px solid #dfceb2;color:var(--ink);text-align:left}
+.check.selected{background:#eaf2f7;border:2px solid var(--navy)}
+.check strong,.check span{display:block}.check span{font-size:12px;color:var(--muted);margin-top:4px}
+.decision-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:12px}
+.decision{color:white}.pay{background:var(--green)}.pend{background:var(--amber)}.deny{background:var(--red)}.escalate{background:var(--navy)}
+.feedback{display:none;margin-top:14px;border-radius:14px;padding:16px;line-height:1.55}.feedback.show{display:block}.feedback.good{background:#e9f5ed;border:1px solid #bddbc7}.feedback.mid{background:#fff3df;border:1px solid #e2c18b}.feedback.bad{background:#fbeaea;border:1px solid #e1b8b8}
+.nextrow{display:flex;justify-content:flex-end;margin-top:13px}
+.results{display:grid;grid-template-columns:.9fr 1.1fr;gap:32px;align-items:center;min-height:630px}
+.rank{background:linear-gradient(145deg,#203746,var(--mocha2));color:white;border-radius:24px;padding:34px;text-align:center}
+.rank-badge{width:170px;height:170px;border-radius:50%;margin:10px auto 20px;display:grid;place-items:center;background:radial-gradient(circle,#fff3d4 0 45%,var(--navy2) 46% 57%,#203746 58%);border:9px solid #edd18a;font-size:54px}
+.ranktitle{font-size:30px;font-weight:900}.rank p{color:#d5e5ee;line-height:1.5}
+.scoregrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}.scorecard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px;text-align:center}.scorecard strong,.scorecard span{display:block}.scorecard strong{font-size:27px}.scorecard span{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.lesson{padding:16px;border-radius:14px;background:#edf4f8;border:1px solid #c7d9e3;line-height:1.55;margin-bottom:18px}
+@media(max-width:900px){.start,.gamegrid,.results{grid-template-columns:1fr}.gamehead{grid-template-columns:1fr}.hud{justify-content:flex-start}}
+@media(max-width:620px){.shell{width:calc(100% - 12px)}.screen{padding:20px 14px;min-height:auto}.app{min-height:auto}.brand span{display:none}.form-grid,.decision-grid,.scoregrid{grid-template-columns:1fr}.hud{display:grid;grid-template-columns:repeat(2,1fr)}.hudcard{min-width:0}.btnrow button{width:100%}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="top"><div class="brand"><div class="logo">🦋</div><div><strong>ButterflyOS</strong><span>Career Arcade</span></div></div><button class="exit" id="exitBtn">← Exit Game</button></header>
+<main class="app">
+<section class="screen active" id="start">
+<div class="start">
+<div><p class="ey">Healthcare Claims Simulation</p><h1>Claims<br>Processor</h1><p class="lead">Work through six healthcare claims by reviewing eligibility, claim forms, coding, documentation, benefits, and escalation requirements.</p>
+<div class="tags"><span class="tag">6 Claim Scenarios</span><span class="tag">Pay · Pend · Deny · Escalate</span><span class="tag">CMS-1500 + UB-04</span><span class="tag">Claims Coaching</span></div>
+<div class="btnrow"><button class="primary" id="startBtn">Open the Claims Queue</button><button class="secondary" id="howBtn">How to Play</button></div></div>
+<div class="preview"><p class="ey" style="color:#d5e5ee">Claims Queue</p><div class="queue-card">
+<div class="queue-head"><div><strong>Pending Claims</strong><span>Queue: Medical Operations</span></div><span>6 open</span></div>
+<div class="claim-row"><div><strong>Professional Claim</strong><span>CMS-1500 · $485</span></div><div class="status-pill">Review</div></div>
+<div class="claim-row"><div><strong>Hospital Claim</strong><span>UB-04 · $18,750</span></div><div class="status-pill">Documents</div></div>
+<div class="claim-row"><div><strong>Duplicate Claim</strong><span>CMS-1500 · $225</span></div><div class="status-pill">Research</div></div>
+<div class="claim-row"><div><strong>High-Dollar Claim</strong><span>UB-04 · $92,400</span></div><div class="status-pill">Escalation</div></div>
+</div></div>
+</div></section>
+
+<section class="screen" id="how">
+<p class="ey">Claims Briefing</p><h2>How to Play</h2><p class="lead">Each claim contains data that supports one correct processing decision.</p>
+<div class="instructions">
+<div class="instruction"><div class="num">1</div><div><h3>Review the claim</h3><p>Check member eligibility, dates of service, provider status, coding, authorization, and documentation.</p></div></div>
+<div class="instruction"><div class="num">2</div><div><h3>Flag the relevant findings</h3><p>Select every issue or supporting fact that affects adjudication.</p></div></div>
+<div class="instruction"><div class="num">3</div><div><h3>Choose a processing action</h3><p>Decide whether to Pay, Pend, Deny, or Escalate the claim.</p></div></div>
+<div class="instruction"><div class="num">4</div><div><h3>Review the rationale</h3><p>Claims coaching explains the correct decision and processing logic.</p></div></div>
+</div>
+<div class="btnrow"><button class="primary" id="beginBtn">Begin Processing</button><button class="secondary" id="backBtn">Back</button></div>
+</section>
+
+<section class="screen" id="game">
+<div class="gamehead">
+<div><p class="ey" id="claimNum">Claim 1 of 6</p><h2 id="claimTitle"></h2><p class="lead" id="claimPrompt"></p></div>
+<div class="hud"><div class="hudcard"><span>Processor Score</span><strong id="score">0</strong></div><div class="hudcard"><span>Accuracy</span><strong id="accuracy">0%</strong></div><div class="hudcard"><span>Correct Actions</span><strong id="correctActions">0</strong></div></div>
+</div>
+<div class="progress"><div id="progress"></div></div>
+<div class="gamegrid">
+<section class="panel">
+<h3>Claim Details</h3>
+<div class="claim-form"><div class="form-grid" id="claimFields"></div><div class="alert" id="claimAlert"></div></div>
+</section>
+<aside class="panel">
+<h3>Processing Review</h3><p style="color:var(--muted);line-height:1.5">Select every finding that affects the claim, then choose the correct action.</p>
+<div class="checklist" id="checklist"></div>
+<div class="decision-grid">
+<button class="decision pay" data-decision="pay">Pay</button>
+<button class="decision pend" data-decision="pend">Pend</button>
+<button class="decision deny" data-decision="deny">Deny</button>
+<button class="decision escalate" data-decision="escalate">Escalate</button>
+</div>
+<div class="feedback" id="feedback"></div>
+<div class="nextrow"><button class="primary" id="nextBtn" style="display:none">Next Claim</button></div>
+</aside>
+</div>
+</section>
+
+<section class="screen" id="results">
+<div class="results">
+<div class="rank"><p class="ey" style="color:#d5e5ee">Claims Queue Complete</p><div class="rank-badge">🧾</div><div class="ranktitle" id="rankTitle"></div><p id="rankMsg"></p></div>
+<div><p class="ey">Final Claims Report</p><h2>Your Processing Results</h2><p class="lead">Accurate claims decisions protect members, providers, compliance, and plan funds.</p>
+<div class="scoregrid"><div class="scorecard"><strong id="finalScore">0</strong><span>Processor Score</span></div><div class="scorecard"><strong id="finalAccuracy">0%</strong><span>Decision Accuracy</span></div><div class="scorecard"><strong id="finalFindings">0%</strong><span>Finding Accuracy</span></div></div>
+<div class="lesson"><strong>Claims Processing Summary</strong><br>Reliable adjudication requires validating eligibility, provider and member data, coding, authorization, documentation, duplicate history, benefit limits, and escalation thresholds before deciding whether a claim should pay, pend, deny, or receive specialized review.</div>
+<div class="btnrow"><button class="primary" id="replayBtn">Replay Claims Processor</button><button class="secondary" id="resultsExitBtn">Return to Career Arcade</button></div>
+</div></div>
+</section>
+</main>
+</div>
+
+<script>
+const claims=[
+{
+title:"Clean Professional Claim",
+prompt:"Determine whether this office-visit claim is ready to adjudicate.",
+fields:[
+["Claim Form","CMS-1500"],["Billed Amount","$485"],["Member Eligibility","Active"],["Provider Status","In Network"],
+["Date of Service","Within coverage"],["Authorization","Not required"],["Coding","Valid CPT + diagnosis"],["Duplicate History","None"]
+],
+alert:"All required fields are present. The service is covered under the member’s plan with a $35 copay.",
+checks:["Eligibility active","Coding valid","Authorization missing","Duplicate claim","Covered benefit"],
+correctChecks:["Eligibility active","Coding valid","Covered benefit"],
+decision:"pay",
+rationale:"The claim is complete, covered, properly coded, and not duplicated. Apply the member copay and pay according to contracted benefits."
+},
+{
+title:"Missing Medical Records",
+prompt:"Review an outpatient procedure requiring supporting documentation.",
+fields:[
+["Claim Form","CMS-1500"],["Billed Amount","$2,940"],["Member Eligibility","Active"],["Provider Status","In Network"],
+["Date of Service","Within coverage"],["Authorization","Approved"],["Coding","Valid"],["Medical Records","Not attached"]
+],
+alert:"The procedure requires operative notes before final adjudication.",
+checks:["Eligibility active","Authorization approved","Medical records missing","Coding invalid","Out-of-network provider"],
+correctChecks:["Eligibility active","Authorization approved","Medical records missing"],
+decision:"pend",
+rationale:"The claim should pend for required medical records. Eligibility, authorization, and coding are valid, so denial is premature."
+},
+{
+title:"Inactive Coverage",
+prompt:"Determine the correct action for a claim submitted after coverage ended.",
+fields:[
+["Claim Form","CMS-1500"],["Billed Amount","$760"],["Member Eligibility","Terminated"],["Coverage End Date","March 31"],
+["Date of Service","April 18"],["Provider Status","In Network"],["Authorization","Not required"],["Coding","Valid"]
+],
+alert:"The date of service occurred after the member’s coverage termination date.",
+checks:["Coverage inactive on date of service","Coding valid","Provider out of network","Authorization missing","Benefit active"],
+correctChecks:["Coverage inactive on date of service","Coding valid"],
+decision:"deny",
+rationale:"The member was not eligible on the date of service. The claim should deny for inactive coverage even though coding is valid."
+},
+{
+title:"Duplicate Submission",
+prompt:"Review whether this claim represents a new service or a duplicate.",
+fields:[
+["Claim Form","CMS-1500"],["Billed Amount","$225"],["Member Eligibility","Active"],["Provider Status","In Network"],
+["Date of Service","May 12"],["Procedure Code","99213"],["Prior Claim","Paid May 20"],["Patient Control Number","Same"]
+],
+alert:"A previously paid claim contains the same member, provider, date, procedure, and control number.",
+checks:["Exact duplicate indicators","Eligibility active","New corrected claim","Prior claim paid","Authorization required"],
+correctChecks:["Exact duplicate indicators","Eligibility active","Prior claim paid"],
+decision:"deny",
+rationale:"The claim is an exact duplicate of a previously paid submission and should deny as duplicate rather than pay again."
+},
+{
+title:"High-Dollar Facility Claim",
+prompt:"Determine whether standard processing authority is sufficient.",
+fields:[
+["Claim Form","UB-04"],["Billed Amount","$92,400"],["Member Eligibility","Active"],["Facility Status","In Network"],
+["Authorization","Approved"],["Coding","Valid"],["Medical Records","Complete"],["Processor Authority","Up to $75,000"]
+],
+alert:"The claim exceeds the processor’s $75,000 financial authority threshold.",
+checks:["Eligibility active","Documentation complete","High-dollar threshold exceeded","Authorization missing","Coding invalid"],
+correctChecks:["Eligibility active","Documentation complete","High-dollar threshold exceeded"],
+decision:"escalate",
+rationale:"The claim appears payable but exceeds the processor’s financial authority. Escalate for required high-dollar review."
+},
+{
+title:"Authorization Mismatch",
+prompt:"Review an inpatient claim where the approved service dates do not match the billed stay.",
+fields:[
+["Claim Form","UB-04"],["Billed Amount","$18,750"],["Member Eligibility","Active"],["Facility Status","In Network"],
+["Authorized Dates","June 10–12"],["Billed Dates","June 10–15"],["Coding","Valid"],["Medical Records","Complete"]
+],
+alert:"Three billed days extend beyond the approved authorization period.",
+checks:["Eligibility active","Authorization date mismatch","Medical records complete","Entire claim automatically payable","Coding invalid"],
+correctChecks:["Eligibility active","Authorization date mismatch","Medical records complete"],
+decision:"pend",
+rationale:"The claim requires additional authorization review for the three unapproved days. Pend rather than automatically denying the entire stay."
+}
+];
+
+let index=0,score=0,correctActions=0,totalFindingAccuracy=0,totalAttempts=0,selectedChecks=new Set(),locked=false;
+const $=id=>document.getElementById(id);
+const screens={start:$("start"),how:$("how"),game:$("game"),results:$("results")};
+
+function show(name){Object.values(screens).forEach(s=>s.classList.remove("active"));screens[name].classList.add("active");window.scrollTo({top:0,behavior:"smooth"})}
+function render(){
+ locked=false;selectedChecks=new Set();
+ const c=claims[index];
+ $("claimNum").textContent=`Claim ${index+1} of ${claims.length}`;$("claimTitle").textContent=c.title;$("claimPrompt").textContent=c.prompt;
+ $("claimFields").innerHTML=c.fields.map(f=>`<div class="field"><strong>${f[0]}</strong><span>${f[1]}</span></div>`).join("");
+ $("claimAlert").textContent=c.alert;
+ $("checklist").innerHTML=c.checks.map(x=>`<button class="check" data-check="${x}"><strong>${x}</strong><span>Select if relevant to adjudication</span></button>`).join("");
+ $("feedback").className="feedback";$("feedback").innerHTML="";$("nextBtn").style.display="none";
+ document.querySelectorAll("[data-check]").forEach(b=>b.onclick=()=>toggleCheck(b.dataset.check,b));
+ document.querySelectorAll("[data-decision]").forEach(b=>{b.disabled=false;b.onclick=()=>decide(b.dataset.decision)});
+ updateHud();
+}
+function toggleCheck(x,b){
+ if(locked)return;selectedChecks.has(x)?selectedChecks.delete(x):selectedChecks.add(x);b.classList.toggle("selected");
+}
+function updateHud(){
+ const accuracy=totalAttempts?Math.round(correctActions/totalAttempts*100):0;
+ $("score").textContent=score;$("accuracy").textContent=accuracy+"%";$("correctActions").textContent=correctActions;$("progress").style.width=`${(index/claims.length)*100}%`;
+}
+function decide(choice){
+ if(locked)return;locked=true;totalAttempts++;
+ const c=claims[index],correctSet=new Set(c.correctChecks);
+ let truePos=0;selectedChecks.forEach(x=>{if(correctSet.has(x))truePos++});
+ const falsePos=[...selectedChecks].filter(x=>!correctSet.has(x)).length;
+ const findingAccuracy=Math.max(0,Math.round((truePos/(c.correctChecks.length+falsePos||1))*100));
+ const actionCorrect=choice===c.decision;
+ if(actionCorrect)correctActions++;
+ let earned=(actionCorrect?150:25)+Math.round(findingAccuracy*.7);
+ score+=earned;totalFindingAccuracy+=findingAccuracy;
+ document.querySelectorAll("[data-check]").forEach(b=>{if(correctSet.has(b.dataset.check))b.classList.add("selected");b.disabled=true});
+ document.querySelectorAll("[data-decision]").forEach(b=>b.disabled=true);
+ let cls="mid",headline="Partially correct processing review";
+ if(actionCorrect&&findingAccuracy===100){cls="good";headline="Correct claims decision"}
+ else if(!actionCorrect){cls="bad";headline="Incorrect claims action"}
+ $("feedback").className=`feedback show ${cls}`;
+ $("feedback").innerHTML=`<strong>${headline}.</strong><br>Correct action: ${c.decision.toUpperCase()}. Finding accuracy: ${findingAccuracy}%. ${c.rationale}`;
+ $("nextBtn").style.display="inline-block";$("nextBtn").textContent=index===claims.length-1?"View Claims Report":"Next Claim";updateHud();
+}
+function next(){if(index<claims.length-1){index++;render()}else finish()}
+function finish(){
+ const actionAccuracy=Math.round(correctActions/claims.length*100),findingAccuracy=Math.round(totalFindingAccuracy/claims.length);
+ let rank="Claims Processing Trainee",msg="You completed the queue and practiced core adjudication decisions.";
+ if(actionAccuracy===100&&findingAccuracy>=95){rank="Senior Claims Examiner";msg="Exceptional adjudication accuracy across clean claims, denials, pends, duplicates, and escalations."}
+ else if(actionAccuracy>=83&&findingAccuracy>=85){rank="Claims Resolution Specialist";msg="Strong processing judgment with only minor finding gaps."}
+ else if(actionAccuracy>=67){rank="Claims Processor";msg="Solid claims foundation with several correct processing decisions."}
+ else if(actionAccuracy>=50){rank="Claims Operations Builder";msg="Continue reviewing eligibility, documentation, duplicate, and escalation logic."}
+ $("rankTitle").textContent=rank;$("rankMsg").textContent=msg;$("finalScore").textContent=score;$("finalAccuracy").textContent=actionAccuracy+"%";$("finalFindings").textContent=findingAccuracy+"%";
+ $("progress").style.width="100%";show("results");
+}
+function startGame(){index=0;score=0;correctActions=0;totalFindingAccuracy=0;totalAttempts=0;render();show("game")}
+function exit(){if(history.length>1)history.back();else location.href="../"}
+$("startBtn").onclick=startGame;$("beginBtn").onclick=startGame;$("howBtn").onclick=()=>show("how");$("backBtn").onclick=()=>show("start");$("nextBtn").onclick=next;$("replayBtn").onclick=startGame;$("exitBtn").onclick=exit;$("resultsExitBtn").onclick=exit;
+</script>
+</body>
+</html>

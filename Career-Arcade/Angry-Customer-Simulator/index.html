@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Angry Customer Simulator | ButterflyOS Career Arcade</title>
+<meta name="description" content="Angry Customer Simulator — a ButterflyOS customer de-escalation game.">
+<style>
+:root{
+  --mocha:#3b211b;--mocha2:#5a382e;--cream:#fff8eb;--cream2:#f0dfc2;
+  --red:#9f4545;--red2:#c56a6a;--gold:#d3aa4d;--green:#2f7158;
+  --amber:#ad7725;--blue:#3f6f8f;--ink:#281a16;--muted:#75665e;--line:#e4d5bc;--white:#fff;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100vh;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);
+  background:
+    radial-gradient(circle at 12% 10%,rgba(197,106,106,.18),transparent 26%),
+    radial-gradient(circle at 88% 4%,rgba(211,170,77,.16),transparent 23%),
+    linear-gradient(135deg,#25130f,#4a2a22 55%,#311a15);
+}
+button{font:inherit}
+button:focus-visible{outline:3px solid #f0d58d;outline-offset:3px}
+.shell{width:min(1240px,calc(100% - 24px));margin:auto;padding:18px 0 34px}
+.top{display:flex;justify-content:space-between;align-items:center;color:var(--cream);margin-bottom:14px}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(145deg,var(--red2),var(--red));font-size:22px}
+.brand strong,.brand span{display:block}.brand strong{font-size:14px;letter-spacing:.1em;text-transform:uppercase}.brand span{font-size:12px;color:#deccb3}
+.exit{border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.05);color:var(--cream);padding:9px 14px;border-radius:999px;cursor:pointer}
+.app{background:linear-gradient(180deg,#fffaf1,#f5e8d3);border-radius:28px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.25);min-height:760px}
+.screen{display:none;min-height:760px;padding:clamp(22px,4vw,48px)}
+.screen.active{display:block;animation:fade .28s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.ey{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:900;color:var(--red);margin:0 0 10px}
+h1,h2,h3,p{margin-top:0}
+h1{font-size:clamp(48px,7vw,82px);line-height:.92;letter-spacing:-.05em;margin-bottom:18px}
+h2{font-size:clamp(30px,4vw,44px);line-height:1.05;margin-bottom:10px}
+h3{margin-bottom:8px;color:var(--mocha)}
+.lead{font-size:clamp(16px,2vw,19px);line-height:1.6;color:#63534b;max-width:760px}
+.start{display:grid;grid-template-columns:1fr 1fr;gap:42px;align-items:center;min-height:640px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0}
+.tag{background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 12px;font-size:13px;font-weight:800}
+.btnrow{display:flex;gap:12px;flex-wrap:wrap}
+.primary,.secondary,.choice{
+  border:0;border-radius:14px;padding:13px 17px;font-weight:900;cursor:pointer;transition:.17s
+}
+.primary{background:linear-gradient(135deg,var(--red),var(--mocha));color:white;box-shadow:0 11px 24px rgba(159,69,69,.22)}
+.secondary{background:transparent;border:1px solid var(--mocha2);color:var(--mocha2)}
+.primary:hover,.choice:hover{transform:translateY(-2px)}
+.preview{background:linear-gradient(145deg,#4b2626,var(--mocha2));padding:24px;border-radius:24px;color:white;min-height:520px}
+.call-window{background:#fff;color:var(--ink);border-radius:18px;overflow:hidden;box-shadow:0 18px 36px rgba(0,0,0,.25)}
+.call-head{padding:14px 16px;background:#efdfcc;display:flex;justify-content:space-between;font-weight:900}
+.customer-preview{padding:24px;text-align:center}
+.face{width:120px;height:120px;border-radius:50%;margin:0 auto 18px;background:#f5d7d7;position:relative}
+.face:before,.face:after{content:"";position:absolute;width:14px;height:14px;border-radius:50%;background:#4b2b27;top:39px}
+.face:before{left:31px}.face:after{right:31px}
+.mouth{width:52px;height:20px;border-top:5px solid #8f3f3f;border-radius:50%;margin:0 auto;transform:translateY(-38px)}
+.quote{font-size:20px;font-weight:900;line-height:1.45;color:var(--red)}
+.preview-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;padding:0 18px 20px}
+.preview-stat{background:#fff8ec;border:1px solid var(--line);border-radius:12px;padding:11px}
+.preview-stat strong,.preview-stat span{display:block}.preview-stat strong{font-size:20px}.preview-stat span{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.instructions{display:grid;gap:14px;margin:25px 0}
+.instruction{display:grid;grid-template-columns:38px 1fr;gap:12px}.num{width:38px;height:38px;border-radius:12px;background:var(--red);color:white;display:grid;place-items:center;font-weight:900}
+.gamehead{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:start;margin-bottom:16px}
+.hud{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}
+.hudcard{min-width:100px;background:#fff;border:1px solid var(--line);border-radius:13px;padding:10px;text-align:center}
+.hudcard span,.hudcard strong{display:block}.hudcard span{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}.hudcard strong{font-size:20px}
+.progress{height:9px;background:#e2d3b8;border-radius:999px;overflow:hidden;margin-bottom:18px}.progress div{height:100%;background:linear-gradient(90deg,var(--red),var(--gold));transition:.25s}
+.gamegrid{display:grid;grid-template-columns:.9fr 1.1fr;gap:20px}
+.panel{background:rgba(255,255,255,.78);border:1px solid var(--line);border-radius:18px;padding:18px}
+.customer-card{background:linear-gradient(145deg,#4b2626,var(--mocha2));color:white;border-radius:16px;padding:20px;min-height:500px;display:flex;flex-direction:column}
+.customer-avatar{width:120px;height:120px;border-radius:50%;margin:0 auto 16px;background:#f3d0d0;position:relative}
+.customer-avatar:before,.customer-avatar:after{content:"";position:absolute;width:14px;height:14px;border-radius:50%;background:#4b2b27;top:39px}
+.customer-avatar:before{left:31px}.customer-avatar:after{right:31px}
+.customer-name{text-align:center;font-size:24px;font-weight:900}.customer-state{text-align:center;color:#f3cccc;margin-top:4px}
+.speech{margin-top:20px;background:white;color:var(--ink);border-radius:15px;padding:18px;font-size:18px;line-height:1.5}
+.call-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:auto;padding-top:18px}
+.call-stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px;text-align:center}
+.call-stat strong,.call-stat span{display:block}.call-stat span{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:#f0d0d0}
+.choices{display:grid;gap:11px}
+.choice{background:#fff;border:1px solid #dfceb2;color:var(--ink);text-align:left;line-height:1.45}
+.choice strong,.choice span{display:block}.choice span{font-size:12px;color:var(--muted);margin-top:5px}
+.choice.good{border-color:var(--green);background:#e9f5ed}.choice.bad{border-color:var(--red);background:#fbeaea}.choice.mid{border-color:var(--amber);background:#fff3df}
+.feedback{display:none;margin-top:14px;border-radius:14px;padding:16px;line-height:1.55}.feedback.show{display:block}.feedback.good{background:#e9f5ed;border:1px solid #bddbc7}.feedback.mid{background:#fff3df;border:1px solid #e2c18b}.feedback.bad{background:#fbeaea;border:1px solid #e1b8b8}
+.nextrow{display:flex;justify-content:flex-end;margin-top:13px}
+.results{display:grid;grid-template-columns:.9fr 1.1fr;gap:32px;align-items:center;min-height:620px}
+.rank{background:linear-gradient(145deg,#4b2626,var(--mocha2));color:white;border-radius:24px;padding:34px;text-align:center}
+.rank-badge{width:170px;height:170px;border-radius:50%;margin:10px auto 20px;display:grid;place-items:center;background:radial-gradient(circle,#fff3d4 0 45%,var(--red2) 46% 57%,#4b2626 58%);border:9px solid #edd18a;font-size:54px}
+.ranktitle{font-size:30px;font-weight:900}.rank p{color:#f0d0d0;line-height:1.5}
+.scoregrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}.scorecard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px;text-align:center}.scorecard strong,.scorecard span{display:block}.scorecard strong{font-size:27px}.scorecard span{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.lesson{padding:16px;border-radius:14px;background:#f8eeee;border:1px solid #e1caca;line-height:1.55;margin-bottom:18px}
+@media(max-width:900px){.start,.gamegrid,.results{grid-template-columns:1fr}.gamehead{grid-template-columns:1fr}.hud{justify-content:flex-start}}
+@media(max-width:620px){.shell{width:calc(100% - 12px)}.screen{padding:20px 14px;min-height:auto}.app{min-height:auto}.brand span{display:none}.preview-stats,.call-stats,.scoregrid{grid-template-columns:1fr}.hud{display:grid;grid-template-columns:repeat(2,1fr)}.hudcard{min-width:0}.btnrow button{width:100%}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="top"><div class="brand"><div class="logo">🦋</div><div><strong>ButterflyOS</strong><span>Career Arcade</span></div></div><button class="exit" id="exitBtn">← Exit Game</button></header>
+<main class="app">
+<section class="screen active" id="start">
+<div class="start">
+<div><p class="ey">Customer Service Simulation</p><h1>Angry Customer<br>Simulator</h1><p class="lead">Handle six difficult customer situations while balancing empathy, compliance, resolution progress, CSAT, and escalation risk.</p>
+<div class="tags"><span class="tag">6 Customer Scenarios</span><span class="tag">Branching Responses</span><span class="tag">CSAT Tracking</span><span class="tag">De-escalation Coaching</span></div>
+<div class="btnrow"><button class="primary" id="startBtn">Answer the First Call</button><button class="secondary" id="howBtn">How to Play</button></div></div>
+<div class="preview"><p class="ey" style="color:#f0d0d0">Incoming Escalation</p><div class="call-window">
+<div class="call-head"><span>Customer Call</span><span>03:42</span></div>
+<div class="customer-preview"><div class="face"></div><div class="mouth"></div><div class="quote">“I’ve called three times already!”</div></div>
+<div class="preview-stats"><div class="preview-stat"><strong>82%</strong><span>Emotion</span></div><div class="preview-stat"><strong>41%</strong><span>Resolution</span></div><div class="preview-stat"><strong>High</strong><span>Escalation Risk</span></div></div>
+</div></div>
+</div></section>
+
+<section class="screen" id="how">
+<p class="ey">Call Handling Briefing</p><h2>How to Play</h2><p class="lead">Each response changes the customer’s emotion, resolution progress, CSAT, compliance, and escalation risk.</p>
+<div class="instructions">
+<div class="instruction"><div class="num">1</div><div><h3>Read the customer’s concern</h3><p>Identify the actual issue, emotional intensity, and policy limits.</p></div></div>
+<div class="instruction"><div class="num">2</div><div><h3>Select your response</h3><p>Strong responses combine empathy, ownership, clarity, and an approved next step.</p></div></div>
+<div class="instruction"><div class="num">3</div><div><h3>Protect compliance</h3><p>Do not promise unauthorized exceptions, refunds, replacements, or outcomes.</p></div></div>
+<div class="instruction"><div class="num">4</div><div><h3>Resolve without unnecessary escalation</h3><p>Your final rank depends on both customer satisfaction and sound judgment.</p></div></div>
+</div>
+<div class="btnrow"><button class="primary" id="beginBtn">Begin Call Queue</button><button class="secondary" id="backBtn">Back</button></div>
+</section>
+
+<section class="screen" id="game">
+<div class="gamehead">
+<div><p class="ey" id="callNum">Call 1 of 6</p><h2 id="callTitle"></h2><p class="lead" id="callPrompt"></p></div>
+<div class="hud"><div class="hudcard"><span>Score</span><strong id="score">0</strong></div><div class="hudcard"><span>CSAT</span><strong id="csat">70%</strong></div><div class="hudcard"><span>Compliance</span><strong id="compliance">100%</strong></div></div>
+</div>
+<div class="progress"><div id="progress"></div></div>
+<div class="gamegrid">
+<aside class="panel"><div class="customer-card"><div class="customer-avatar"></div><div class="customer-name" id="customerName"></div><div class="customer-state" id="customerState"></div><div class="speech" id="speech"></div>
+<div class="call-stats">
+<div class="call-stat"><strong id="emotion">80%</strong><span>Customer Emotion</span></div>
+<div class="call-stat"><strong id="resolution">20%</strong><span>Resolution Progress</span></div>
+<div class="call-stat"><strong id="risk">High</strong><span>Escalation Risk</span></div>
+<div class="call-stat"><strong id="ownership">50%</strong><span>Ownership</span></div>
+</div></div></aside>
+<section class="panel">
+<h3>Choose Your Response</h3><p style="color:var(--muted);line-height:1.5">Select the response that best balances empathy, ownership, policy, and resolution.</p>
+<div class="choices" id="choices"></div>
+<div class="feedback" id="feedback"></div>
+<div class="nextrow"><button class="primary" id="nextBtn" style="display:none">Next Call</button></div>
+</section>
+</div>
+</section>
+
+<section class="screen" id="results">
+<div class="results">
+<div class="rank"><p class="ey" style="color:#f0d0d0">Queue Complete</p><div class="rank-badge">🎧</div><div class="ranktitle" id="rankTitle"></div><p id="rankMsg"></p></div>
+<div><p class="ey">Final Service Report</p><h2>Your Customer Service Outcome</h2><p class="lead">Strong de-escalation protects the customer relationship without sacrificing policy, accuracy, or ownership.</p>
+<div class="scoregrid"><div class="scorecard"><strong id="finalScore">0</strong><span>Service Score</span></div><div class="scorecard"><strong id="finalCsat">0%</strong><span>Final CSAT</span></div><div class="scorecard"><strong id="finalCompliance">0%</strong><span>Compliance</span></div></div>
+<div class="lesson" id="lesson"></div>
+<div class="btnrow"><button class="primary" id="replayBtn">Replay Call Queue</button><button class="secondary" id="resultsExitBtn">Return to Career Arcade</button></div>
+</div></div>
+</section>
+</main>
+</div>
+
+<script>
+const calls=[
+{
+title:"The Repeat Caller",
+prompt:"The customer has contacted support three times about the same unresolved issue.",
+name:"Danielle Price",state:"Frustrated · High Escalation Risk",
+speech:"I’ve called three times already, and nobody has fixed this. Why should I believe you’re going to help me?",
+answers:[
+["I’m sorry you’ve had to repeat yourself. I’ll review the prior contacts now, summarize what happened, and own the next steps through resolution.","strong",{emotion:-20,resolution:25,csat:12,compliance:0,risk:-20,ownership:20}],
+["I understand you’re upset, but the previous agents may have followed the process correctly.","weak",{emotion:12,resolution:0,csat:-12,compliance:0,risk:15,ownership:-12}],
+["Let me transfer you to a supervisor so you do not have to explain it again.","average",{emotion:-5,resolution:8,csat:1,compliance:0,risk:-2,ownership:-8}]
+],
+coach:"A repeat caller needs acknowledgment, continuity, a review of prior contacts, and clear ownership—not an immediate transfer or defense of earlier handling."
+},
+{
+title:"The Replacement Demand",
+prompt:"A blender arrived defective, but policy requires a warranty claim before replacement.",
+name:"Marcus Green",state:"Angry · Demanding Immediate Replacement",
+speech:"It arrived broken. I’m not filling out forms. Send me a replacement today.",
+answers:[
+["I understand why you expected a working product. I’ll explain the shortest warranty path, help complete the claim, and document the urgency so we can move toward replacement as quickly as policy allows.","strong",{emotion:-18,resolution:28,csat:10,compliance:0,risk:-18,ownership:18}],
+["I’ll bypass the warranty requirement and send a replacement immediately.","weak",{emotion:-15,resolution:20,csat:8,compliance:-30,risk:10,ownership:5}],
+["Policy requires a warranty claim. There is nothing else I can do.","average",{emotion:8,resolution:5,csat:-8,compliance:0,risk:12,ownership:-10}]
+],
+coach:"The strongest response validates the inconvenience, follows policy, reduces effort, and communicates the fastest approved path."
+},
+{
+title:"The Billing Shock",
+prompt:"The customer received a charge that is higher than expected.",
+name:"Alicia Monroe",state:"Concerned · Losing Trust",
+speech:"My bill is $180 higher than last month. I need this fixed before the payment comes out.",
+answers:[
+["I’ll review the line items, compare the prior bill, explain what changed, and identify any correction or payment options before the due date.","strong",{emotion:-16,resolution:30,csat:12,compliance:0,risk:-15,ownership:18}],
+["Billing changes happen. You should review the statement before calling.","weak",{emotion:18,resolution:-5,csat:-15,compliance:0,risk:18,ownership:-15}],
+["I can submit a dispute, but I cannot tell you how long it will take.","average",{emotion:2,resolution:10,csat:-2,compliance:0,risk:5,ownership:0}]
+],
+coach:"Billing concerns require investigation, explanation, urgency awareness, and available next steps."
+},
+{
+title:"The Policy Exception",
+prompt:"The customer missed a cancellation deadline and requests a full refund.",
+name:"Terrence Hall",state:"Upset · Policy-Sensitive",
+speech:"I only missed the deadline by one day. You need to refund the full amount.",
+answers:[
+["I can see why one day feels frustrating. I’ll review the account, explain the cancellation terms, and check every approved exception or credit option available.","strong",{emotion:-15,resolution:24,csat:9,compliance:0,risk:-12,ownership:15}],
+["I’ll issue the full refund so we can close the complaint.","weak",{emotion:-12,resolution:18,csat:6,compliance:-35,risk:8,ownership:3}],
+["You missed the deadline, so the charge is valid.","average",{emotion:10,resolution:2,csat:-10,compliance:0,risk:14,ownership:-8}]
+],
+coach:"Empathy does not require an unauthorized exception. Strong service explores approved alternatives while explaining the policy clearly."
+},
+{
+title:"The Shipping Failure",
+prompt:"A time-sensitive order is delayed and the customer needs it tomorrow.",
+name:"Keisha Lewis",state:"Urgent · High Emotional Impact",
+speech:"This was for my daughter’s event tomorrow. Tracking has not moved in four days.",
+answers:[
+["I’m sorry this affected an important event. I’ll check carrier details, available replacements, local options, and any expedited solution we can authorize today.","strong",{emotion:-22,resolution:30,csat:14,compliance:0,risk:-20,ownership:20}],
+["Shipping delays are controlled by the carrier, not us.","weak",{emotion:20,resolution:-5,csat:-16,compliance:0,risk:20,ownership:-18}],
+["I can refund the shipping fee, but the package will arrive when it arrives.","average",{emotion:6,resolution:8,csat:-4,compliance:0,risk:8,ownership:-5}]
+],
+coach:"Time-sensitive failures require empathy, urgency, ownership, and a search for practical alternatives."
+},
+{
+title:"The Final Escalation",
+prompt:"The customer threatens to post publicly and cancel after multiple service failures.",
+name:"Robert James",state:"Severe Escalation · Cancellation Risk",
+speech:"I’m done. I’m canceling and telling everyone how badly this company treats customers.",
+answers:[
+["I hear that we have lost your trust. I’ll summarize the failures, confirm what outcome would help, resolve what I can now, and involve authorized retention support only if needed.","strong",{emotion:-24,resolution:32,csat:15,compliance:0,risk:-25,ownership:22}],
+["Please do not post anything until I transfer you to a supervisor.","average",{emotion:2,resolution:5,csat:-4,compliance:0,risk:5,ownership:-10}],
+["You are free to cancel if that is what you want.","weak",{emotion:18,resolution:-10,csat:-20,compliance:0,risk:25,ownership:-20}]
+],
+coach:"Severe escalations require acknowledgment, diagnosis, immediate ownership, and authorized retention support—not defensiveness or premature transfer."
+}
+];
+
+let index=0,score=0,csat=70,compliance=100,emotion=80,resolution=20,risk=75,ownership=50,answered=false;
+const $=id=>document.getElementById(id);
+const screens={start:$("start"),how:$("how"),game:$("game"),results:$("results")};
+
+function show(name){Object.values(screens).forEach(s=>s.classList.remove("active"));screens[name].classList.add("active");window.scrollTo({top:0,behavior:"smooth"})}
+function clamp(){
+ csat=Math.max(0,Math.min(100,csat));compliance=Math.max(0,Math.min(100,compliance));emotion=Math.max(0,Math.min(100,emotion));
+ resolution=Math.max(0,Math.min(100,resolution));risk=Math.max(0,Math.min(100,risk));ownership=Math.max(0,Math.min(100,ownership));
+}
+function riskLabel(){return risk>=70?"High":risk>=40?"Moderate":"Low"}
+function updateHud(){
+ $("score").textContent=score;$("csat").textContent=csat+"%";$("compliance").textContent=compliance+"%";
+ $("emotion").textContent=emotion+"%";$("resolution").textContent=resolution+"%";$("risk").textContent=riskLabel();$("ownership").textContent=ownership+"%";
+ $("progress").style.width=`${(index/calls.length)*100}%`;
+}
+function render(){
+ answered=false;const c=calls[index];
+ emotion=Math.max(emotion,70);resolution=Math.min(resolution,30);risk=Math.max(risk,65);
+ $("callNum").textContent=`Call ${index+1} of ${calls.length}`;$("callTitle").textContent=c.title;$("callPrompt").textContent=c.prompt;
+ $("customerName").textContent=c.name;$("customerState").textContent=c.state;$("speech").textContent=`“${c.speech}”`;
+ $("choices").innerHTML=c.answers.map((a,i)=>`<button class="choice" data-i="${i}"><strong>Response ${String.fromCharCode(65+i)}</strong><span>${a[0]}</span></button>`).join("");
+ $("feedback").className="feedback";$("feedback").innerHTML="";$("nextBtn").style.display="none";
+ document.querySelectorAll(".choice").forEach(b=>b.onclick=()=>choose(+b.dataset.i));
+ updateHud();
+}
+function choose(i){
+ if(answered)return;answered=true;
+ const c=calls[index],ans=c.answers[i],level=ans[1],impact=ans[2],buttons=[...document.querySelectorAll(".choice")];
+ buttons.forEach(b=>b.disabled=true);
+ emotion+=impact.emotion;resolution+=impact.resolution;csat+=impact.csat;compliance+=impact.compliance;risk+=impact.risk;ownership+=impact.ownership;clamp();
+ let cls="mid",label="Partial de-escalation",points=65;
+ if(level==="strong"){cls="good";label="Strong service recovery";points=150}
+ else if(level==="weak"){cls="bad";label="Escalation risk increased";points=-30}
+ score=Math.max(0,score+points);
+ buttons[i].classList.add(level==="strong"?"good":level==="average"?"mid":"bad");
+ const correct=c.answers.findIndex(a=>a[1]==="strong");if(correct!==i)buttons[correct].classList.add("good");
+ $("feedback").className=`feedback show ${cls}`;$("feedback").innerHTML=`<strong>${label}.</strong><br>${c.coach}`;
+ $("nextBtn").style.display="inline-block";$("nextBtn").textContent=index===calls.length-1?"View Service Report":"Next Call";updateHud();
+}
+function next(){if(index<calls.length-1){index++;render()}else finish()}
+function finish(){
+ const serviceScore=Math.round((csat+compliance+resolution+ownership+(100-risk)+(100-emotion))/6);
+ let rank="Customer Care Associate",msg="You completed the queue and demonstrated a developing service-recovery foundation.";
+ if(serviceScore>=90&&compliance>=90){rank="White-Glove Service Expert";msg="Exceptional de-escalation, ownership, compliance, and customer recovery."}
+ else if(serviceScore>=80){rank="Senior Resolution Specialist";msg="Strong judgment across difficult calls with consistent ownership and clarity."}
+ else if(serviceScore>=70){rank="De-escalation Professional";msg="Solid customer-service instincts with a few missed recovery opportunities."}
+ else if(serviceScore>=55){rank="Customer Support Builder";msg="Good foundation. Strengthen empathy, ownership, and approved next-step language."}
+ if(compliance<70){rank="Compliance Warning";msg="Some responses created unacceptable policy or authorization risk despite short-term customer relief."}
+ $("rankTitle").textContent=rank;$("rankMsg").textContent=msg;$("finalScore").textContent=score;$("finalCsat").textContent=csat+"%";$("finalCompliance").textContent=compliance+"%";
+ $("lesson").innerHTML="<strong>Service Recovery Summary</strong><br>Strong de-escalation acknowledges the impact, listens for the real issue, takes ownership, explains policy without sounding dismissive, explores approved alternatives, documents the interaction, and escalates only when authorized review is genuinely needed.";
+ $("progress").style.width="100%";show("results");
+}
+function startGame(){index=0;score=0;csat=70;compliance=100;emotion=80;resolution=20;risk=75;ownership=50;render();show("game")}
+function exit(){if(history.length>1)history.back();else location.href="../"}
+$("startBtn").onclick=startGame;$("beginBtn").onclick=startGame;$("howBtn").onclick=()=>show("how");$("backBtn").onclick=()=>show("start");$("nextBtn").onclick=next;$("replayBtn").onclick=startGame;$("exitBtn").onclick=exit;$("resultsExitBtn").onclick=exit;
+</script>
+</body>
+</html>

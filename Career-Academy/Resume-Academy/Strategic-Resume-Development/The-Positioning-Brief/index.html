@@ -1,28 +1,318 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Professional Mission 1: The Positioning Brief</title><style>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Professional Mission 1: The Positioning Brief</title>
+<style>
 :root{--bg:#070609;--panel:#141018ef;--gold:#e5b84f;--gold2:#f5d887;--plum:#8e4197;--ink:#faf5ee;--muted:#c9bdca;--green:#48bc88;--red:#df6474;--amber:#e59a45}*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif}button,textarea,input{font:inherit}button:focus-visible,textarea:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--gold2);outline-offset:3px}#app{height:100%;position:relative;background:radial-gradient(circle at 50% 8%,#2a1830,#070609 67%)}.topbar{position:absolute;inset:0 0 auto;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;background:#070609f3;border-bottom:1px solid #e5b84f44;z-index:20}.brand{display:flex;gap:10px;align-items:center}.brand strong{font-family:Georgia,serif;letter-spacing:.18em}.brand small{display:block;color:var(--gold2);font-size:10px;letter-spacing:.18em}.mark{font-size:30px}.mission{text-align:center}.mission small{display:block;color:#dda0d8}.mission strong{font:21px Georgia,serif}.actions{display:flex;gap:8px}.pill,.icon{border:1px solid #e5b84f66;background:#ffffff09;color:#fff;border-radius:999px;padding:8px 12px}.icon{width:40px;height:40px;padding:0;cursor:pointer}.stage{position:absolute;inset:68px 0 92px;overflow:hidden}.scene{position:absolute;inset:0;display:none;opacity:0;transform:scale(1.015);transition:.45s}.scene.active{display:block;opacity:1;transform:none}.bg{position:absolute;inset:0;background-size:cover;background-position:center}.bg:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#040307f4,#04030762 52%,#04030785)}.content{position:relative;z-index:2;height:100%;padding:28px 38px;display:flex;flex-direction:column;overflow-y:auto;scrollbar-color:var(--gold) #211827}.kicker{color:var(--gold2);letter-spacing:.16em;text-transform:uppercase;font-size:11px;font-weight:900}h1,h2,h3,p{margin-top:0}h1{font:clamp(48px,7vw,88px)/.95 Georgia,serif}h2{font:clamp(34px,4vw,56px)/1 Georgia,serif;margin-bottom:10px}.lead{max-width:980px;font-size:17px;line-height:1.55;color:#e7dce7}.dialogue,.panel,.card{background:#121018ed;border:1px solid #e5b84f55;border-radius:17px;padding:16px;box-shadow:0 18px 50px #0005}.dialogue{max-width:800px}.speaker{color:var(--gold2);font-weight:900;letter-spacing:.08em}.dialogue p{font-size:16px;line-height:1.58;margin:7px 0 0}.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.primary,.secondary,.choice{padding:11px 16px;border-radius:10px;font-weight:900;cursor:pointer}.primary{border:0;background:linear-gradient(var(--gold2),var(--gold));color:#291a08}.secondary,.choice{border:1px solid #e5b84f66;background:#17111edd;color:#fff}.primary:disabled{opacity:.35;cursor:not-allowed}.feedback{min-height:25px;color:var(--muted);font-weight:800;margin:10px 0}.feedback.good{color:#7ce3b3}.feedback.bad{color:#ff99a5}.bottom{position:absolute;inset:auto 0 0;height:92px;background:#070609f8;border-top:1px solid #e5b84f44;display:flex;align-items:center;gap:12px;padding:10px 18px;z-index:25}.label{min-width:200px;font-size:12px;color:var(--muted)}.label strong{display:block;color:#fff}.track{flex:1;height:13px;border-radius:99px;background:#2b2230;overflow:hidden}.fill{height:100%;width:0;background:linear-gradient(90deg,var(--plum),var(--gold),var(--green));transition:.5s}.voice-state{min-width:145px;text-align:right;color:var(--muted);font-size:12px;font-weight:800}.voice-state.speaking{color:var(--gold2)}.drawer{position:absolute;top:68px;right:0;bottom:92px;width:min(430px,92vw);background:#0b0810fc;border-left:1px solid #e5b84f44;transform:translateX(102%);transition:.3s;z-index:30;padding:22px;overflow:auto}.drawer.open{transform:none}.dhead{display:flex;justify-content:space-between}.dhead button{background:none;border:0;color:#fff;font-size:24px}.entry{padding:12px;border-bottom:1px solid #ffffff14;line-height:1.5}.entry strong{color:#e8a5e3}.grid2,.grid3,.grid4{display:grid;gap:12px}.grid2{grid-template-columns:repeat(2,1fr)}.grid3{grid-template-columns:repeat(3,1fr)}.grid4{grid-template-columns:repeat(4,1fr)}.click{cursor:pointer}.click.open,.choice.on{background:#3e2948;border-color:var(--gold)}.pass{color:#7ce3b3!important;border-color:var(--green)!important}.miss{color:#ff99a5!important;border-color:var(--red)!important}.case-layout,.matrix-layout,.brief-layout{display:grid;grid-template-columns:.82fr 1.18fr;gap:16px}.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.tab{padding:8px 11px;border-radius:99px;border:1px solid #e5b84f55;background:#201726;color:#fff}.tab.on{background:#4a3153;border-color:var(--gold)}.signal{padding:10px;background:#ffffff0b;border-left:3px solid var(--gold);border-radius:7px;margin:8px 0;animation:rise .3s}@keyframes rise{from{opacity:0;transform:translateY(8px)}}.outcome{display:block;width:100%;text-align:left;margin:7px 0}.bucket{min-height:175px}.bucket strong{display:block;color:var(--gold2);margin-bottom:8px}.angle{position:relative}.angle .score{font:36px Georgia,serif;color:var(--gold2)}.angle.primary{border-color:var(--green);box-shadow:0 0 30px #48bc8828}.evidence{display:block;width:100%;text-align:left;margin:7px 0}.triangle{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.triangle .card{text-align:center}.triangle strong{font:24px Georgia,serif;color:var(--gold2);display:block}.blueprint{font:22px/1.5 Georgia,serif;border-left:4px solid var(--gold);background:#ffffff0b;padding:16px;border-radius:8px}.field{margin-bottom:11px}.field label{display:block;color:var(--gold2);font-size:12px;font-weight:900;margin-bottom:5px}.field input,.field textarea{width:100%;background:#0b0910;color:#fff;border:1px solid #e5b84f66;border-radius:10px;padding:12px}.field textarea{min-height:82px;resize:vertical}.score-head{display:flex;gap:14px;align-items:center}.score-ring{--score:0;width:100px;height:100px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--green) calc(var(--score)*1%),#2b2230 0);position:relative}.score-ring:after{content:"";position:absolute;inset:10px;background:#121018;border-radius:50%}.score-ring strong{z-index:1;font-size:27px}.rank{font:24px Georgia,serif;color:var(--gold2)}.score-item{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #ffffff13}.stress{display:grid;grid-template-columns:1fr 1fr;gap:14px}.reaction{min-height:145px;border-left:4px solid var(--plum)}.passport-wrap{display:grid;grid-template-columns:.75fr 1.25fr;gap:24px;align-items:center;min-height:100%}.passport{background:#100b14eb;border:2px solid var(--gold);border-radius:18px;padding:24px}.stamp{width:190px;height:190px;border-radius:50%;border:9px double var(--gold);display:grid;place-items:center;text-align:center;color:var(--gold2);font-weight:900;margin:auto;transform:rotate(-7deg)}.rewards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.reward{background:#1a1220;border:1px solid #e5b84f44;border-radius:12px;padding:14px;text-align:center}.reward strong,.reward span{display:block}.reward strong{font-size:28px;color:var(--gold2)}.reward span{font-size:10px;color:var(--muted)}
-@media(max-width:980px){.mission{display:none}.content{padding:24px 18px}.grid3,.grid4,.case-layout,.matrix-layout,.brief-layout,.triangle,.stress,.passport-wrap{grid-template-columns:1fr}.label{display:none}}@media(max-width:620px){.pill{display:none}.voice-state{display:none}.grid2{grid-template-columns:1fr}}
-</style></head><body><div id="app"><header class="topbar"><div class="brand"><div class="mark">🦋</div><div><strong>BUTTERFLY</strong><small>UNIVERSITY</small></div></div><div class="mission"><small>PROFESSIONAL PATH · MISSION 1</small><strong>The Positioning Brief</strong></div><div class="actions"><div class="pill">XP <b id="xpTop">0</b></div><button class="icon" id="voice">🔊</button><button class="icon" id="cc">CC</button><button class="icon" id="settings">⚙</button></div></header><main class="stage">
-<section class="scene active"><div class="bg" style="background-image:url('assets/professional-strategy-suite.png')"></div><div class="content"><span class="kicker">Strategic Resume Development · Professional Path</span><h1 style="margin-top:auto">A resume is an argument.<br>What are you proving?</h1><div class="dialogue"><div class="speaker">PROFESSOR REEVA</div><p>Foundations taught you how resumes work. Professional begins where templates stop. Today, you will decide which version of a qualified candidate the employer needs to understand first—and defend that decision with evidence.</p></div><button class="primary" style="align-self:flex-start;margin-top:16px" onclick="goTo(1)">Accept the Strategy Case</button></div></section>
-<section class="scene"><div class="content"><span class="kicker">Scene 1 · Employer Intelligence Dossier</span><h2>Read beyond the job title.</h2><p class="lead">Explore all five intelligence files for a Customer Experience Operations Specialist opening at Luma Financial.</p><div class="case-layout"><aside class="panel"><h3>Luma Financial</h3><p>Customer Experience Operations Specialist</p><div class="tabs" id="dossierTabs"></div></aside><div class="panel" id="dossierBoard"><span class="kicker">Employer intelligence</span><p>Select a file to begin.</p></div></div><p class="feedback" id="dossierFeedback">0 of 5 files reviewed.</p><button class="primary" id="dossierNext" disabled onclick="goTo(2)">Translate Requirements into Outcomes</button></div></section>
-<section class="scene"><div class="content"><span class="kicker">Scene 2 · Outcome Translation Lab</span><h2>What does the employer need to become true?</h2><p class="lead">Classify each job-description signal as a Business Outcome, Capability, Operating Context, or Generic Filler.</p><div class="grid4" id="bucketGrid"></div><div class="panel" id="signalDeck"></div><p class="feedback" id="outcomeFeedback">0 of 8 signals classified.</p><button class="primary" id="outcomeNext" disabled onclick="goTo(3)">Identify the Central Business Need</button></div></section>
-<section class="scene"><div class="content"><span class="kicker">Scene 3 · Business Need Inference</span><h2>The posting describes tasks. Strategy identifies the problem.</h2><p class="lead">Select the strongest inference supported by the dossier.</p><div class="grid3" id="needGrid"></div><div class="panel" id="needEvidence" style="margin-top:12px"><span class="kicker">Inference standard</span><p>A defensible strategy connects multiple signals without inventing facts.</p></div><button class="primary" id="needNext" disabled onclick="goTo(4)">Compare Candidate Angles</button></div></section>
-<section class="scene"><div class="content"><span class="kicker">Scene 4 · Candidate Angle Lab</span><h2>Qualified is not the same as positioned.</h2><p class="lead">Review three truthful ways to introduce Jordan Brooks. Select the primary angle that best solves Luma’s need.</p><div class="grid3" id="angleGrid"></div><p class="feedback" id="angleFeedback">Choose the angle that should lead the resume.</p><button class="primary" id="angleNext" disabled onclick="goTo(5)">Build the Evidence Hierarchy</button></div></section>
-<section class="scene"><div class="content"><span class="kicker">Scene 5 · Evidence Hierarchy</span><h2>Lead with proof. Support with context.</h2><p class="lead">Select the five pieces of evidence that most strongly defend the Customer Experience Operations positioning.</p><div class="matrix-layout"><div class="panel" id="evidenceGrid"></div><aside class="panel"><span class="kicker">Selected evidence</span><div id="evidenceSelected"></div><div class="score" style="font:45px Georgia,serif;color:var(--gold2)"><b id="evidenceCount">0</b>/5</div></aside></div><p class="feedback" id="evidenceFeedback">Prioritize relevance, scale, and documented impact.</p><div class="btns"><button class="secondary" onclick="testEvidence()">Test Hierarchy</button><button class="primary" id="evidenceNext" disabled onclick="goTo(6)">Assemble the Strategy Triangle</button></div></div></section>
-<section class="scene"><div class="content"><span class="kicker">Scene 6 · Strategy Triangle</span><h2>Need + Value + Proof.</h2><p class="lead">Open each point of the triangle. A resume strategy collapses when any point is missing.</p><div class="triangle" id="triangleGrid"></div><div class="blueprint" id="strategyBlueprint">[Employer Need] + [Candidate Value] + [Defensible Proof]</div><button class="primary" id="triangleNext" disabled onclick="goTo(7)">Write the Positioning Brief</button></div></section>
-<section class="scene"><div class="content"><span class="kicker">Scene 7 · Reeva’s Strategy Desk</span><h2>Write the brief before writing the resume.</h2><p class="lead">Complete all five fields. The strategy brief should guide what leads, what supports, and what stays out.</p><div class="brief-layout"><div class="panel"><div class="field"><label>Target role</label><input id="briefTarget" placeholder="Exact target title"></div><div class="field"><label>Employer’s central need</label><textarea id="briefNeed" placeholder="What must improve or become true?"></textarea></div><div class="field"><label>Primary candidate value</label><textarea id="briefValue" placeholder="What should the recruiter understand first?"></textarea></div><div class="field"><label>Proof to prioritize</label><textarea id="briefProof" placeholder="Name at least two defensible results or capabilities."></textarea></div><div class="field"><label>Information to de-emphasize or exclude</label><textarea id="briefExclude" placeholder="What is true but strategically secondary or unsupported?"></textarea></div><button class="primary" onclick="scoreBrief()">Analyze Strategy Brief</button></div><aside class="panel"><div class="score-head"><div class="score-ring" id="briefRing"><strong id="briefScore">0</strong></div><div><span class="kicker">Strategy rank</span><div class="rank" id="briefRank">Waiting for brief</div></div></div><div id="briefBreakdown"></div><div class="feedback" id="briefCoach">Your brief must make choices—not list everything.</div></aside></div><button class="primary" id="briefNext" disabled onclick="goTo(8)">Stress-Test the Strategy</button></div></section>
-<section class="scene"><div class="content"><span class="kicker">Scene 8 · Recruiter Stress Test</span><h2>Does the strategy survive competing priorities?</h2><p class="lead">Respond to three recruiter challenges. Strong strategy remains focused without ignoring legitimate risk.</p><div class="stress"><div class="panel" id="stressCase"></div><div class="panel reaction" id="stressReaction"><span class="kicker">Recruiter reaction</span><p>Select a response.</p></div></div><p class="feedback" id="stressFeedback">Challenge 1 of 3</p><button class="primary" id="stressNext" disabled onclick="goTo(9)">Approve the Positioning Brief</button></div></section>
-<section class="scene"><div class="bg" style="background-image:url('assets/professional-strategy-suite.png')"></div><div class="content"><div class="passport-wrap"><div class="passport"><div class="stamp">POSITIONING<br>STRATEGIST</div><h2 style="text-align:center">Professional Passport</h2><p style="text-align:center;color:var(--muted)">Signed by Professor Reeva</p></div><div><span class="kicker">Mission Accomplished</span><h2>You chose the argument before writing the document.</h2><p class="lead">You translated a posting into business outcomes, inferred the employer’s central need, selected a primary candidate angle, prioritized evidence, wrote a positioning brief, and defended it under recruiter pressure.</p><div class="rewards"><div class="reward"><strong id="finalXp">0</strong><span>XP Earned</span></div><div class="reward"><strong id="finalBrief">0</strong><span>Strategy Score</span></div><div class="reward"><strong>1</strong><span>Professional Stamp</span></div></div><div class="dialogue" style="margin-top:14px"><div class="speaker">PROFESSOR REEVA</div><p>Next, we will dissect job descriptions until you can separate priority signals from copied boilerplate, hidden expectations, and false urgency.</p></div><div class="btns"><button class="primary" onclick="location.reload()">Replay Mission</button><button class="secondary" onclick="history.back()">Return to Career Academy</button></div></div></div></div></section>
-</main><footer class="bottom"><div class="label"><strong id="sceneLabel">Professional Path Opening</strong><span id="sceneCounter">1 of 10</span></div><div class="track"><div class="fill" id="fill"></div></div><div class="voice-state" id="voiceState">Reeva ready</div></footer><aside class="drawer" id="transcript"><div class="dhead"><h3>Transcript</h3><button onclick="closeDrawers()">×</button></div><div id="transcriptBody"></div></aside><aside class="drawer" id="settingsDrawer"><div class="dhead"><h3>Settings</h3><button onclick="closeDrawers()">×</button></div><label style="display:block;margin-bottom:14px"><input type="checkbox" id="narration" checked> Professor Reeva narration</label><label><input type="checkbox" id="contrast"> High contrast</label></aside></div><script>
+button.card{color:var(--ink);text-align:left}button.card p{color:#e8dde8}button.card:hover{background:#281d30;border-color:var(--gold2);transform:translateY(-2px)}.analyst-hud{display:flex;gap:9px;flex-wrap:wrap;margin:8px 0 12px}.hud-chip{background:#23182a;border:1px solid #e5b84f55;border-radius:999px;padding:8px 12px;color:var(--ink)}.hud-chip strong{color:var(--gold2)}.case-reference{background:#211626;border:1px solid var(--gold);border-radius:13px;padding:13px;margin-bottom:14px}.case-reference summary{cursor:pointer;color:var(--gold2);font-weight:900}.case-reference .grid2{margin-top:11px}.reference-item{background:#ffffff0b;border-left:3px solid var(--gold);padding:9px;border-radius:7px}.confidence{margin-top:13px}.confidence-bar{height:15px;background:#2b2230;border-radius:99px;overflow:hidden}.confidence-fill{height:100%;width:40%;background:linear-gradient(90deg,var(--red),var(--amber),var(--green));transition:.5s}@media(max-width:980px){.mission{display:none}.content{padding:24px 18px}.grid3,.grid4,.case-layout,.matrix-layout,.brief-layout,.triangle,.stress,.passport-wrap{grid-template-columns:1fr}.label{display:none}}@media(max-width:620px){.pill{display:none}.voice-state{display:none}.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="app">
+<header class="topbar">
+<div class="brand">
+<div class="mark">🦋</div>
+<div>
+<strong>BUTTERFLY</strong>
+<small>UNIVERSITY</small>
+</div>
+</div>
+<div class="mission">
+<small>PROFESSIONAL PATH · MISSION 1</small>
+<strong>The Positioning Brief</strong>
+</div>
+<div class="actions">
+<div class="pill">XP <b id="xpTop">0</b>
+</div>
+<button class="icon" id="voice">🔊</button>
+<button class="icon" id="cc">CC</button>
+<button class="icon" id="settings">⚙</button>
+</div>
+</header>
+<main class="stage">
+<section class="scene active">
+<div class="bg" style="background-image:url('assets/professional-strategy-suite.png')">
+</div>
+<div class="content">
+<span class="kicker">Strategic Resume Development · Professional Path</span>
+<h1 style="margin-top:auto">A resume is an argument.<br>What are you proving?</h1>
+<div class="dialogue">
+<div class="speaker">PROFESSOR REEVA</div>
+<p>Foundations taught you how resumes work. Professional begins where templates stop. Today, you will decide which version of a qualified candidate the employer needs to understand first—and defend that decision with evidence.</p>
+</div>
+<button class="primary" style="align-self:flex-start;margin-top:16px" onclick="goTo(1)">Accept the Strategy Case</button>
+</div>
+</section>
+<section class="scene">
+<div class="content">
+<span class="kicker">Scene 1 · Employer Intelligence Dossier</span>
+<h2>Read beyond the job title.</h2>
+<p class="lead">Explore all five intelligence files for a Customer Experience Operations Specialist opening at Luma Financial.</p>
+<div class="case-layout">
+<aside class="panel">
+<h3>Luma Financial</h3>
+<p>Customer Experience Operations Specialist</p>
+<div class="tabs" id="dossierTabs">
+</div>
+</aside>
+<div class="panel" id="dossierBoard">
+<span class="kicker">Employer intelligence</span>
+<p>Select a file to begin.</p>
+</div>
+</div>
+<p class="feedback" id="dossierFeedback">0 of 5 files reviewed.</p>
+<button class="primary" id="dossierNext" disabled onclick="goTo(2)">Translate Requirements into Outcomes</button>
+</div>
+</section>
+<section class="scene">
+<div class="content">
+<span class="kicker">Scene 2 · Outcome Translation Lab</span>
+<h2>What does the employer need to become true?</h2>
+<p class="lead">Classify each job-description signal as a Business Outcome, Capability, Operating Context, or Generic Filler.</p>
+<div class="analyst-hud"><div class="hud-chip">🔥 Analyst streak: <strong id="analystStreak">0</strong></div><div class="hud-chip">Best streak: <strong id="bestStreak">0</strong></div><div class="hud-chip">Answer positions reshuffle every round</div></div>
+<div class="grid4" id="bucketGrid">
+</div>
+<div class="panel" id="signalDeck">
+</div>
+<p class="feedback" id="outcomeFeedback">0 of 8 signals classified.</p>
+<button class="primary" id="outcomeNext" disabled onclick="goTo(3)">Identify the Central Business Need</button>
+</div>
+</section>
+<section class="scene">
+<div class="content">
+<span class="kicker">Scene 3 · Business Need Inference</span>
+<h2>The posting describes tasks. Strategy identifies the problem.</h2>
+<p class="lead">Select the strongest inference supported by the dossier.</p>
+<div class="grid3" id="needGrid">
+</div>
+<div class="panel" id="needEvidence" style="margin-top:12px">
+<span class="kicker">Inference standard</span>
+<p>A defensible strategy connects multiple signals without inventing facts.</p>
+</div>
+<button class="primary" id="needNext" disabled onclick="goTo(4)">Compare Candidate Angles</button>
+</div>
+</section>
+<section class="scene">
+<div class="content">
+<span class="kicker">Scene 4 · Candidate Angle Lab</span>
+<h2>Qualified is not the same as positioned.</h2>
+<p class="lead">Review three truthful ways to introduce Jordan Brooks. Select the primary angle that best solves Luma’s need.</p>
+<div class="grid3" id="angleGrid">
+</div>
+<p class="feedback" id="angleFeedback">Choose the angle that should lead the resume.</p>
+<button class="primary" id="angleNext" disabled onclick="goTo(5)">Build the Evidence Hierarchy</button>
+</div>
+</section>
+<section class="scene">
+<div class="content">
+<span class="kicker">Scene 5 · Evidence Hierarchy</span>
+<h2>Lead with proof. Support with context.</h2>
+<p class="lead">Select the five pieces of evidence that most strongly defend the Customer Experience Operations positioning.</p>
+<div class="matrix-layout">
+<div class="panel" id="evidenceGrid">
+</div>
+<aside class="panel">
+<span class="kicker">Selected evidence</span>
+<div id="evidenceSelected">
+</div>
+<div class="score" style="font:45px Georgia,serif;color:var(--gold2)">
+<b id="evidenceCount">0</b>/5</div>
+</aside>
+</div>
+<p class="feedback" id="evidenceFeedback">Prioritize relevance, scale, and documented impact.</p>
+<div class="btns">
+<button class="secondary" onclick="testEvidence()">Test Hierarchy</button>
+<button class="primary" id="evidenceNext" disabled onclick="goTo(6)">Assemble the Strategy Triangle</button>
+</div>
+</div>
+</section>
+<section class="scene">
+<div class="content">
+<span class="kicker">Scene 6 · Strategy Triangle</span>
+<h2>Need + Value + Proof.</h2>
+<p class="lead">Open each point of the triangle. A resume strategy collapses when any point is missing.</p>
+<div class="triangle" id="triangleGrid">
+</div>
+<div class="blueprint" id="strategyBlueprint">[Employer Need] + [Candidate Value] + [Defensible Proof]</div>
+<button class="primary" id="triangleNext" disabled onclick="goTo(7)">Write the Positioning Brief</button>
+</div>
+</section>
+<section class="scene">
+<div class="content">
+<span class="kicker">Scene 7 · Reeva’s Strategy Desk</span>
+<h2>Write the brief before writing the resume.</h2>
+<p class="lead">Use the reference case file below to complete all five fields. You are not expected to memorize the dossier. The brief should guide what leads, what supports, and what stays out.</p>
+<details class="case-reference" open><summary>📌 Strategy Case File — Keep Open While You Write</summary><div class="grid2"><div class="reference-item"><strong>Target</strong><br>Customer Experience Operations Specialist</div><div class="reference-item"><strong>Employer need</strong><br>Reduce repeat contacts and improve visibility into customer friction.</div><div class="reference-item"><strong>Candidate value</strong><br>Customer operations insight combined with high-volume service execution.</div><div class="reference-item"><strong>Verified proof</strong><br>19% fewer repeat contacts · 28% stronger documentation accuracy · 3 workflow improvements · 100+ daily contacts · 96% satisfaction</div><div class="reference-item"><strong>Strategically secondary</strong><br>76% retention supports the story but should not replace operations as the lead angle.</div><div class="reference-item"><strong>Do not claim</strong><br>SQL proficiency or any unsupported technology.</div></div></details>
+<div class="brief-layout">
+<div class="panel">
+<div class="field">
+<label>Target role</label>
+<input id="briefTarget" placeholder="Exact target title">
+</div>
+<div class="field">
+<label>Employer’s central need</label>
+<textarea id="briefNeed" placeholder="What must improve or become true?">
+</textarea>
+</div>
+<div class="field">
+<label>Primary candidate value</label>
+<textarea id="briefValue" placeholder="What should the recruiter understand first?">
+</textarea>
+</div>
+<div class="field">
+<label>Proof to prioritize</label>
+<textarea id="briefProof" placeholder="Name at least two defensible results or capabilities.">
+</textarea>
+</div>
+<div class="field">
+<label>Information to de-emphasize or exclude</label>
+<textarea id="briefExclude" placeholder="What is true but strategically secondary or unsupported?">
+</textarea>
+</div>
+<button class="primary" onclick="scoreBrief()">Analyze Strategy Brief</button>
+</div>
+<aside class="panel">
+<div class="score-head">
+<div class="score-ring" id="briefRing">
+<strong id="briefScore">0</strong>
+</div>
+<div>
+<span class="kicker">Strategy rank</span>
+<div class="rank" id="briefRank">Waiting for brief</div>
+</div>
+</div>
+<div id="briefBreakdown">
+</div>
+<div class="feedback" id="briefCoach">Your brief must make choices—not list everything.</div>
+</aside>
+</div>
+<button class="primary" id="briefNext" disabled onclick="goTo(8)">Stress-Test the Strategy</button>
+</div>
+</section>
+<section class="scene">
+<div class="content">
+<span class="kicker">Scene 8 · Recruiter Stress Test</span>
+<h2>Does the strategy survive competing priorities?</h2>
+<p class="lead">Respond to three recruiter challenges. Strong strategy remains focused without ignoring legitimate risk.</p>
+<div class="stress">
+<div class="panel" id="stressCase">
+</div>
+<div class="panel reaction" id="stressReaction">
+<span class="kicker">Recruiter reaction</span>
+<p>Select a response.</p>
+<div class="confidence"><div style="display:flex;justify-content:space-between"><strong>Strategy confidence</strong><span id="confidenceValue">40%</span></div><div class="confidence-bar"><div class="confidence-fill" id="confidenceFill"></div></div></div>
+</div>
+</div>
+<p class="feedback" id="stressFeedback">Challenge 1 of 3</p>
+<button class="primary" id="stressNext" disabled onclick="goTo(9)">Approve the Positioning Brief</button>
+</div>
+</section>
+<section class="scene">
+<div class="bg" style="background-image:url('assets/professional-strategy-suite.png')">
+</div>
+<div class="content">
+<div class="passport-wrap">
+<div class="passport">
+<div class="stamp">POSITIONING<br>STRATEGIST</div>
+<h2 style="text-align:center">Professional Passport</h2>
+<p style="text-align:center;color:var(--muted)">Signed by Professor Reeva</p>
+</div>
+<div>
+<span class="kicker">Mission Accomplished</span>
+<h2>You chose the argument before writing the document.</h2>
+<p class="lead">You translated a posting into business outcomes, inferred the employer’s central need, selected a primary candidate angle, prioritized evidence, wrote a positioning brief, and defended it under recruiter pressure.</p>
+<div class="rewards">
+<div class="reward">
+<strong id="finalXp">0</strong>
+<span>XP Earned</span>
+</div>
+<div class="reward">
+<strong id="finalBrief">0</strong>
+<span>Strategy Score</span>
+</div>
+<div class="reward">
+<strong>1</strong>
+<span>Professional Stamp</span>
+</div>
+</div>
+<div class="dialogue" style="margin-top:14px">
+<div class="speaker">PROFESSOR REEVA</div>
+<p>Next, we will dissect job descriptions until you can separate priority signals from copied boilerplate, hidden expectations, and false urgency.</p>
+</div>
+<div class="btns">
+<button class="primary" onclick="location.reload()">Replay Mission</button>
+<button class="secondary" onclick="history.back()">Return to Career Academy</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="bottom">
+<div class="label">
+<strong id="sceneLabel">Professional Path Opening</strong>
+<span id="sceneCounter">1 of 10</span>
+</div>
+<div class="track">
+<div class="fill" id="fill">
+</div>
+</div>
+<div class="voice-state" id="voiceState">Reeva ready</div>
+</footer>
+<aside class="drawer" id="transcript">
+<div class="dhead">
+<h3>Transcript</h3>
+<button onclick="closeDrawers()">×</button>
+</div>
+<div id="transcriptBody">
+</div>
+</aside>
+<aside class="drawer" id="settingsDrawer">
+<div class="dhead">
+<h3>Settings</h3>
+<button onclick="closeDrawers()">×</button>
+</div>
+<label style="display:block;margin-bottom:14px">
+<input type="checkbox" id="narration" checked> Professor Reeva narration</label>
+<label>
+<input type="checkbox" id="contrast"> High contrast</label>
+</aside>
+</div>
+<script>
 const scenes=[...document.querySelectorAll('.scene')],labels=['Professional Path Opening','Employer Intelligence Dossier','Outcome Translation Lab','Business Need Inference','Candidate Angle Lab','Evidence Hierarchy','Strategy Triangle','Reeva’s Strategy Desk','Recruiter Stress Test','Mission Accomplished'];let current=0,xp=0,finalBriefScore=0;
 const transcripts=[`Foundations taught you how resumes work. Professional begins where templates stop. A resume is an argument about fit. Today, you will decide which version of a qualified candidate the employer needs to understand first, and defend that decision with evidence.`,`Read beyond the title. Employer intelligence includes responsibilities, success measures, operational conditions, known pain points, and language patterns. Strategy starts by understanding the environment the resume must enter.`,`A job posting mixes business outcomes, capabilities, operating context, and generic filler. Translate tasks into what the employer needs to become true. Do not assign equal strategic weight to every sentence.`,`The posting may never state the central problem directly. Infer it by connecting repeated responsibilities, success measures, and pain signals. A strong inference is supported by multiple facts and does not invent inside information.`,`A candidate can be truthful in several ways. The primary angle determines what the recruiter understands first. Select the angle that solves the employer's most important need, then use secondary strengths as supporting evidence.`,`Build an evidence hierarchy. Lead with proof that is relevant, scaled, and documented. Supporting details can reinforce the argument. Interesting facts that do not advance the target should not consume premium space.`,`Professional strategy connects three points: employer need, candidate value, and defensible proof. Need without value is analysis. Value without proof is marketing. Proof without relevance is noise.`,`Write the positioning brief before writing the resume. Define the target, central need, primary value, proof to prioritize, and information to de-emphasize. Strategy requires exclusion as much as inclusion.`,`Stress-test the brief against legitimate recruiter concerns. Preserve the central argument while addressing risk with truthful evidence. Do not abandon the strategy every time a secondary requirement appears.`,`Mission accomplished. You chose and defended the resume's argument before writing the document.`];
-transcriptBody.innerHTML=transcripts.map((t,i)=>`<div class="entry"><strong>${labels[i]} · Reeva:</strong> ${t}</div>`).join('');let narrationOn=true,narrationRun=0,selectedVoice=null;function loadVoice(){const v=speechSynthesis.getVoices(),e=v.filter(x=>/^en(-|_)/i.test(x.lang)),p=[/Aria.*Natural/i,/Jenny.*Natural/i,/Ava.*Natural/i,/Google US English/i,/Samantha/i,/Zira/i];selectedVoice=p.map(r=>e.find(x=>r.test(x.name))).find(Boolean)||e[0]||v[0]||null}function stopNarration(){narrationRun++;if('speechSynthesis'in window)speechSynthesis.cancel()}function speakScene(i){if(!narrationOn||!('speechSynthesis'in window))return;stopNarration();loadVoice();const run=narrationRun,u=new SpeechSynthesisUtterance(transcripts[i]);voiceState.textContent='Reeva is speaking…';voiceState.classList.add('speaking');voice.textContent='🗣';u.rate=1.17;u.pitch=1.02;if(selectedVoice)u.voice=selectedVoice;const done=()=>{if(run!==narrationRun)return;voiceState.textContent='Narration complete';voiceState.classList.remove('speaking');voice.textContent='🔊'};u.onend=done;u.onerror=done;speechSynthesis.speak(u)}if('speechSynthesis'in window){speechSynthesis.onvoiceschanged=loadVoice;loadVoice()}function goTo(i){stopNarration();scenes[current].classList.remove('active');current=i;scenes[i].classList.add('active');sceneLabel.textContent=labels[i];sceneCounter.textContent=`${i+1} of 10`;fill.style.width=`${i/9*100}%`;setTimeout(()=>speakScene(i),160);if(i===9){finalXp.textContent=xp;finalBrief.textContent=finalBriefScore;confetti()}}function addXp(n){xp+=n;xpTop.textContent=xp}function closeDrawers(){document.querySelectorAll('.drawer').forEach(d=>d.classList.remove('open'))}cc.onclick=()=>{closeDrawers();transcript.classList.add('open')};settings.onclick=()=>{closeDrawers();settingsDrawer.classList.add('open')};voice.onclick=()=>speakScene(current);narration.onchange=e=>{narrationOn=e.target.checked;if(narrationOn)speakScene(current);else{stopNarration();voice.textContent='🔇';voiceState.textContent='Narration off'}};contrast.onchange=e=>document.body.style.filter=e.target.checked?'contrast(1.2) saturate(1.1)':'none';setTimeout(()=>speakScene(0),500);
+transcriptBody.innerHTML=transcripts.map((t,i)=>`<div class="entry">
+<strong>${labels[i]} · Reeva:</strong> ${t}</div>`).join('');let narrationOn=true,narrationRun=0,selectedVoice=null;function loadVoice(){const v=speechSynthesis.getVoices(),e=v.filter(x=>/^en(-|_)/i.test(x.lang)),p=[/Aria.*Natural/i,/Jenny.*Natural/i,/Ava.*Natural/i,/Google US English/i,/Samantha/i,/Zira/i];selectedVoice=p.map(r=>e.find(x=>r.test(x.name))).find(Boolean)||e[0]||v[0]||null}function stopNarration(){narrationRun++;if('speechSynthesis'in window)speechSynthesis.cancel()}function speakScene(i){if(!narrationOn||!('speechSynthesis'in window))return;stopNarration();loadVoice();const run=narrationRun,u=new SpeechSynthesisUtterance(transcripts[i]);voiceState.textContent='Reeva is speaking…';voiceState.classList.add('speaking');voice.textContent='🗣';u.rate=1.17;u.pitch=1.02;if(selectedVoice)u.voice=selectedVoice;const done=()=>{if(run!==narrationRun)return;voiceState.textContent='Narration complete';voiceState.classList.remove('speaking');voice.textContent='🔊'};u.onend=done;u.onerror=done;speechSynthesis.speak(u)}if('speechSynthesis'in window){speechSynthesis.onvoiceschanged=loadVoice;loadVoice()}function goTo(i){stopNarration();scenes[current].classList.remove('active');current=i;scenes[i].classList.add('active');sceneLabel.textContent=labels[i];sceneCounter.textContent=`${i+1} of 10`;fill.style.width=`${i/9*100}%`;setTimeout(()=>speakScene(i),160);if(i===9){finalXp.textContent=xp;finalBrief.textContent=finalBriefScore;confetti()}}function addXp(n){xp+=n;xpTop.textContent=xp}function shuffle(items){const a=[...items];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}function closeDrawers(){document.querySelectorAll('.drawer').forEach(d=>d.classList.remove('open'))}cc.onclick=()=>{closeDrawers();transcript.classList.add('open')};settings.onclick=()=>{closeDrawers();settingsDrawer.classList.add('open')};voice.onclick=()=>speakScene(current);narration.onchange=e=>{narrationOn=e.target.checked;if(narrationOn)speakScene(current);else{stopNarration();voice.textContent='🔇';voiceState.textContent='Narration off'}};contrast.onchange=e=>document.body.style.filter=e.target.checked?'contrast(1.2) saturate(1.1)':'none';setTimeout(()=>speakScene(0),500);
 const dossier=[{n:'Responsibilities',x:['Analyze contact drivers and recurring customer friction','Resolve escalated account issues across channels','Partner with Product and Operations on workflow improvements']},{n:'Success Measures',x:['Customer satisfaction','First-contact resolution','Repeat-contact reduction','Documentation accuracy']},{n:'Operating Context',x:['High-volume financial services environment','Phone, email, and chat support','Cross-functional work with regulated processes']},{n:'Pain Signals',x:['Repeated contacts are increasing','Escalation documentation is inconsistent','Teams lack visibility into root causes']},{n:'Language Patterns',x:['Analyze, identify, improve, partner, document','Customer friction appears three times','Operations and insight appear repeatedly']}];dossierTabs.innerHTML=dossier.map((d,i)=>`<button class="tab" data-i="${i}">${d.n}</button>`).join('');const dossierSeen=new Set();dossierTabs.querySelectorAll('button').forEach(b=>b.onclick=()=>{dossierTabs.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');dossierSeen.add(b.dataset.i);const d=dossier[+b.dataset.i];dossierBoard.innerHTML=`<span class="kicker">${d.n}</span>${d.x.map(x=>`<div class="signal">${x}</div>`).join('')}`;dossierFeedback.textContent=`${dossierSeen.size} of 5 files reviewed.`;if(dossierSeen.size===5&&!dossierNext.dataset.xp){dossierNext.dataset.xp=1;dossierNext.disabled=false;addXp(100)}});
-const bucketNames=['Business Outcome','Capability','Operating Context','Generic Filler'];bucketGrid.innerHTML=bucketNames.map(x=>`<div class="card bucket"><strong>${x}</strong><div data-bucket="${x}"></div></div>`).join('');const signals=[['Reduce repeat customer contacts','Business Outcome'],['Analyze recurring contact drivers','Capability'],['High-volume regulated environment','Operating Context'],['Excellent communication skills','Generic Filler'],['Improve escalation documentation accuracy','Business Outcome'],['Partner cross-functionally','Capability'],['Phone, email, and chat support','Operating Context'],['Other duties as assigned','Generic Filler']];let signalIndex=0;function showSignal(){if(signalIndex>=signals.length)return;signalDeck.innerHTML=`<span class="kicker">Signal ${signalIndex+1} of 8</span><h3>${signals[signalIndex][0]}</h3><div class="btns">${bucketNames.map(x=>`<button class="choice" onclick="classifySignal('${x}')">${x}</button>`).join('')}</div>`}function classifySignal(bucket){const s=signals[signalIndex];if(bucket!==s[1]){outcomeFeedback.className='feedback bad';outcomeFeedback.textContent='Reconsider whether this describes a result, an ability, the environment, or low-value boilerplate.';return}bucketGrid.querySelector(`[data-bucket="${bucket}"]`).innerHTML+=`<div class="signal">${s[0]}</div>`;signalIndex++;addXp(15);outcomeFeedback.className='feedback good';outcomeFeedback.textContent=`${signalIndex} of 8 signals classified.`;if(signalIndex===8){signalDeck.innerHTML='<span class="kicker">Translation complete</span><h3>Tasks are now separated from strategic outcomes.</h3>';outcomeNext.disabled=false}else showSignal()}showSignal();
-const needs=[{t:'Luma mainly needs someone friendly enough to answer customer questions.',g:0,e:'This ignores the repeated analytics, root-cause, and workflow language.'},{t:'Luma needs an operator who can reduce repeat contacts by converting customer friction into documented operational improvements.',g:1,e:'Supported by repeat-contact growth, root-cause analysis, documentation gaps, and cross-functional improvement responsibilities.'},{t:'Luma needs a software engineer to rebuild its customer platform.',g:0,e:'No engineering responsibility or technical development requirement supports this inference.'}];needGrid.innerHTML=needs.map((n,i)=>`<button class="card click" data-i="${i}">${n.t}</button>`).join('');needGrid.querySelectorAll('button').forEach(b=>b.onclick=()=>{const n=needs[+b.dataset.i];needGrid.querySelectorAll('button').forEach(x=>x.classList.remove('pass','miss'));b.classList.add(n.g?'pass':'miss');needEvidence.innerHTML=`<span class="kicker">Evidence test</span><p>${n.e}</p>`;if(n.g&&!needNext.dataset.xp){needNext.dataset.xp=1;needNext.disabled=false;addXp(100)}});
-const angles=[{n:'Service Volume',s:72,d:'8 years handling 100+ daily contacts with strong satisfaction scores.',g:0},{n:'Retention Specialist',s:81,d:'Retained 76% of at-risk customers through needs-based solutions.',g:0},{n:'Customer Operations',s:94,d:'Analyzed contact drivers, improved escalation documentation by 28%, and reduced repeat contacts by 19%.',g:1}];angleGrid.innerHTML=angles.map((a,i)=>`<button class="card angle" data-i="${i}"><span class="kicker">${a.n}</span><div class="score">${a.s}</div><p>${a.d}</p></button>`).join('');angleGrid.querySelectorAll('button').forEach(b=>b.onclick=()=>{const a=angles[+b.dataset.i];angleGrid.querySelectorAll('button').forEach(x=>x.classList.remove('primary','miss'));b.classList.add(a.g?'primary':'miss');angleFeedback.className='feedback '+(a.g?'good':'bad');angleFeedback.textContent=a.g?'Correct. This angle directly answers Luma’s operational problem; volume and retention become supporting proof.':'Truthful, but strategically secondary. Which angle most directly solves the inferred need?';if(a.g&&!angleNext.dataset.xp){angleNext.dataset.xp=1;angleNext.disabled=false;addXp(100)}});
-const evidence=[['Reduced repeat contacts by 19% after analyzing top contact drivers',1],['Improved escalation documentation accuracy by 28%',1],['Partnered with Product and Operations on three workflow changes',1],['Resolved 100+ daily customer contacts across phone, email, and chat',1],['Maintained 96% customer satisfaction',1],['Enjoys learning new things',0],['Completed a typing test at 52 WPM',0],['Was voted most friendly in high school',0]];evidenceGrid.innerHTML=evidence.map((e,i)=>`<button class="choice evidence" data-good="${e[1]}">${e[0]}</button>`).join('');evidenceGrid.querySelectorAll('button').forEach(b=>b.onclick=()=>{b.classList.toggle('on');const s=[...evidenceGrid.querySelectorAll('.on')];evidenceCount.textContent=s.length;evidenceSelected.innerHTML=s.map(x=>`<div class="signal">${x.textContent}</div>`).join('')});function testEvidence(){const s=[...evidenceGrid.querySelectorAll('.on')],ok=s.length===5&&s.every(x=>x.dataset.good==='1');evidenceFeedback.className='feedback '+(ok?'good':'bad');evidenceFeedback.textContent=ok?'Hierarchy approved: operational outcomes lead; scale and satisfaction strengthen the argument.':'Select exactly five facts that directly defend the positioning strategy.';if(ok&&!evidenceNext.dataset.xp){evidenceNext.dataset.xp=1;evidenceNext.disabled=false;addXp(120)}}
-const tri=[['Employer Need','Reduce repeat contacts and improve visibility into customer friction.'],['Candidate Value','Customer operations insight combined with high-volume service execution.'],['Defensible Proof','19% fewer repeat contacts, 28% stronger documentation accuracy, and three cross-functional improvements.']];triangleGrid.innerHTML=tri.map((x,i)=>`<button class="card click" data-i="${i}"><strong>${x[0]}</strong><p>${x[1]}</p></button>`).join('');const triSeen=new Set(),triParts=[null,null,null];triangleGrid.querySelectorAll('button').forEach(b=>b.onclick=()=>{if(b.classList.contains('open'))return;b.classList.add('open');triSeen.add(b.dataset.i);triParts[+b.dataset.i]=tri[+b.dataset.i][1];strategyBlueprint.textContent=triParts.filter(Boolean).join(' → ');addXp(25);if(triSeen.size===3)triangleNext.disabled=false});
-function scoreBrief(){const vals=[briefTarget.value.trim(),briefNeed.value.trim(),briefValue.value.trim(),briefProof.value.trim(),briefExclude.value.trim()];const tests=[/customer experience operations specialist/i.test(vals[0]),/(repeat|contact|friction|documentation|visibility|operational)/i.test(vals[1]),/(operations|analy|insight|improv|high-volume)/i.test(vals[2]),/(19%|28%|three|3|100\+|96%)/i.test(vals[3])&&((vals[3].match(/\d/g)||[]).length>=2),/(friendly|typing|secondary|exclude|de-emphas|unsupported|high school)/i.test(vals[4])],items=[['Exact target role',tests[0],15],['Evidence-based employer need',tests[1],20],['Focused candidate value',tests[2],20],['Two or more proof points',tests[3],30],['Explicit exclusion choice',tests[4],15]],score=items.reduce((n,x)=>n+(x[1]?x[2]:0),0);finalBriefScore=score;briefScore.textContent=score;briefRing.style.setProperty('--score',score);briefRank.textContent=score>=90?'Senior Strategist':score>=80?'Professional Strategy':score>=60?'Developing Brief':'Unfocused Inventory';briefBreakdown.innerHTML=items.map(x=>`<div class="score-item ${x[1]?'pass':'miss'}"><span>${x[1]?'✓':'○'} ${x[0]}</span><strong>${x[1]?x[2]:0}/${x[2]}</strong></div>`).join('');briefCoach.textContent=score>=80?'This brief makes a defensible choice about what the resume must prove.':'Revise the missing strategic elements. Listing facts is not the same as choosing a position.';if(score>=80&&!briefNext.dataset.xp){briefNext.dataset.xp=1;briefNext.disabled=false;addXp(180)}}
-const stress=[{q:'The recruiter asks: “Jordan’s retention result is strong. Should retention replace operations as the primary angle?”',a:[['Yes. Always lead with the highest percentage.',0],['No. Keep operations primary because it solves the central need; use 76% retention as supporting customer-outcome evidence.',1],['Remove retention entirely.',0]],r:'Correct. A strong secondary result supports the strategy without displacing the employer’s central need.'},{q:'The hiring manager values SQL, but Jordan has never used it. What changes?',a:[['Add SQL because it appears in the posting.',0],['Acknowledge the gap through adjacent analytics evidence without claiming SQL; keep the resume truthful.',1],['Hide all analytics experience.',0]],r:'Correct. Strategy addresses risk with adjacent proof; it never manufactures proficiency.'},{q:'A recruiter says the resume feels too operational. How should the brief respond?',a:[['Add every customer-service duty to look broader.',0],['Preserve the operations argument while adding one line showing direct customer empathy and resolution execution.',1],['Replace the positioning with “results-driven professional.”',0]],r:'Correct. This adds balance without dissolving the central argument.'}];let stressIndex=0;function showStress(){const s=stress[stressIndex];stressCase.innerHTML=`<span class="kicker">Challenge ${stressIndex+1} of 3</span><h3>${s.q}</h3>${s.a.map((a,i)=>`<button class="choice outcome" onclick="answerStress(${i})">${a[0]}</button>`).join('')}`}function answerStress(i){const s=stress[stressIndex],ok=s.a[i][1];stressReaction.innerHTML=`<span class="kicker">Recruiter reaction</span><p class="${ok?'pass':'miss'}">${ok?s.r:'That response weakens focus or credibility. Try again.'}</p>`;if(!ok)return;addXp(60);stressIndex++;if(stressIndex===3){stressFeedback.textContent='All three challenges resolved. Strategy survived the stress test.';stressNext.disabled=false;stressCase.innerHTML='<span class="kicker">Stress test complete</span><h3>Positioning brief approved.</h3>'}else{stressFeedback.textContent=`Challenge ${stressIndex+1} of 3`;setTimeout(showStress,650)}}showStress();
+const bucketNames=['Business Outcome','Capability','Operating Context','Generic Filler'];bucketGrid.innerHTML=bucketNames.map(x=>`<div class="card bucket">
+<strong>${x}</strong>
+<div data-bucket="${x}">
+</div>
+</div>`).join('');const signals=shuffle([['Phone, email, and chat support','Operating Context'],['Improve escalation documentation accuracy','Business Outcome'],['Other duties as assigned','Generic Filler'],['Analyze recurring contact drivers','Capability'],['High-volume regulated environment','Operating Context'],['Reduce repeat customer contacts','Business Outcome'],['Excellent communication skills','Generic Filler'],['Partner cross-functionally','Capability']]);let signalIndex=0,streak=0,best=0;function showSignal(){if(signalIndex>=signals.length)return;const answerOrder=shuffle(bucketNames);signalDeck.innerHTML=`<span class="kicker">Signal ${signalIndex+1} of 8</span>
+<h3>${signals[signalIndex][0]}</h3>
+<div class="btns">${answerOrder.map(x=>`<button class="choice" onclick="classifySignal('${x}')">${x}</button>`).join('')}</div>`}function classifySignal(bucket){const s=signals[signalIndex];if(bucket!==s[1]){streak=0;analystStreak.textContent=streak;outcomeFeedback.className='feedback bad';outcomeFeedback.textContent='Streak reset. Reconsider whether this describes a result, an ability, the environment, or low-value boilerplate.';return}streak++;best=Math.max(best,streak);analystStreak.textContent=streak;bestStreak.textContent=best;bucketGrid.querySelector(`[data-bucket="${bucket}"]`).innerHTML+=`<div class="signal">${s[0]}</div>`;signalIndex++;addXp(15);outcomeFeedback.className='feedback good';outcomeFeedback.textContent=`Correct. ${signalIndex} of 8 classified · ${streak}-signal streak.`;if(signalIndex===8){signalDeck.innerHTML=`<span class="kicker">Translation complete</span><h3>Analyst streak: ${best}/8</h3><p>You separated strategic signal from context and boilerplate without relying on answer position.</p>`;outcomeNext.disabled=false}else showSignal()}
+showSignal();
+const needs=shuffle([{t:'Luma mainly needs someone friendly enough to answer customer questions.',g:0,e:'This ignores the repeated analytics, root-cause, and workflow language.'},{t:'Luma needs an operator who can reduce repeat contacts by converting customer friction into documented operational improvements.',g:1,e:'Supported by repeat-contact growth, root-cause analysis, documentation gaps, and cross-functional improvement responsibilities.'},{t:'Luma needs a software engineer to rebuild its customer platform.',g:0,e:'No engineering responsibility or technical development requirement supports this inference.'}]);needGrid.innerHTML=needs.map((n,i)=>`<button class="card click" data-i="${i}">${n.t}</button>`).join('');needGrid.querySelectorAll('button').forEach(b=>b.onclick=()=>{const n=needs[+b.dataset.i];needGrid.querySelectorAll('button').forEach(x=>x.classList.remove('pass','miss'));b.classList.add(n.g?'pass':'miss');needEvidence.innerHTML=`<span class="kicker">Evidence test</span>
+<p>${n.e}</p>`;if(n.g&&!needNext.dataset.xp){needNext.dataset.xp=1;needNext.disabled=false;addXp(100)}});
+const angles=shuffle([{n:'Service Volume',s:72,d:'8 years handling 100+ daily contacts with strong satisfaction scores.',g:0},{n:'Retention Specialist',s:81,d:'Retained 76% of at-risk customers through needs-based solutions.',g:0},{n:'Customer Operations',s:94,d:'Analyzed contact drivers, improved escalation documentation by 28%, and reduced repeat contacts by 19%.',g:1}]);angleGrid.innerHTML=angles.map((a,i)=>`<button class="card angle" data-i="${i}">
+<span class="kicker">${a.n}</span>
+<div class="score">${a.s}</div>
+<p>${a.d}</p>
+</button>`).join('');angleGrid.querySelectorAll('button').forEach(b=>b.onclick=()=>{const a=angles[+b.dataset.i];angleGrid.querySelectorAll('button').forEach(x=>x.classList.remove('primary','miss'));b.classList.add(a.g?'primary':'miss');angleFeedback.className='feedback '+(a.g?'good':'bad');angleFeedback.textContent=a.g?'Correct. This angle directly answers Luma’s operational problem; volume and retention become supporting proof.':'Truthful, but strategically secondary. Which angle most directly solves the inferred need?';if(a.g&&!angleNext.dataset.xp){angleNext.dataset.xp=1;angleNext.disabled=false;addXp(100)}});
+const evidence=shuffle([['Reduced repeat contacts by 19% after analyzing top contact drivers',1],['Enjoys learning new things',0],['Improved escalation documentation accuracy by 28%',1],['Completed a typing test at 52 WPM',0],['Partnered with Product and Operations on three workflow changes',1],['Was voted most friendly in high school',0],['Resolved 100+ daily customer contacts across phone, email, and chat',1],['Maintained 96% customer satisfaction',1]]);evidenceGrid.innerHTML=evidence.map((e,i)=>`<button class="choice evidence" data-good="${e[1]}">${e[0]}</button>`).join('');evidenceGrid.querySelectorAll('button').forEach(b=>b.onclick=()=>{b.classList.toggle('on');const s=[...evidenceGrid.querySelectorAll('.on')];evidenceCount.textContent=s.length;evidenceSelected.innerHTML=s.map(x=>`<div class="signal">${x.textContent}</div>`).join('')});function testEvidence(){const s=[...evidenceGrid.querySelectorAll('.on')],ok=s.length===5&&s.every(x=>x.dataset.good==='1');evidenceFeedback.className='feedback '+(ok?'good':'bad');evidenceFeedback.textContent=ok?'Hierarchy approved: operational outcomes lead; scale and satisfaction strengthen the argument.':'Select exactly five facts that directly defend the positioning strategy. The choices reshuffle each time the mission loads.';if(ok&&!evidenceNext.dataset.xp){evidenceNext.dataset.xp=1;evidenceNext.disabled=false;addXp(120)}}
+const tri=[['Employer Need','Reduce repeat contacts and improve visibility into customer friction.'],['Candidate Value','Customer operations insight combined with high-volume service execution.'],['Defensible Proof','19% fewer repeat contacts, 28% stronger documentation accuracy, and three cross-functional improvements.']];triangleGrid.innerHTML=tri.map((x,i)=>`<button class="card click" data-i="${i}">
+<strong>${x[0]}</strong>
+<p>${x[1]}</p>
+</button>`).join('');const triSeen=new Set(),triParts=[null,null,null];triangleGrid.querySelectorAll('button').forEach(b=>b.onclick=()=>{if(b.classList.contains('open'))return;b.classList.add('open');triSeen.add(b.dataset.i);triParts[+b.dataset.i]=tri[+b.dataset.i][1];strategyBlueprint.textContent=triParts.filter(Boolean).join(' → ');addXp(25);if(triSeen.size===3)triangleNext.disabled=false});
+function scoreBrief(){const vals=[briefTarget.value.trim(),briefNeed.value.trim(),briefValue.value.trim(),briefProof.value.trim(),briefExclude.value.trim()],proofHits=(vals[3].match(/19%|28%|three|3 workflow|100\+|96%|repeat contacts|documentation accuracy/gi)||[]);const tests=[/(customer experience operations|cx operations)/i.test(vals[0]),/(repeat|contact|friction|documentation|visibility|operational)/i.test(vals[1])&&vals[1].split(/\s+/).length>=6,/(operations|analy|insight|improv|high-volume)/i.test(vals[2])&&vals[2].split(/\s+/).length>=5,proofHits.length>=2,vals[4].split(/\s+/).length>=3&&/(retention|friendly|typing|secondary|exclude|de-emphas|unsupported|sql|high school)/i.test(vals[4])],items=[['Exact target role',tests[0],15],['Evidence-based employer need',tests[1],20],['Focused candidate value',tests[2],20],['Two or more proof points',tests[3],30],['Explicit exclusion choice',tests[4],15]],score=items.reduce((n,x)=>n+(x[1]?x[2]:0),0);finalBriefScore=score;briefScore.textContent=score;briefRing.style.setProperty('--score',score);briefRank.textContent=score>=90?'Senior Strategist':score>=80?'Professional Strategy':score>=60?'Developing Brief':'Unfocused Inventory';briefBreakdown.innerHTML=items.map(x=>`<div class="score-item ${x[1]?'pass':'miss'}">
+<span>${x[1]?'✓':'○'} ${x[0]}</span>
+<strong>${x[1]?x[2]:0}/${x[2]}</strong>
+</div>`).join('');briefCoach.textContent=score>=80?'This brief makes a defensible choice about what the resume must prove.':'Revise the missing strategic elements. Listing facts is not the same as choosing a position.';if(score>=80&&!briefNext.dataset.xp){briefNext.dataset.xp=1;briefNext.disabled=false;addXp(180)}}
+const stress=[{q:'The recruiter asks: “Jordan’s retention result is strong. Should retention replace operations as the primary angle?”',a:[['Yes. Always lead with the highest percentage.',0],['No. Keep operations primary because it solves the central need; use 76% retention as supporting customer-outcome evidence.',1],['Remove retention entirely.',0]],r:'Correct. A strong secondary result supports the strategy without displacing the employer’s central need.'},{q:'The hiring manager values SQL, but Jordan has never used it. What changes?',a:[['Add SQL because it appears in the posting.',0],['Acknowledge the gap through adjacent analytics evidence without claiming SQL; keep the resume truthful.',1],['Hide all analytics experience.',0]],r:'Correct. Strategy addresses risk with adjacent proof; it never manufactures proficiency.'},{q:'A recruiter says the resume feels too operational. How should the brief respond?',a:[['Add every customer-service duty to look broader.',0],['Preserve the operations argument while adding one line showing direct customer empathy and resolution execution.',1],['Replace the positioning with “results-driven professional.”',0]],r:'Correct. This adds balance without dissolving the central argument.'}];let stressIndex=0,confidenceScore=40;function showStress(){const s=stress[stressIndex],answers=shuffle(s.a.map((a,i)=>({a,original:i})));stressCase.innerHTML=`<span class="kicker">Challenge ${stressIndex+1} of 3</span>
+<h3>${s.q}</h3>${answers.map(x=>`<button class="choice outcome" onclick="answerStress(${x.original})">${x.a[0]}</button>`).join('')}`}function renderReaction(message,ok){stressReaction.innerHTML=`<span class="kicker">Recruiter reaction</span><p class="${ok?'pass':'miss'}">${message}</p><div class="confidence"><div style="display:flex;justify-content:space-between"><strong>Strategy confidence</strong><span>${confidenceScore}%</span></div><div class="confidence-bar"><div class="confidence-fill" style="width:${confidenceScore}%"></div></div></div>`}function answerStress(i){const s=stress[stressIndex],ok=s.a[i][1];if(!ok){confidenceScore=Math.max(25,confidenceScore-5);renderReaction('That response weakens focus or credibility. Try again.',false);return}confidenceScore=Math.min(100,confidenceScore+20);renderReaction(s.r,true);addXp(60);stressIndex++;if(stressIndex===3){stressFeedback.textContent='All three challenges resolved. Strategy confidence reached 100%.';stressNext.disabled=false;stressCase.innerHTML=`<span class="kicker">Stress test complete</span><h3>Positioning brief approved.</h3><p>Final confidence: ${confidenceScore}%</p>`}else{stressFeedback.textContent=`Challenge ${stressIndex+1} of 3`;setTimeout(showStress,650)}}showStress();
 function confetti(){for(let i=0;i<90;i++){const p=document.createElement('div');p.style.cssText=`position:fixed;z-index:1000;top:-20px;left:${Math.random()*100}vw;width:9px;height:16px;background:${['#e5b84f','#8e4197','#48bc88','#f9f1e7'][i%4]};animation:fall ${2+Math.random()*2}s linear forwards`;document.body.appendChild(p);setTimeout(()=>p.remove(),4500)}}const st=document.createElement('style');st.textContent='@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}';document.head.appendChild(st);
-</script></body></html>
+</script>
+</body>
+</html>

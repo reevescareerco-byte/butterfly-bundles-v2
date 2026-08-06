@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Interactive Charge Resolution Specialist Career Blueprint by Reeves Career Co." />
+  <title>Charge Resolution Specialist Career Blueprint | Reeves Career Co.</title>
+  <style>
+    :root{
+      --espresso:#2e211c;--mocha:#6b4e3d;--cocoa:#8a6752;--cream:#fbf6ef;--sand:#efe3d5;
+      --gold:#c79a43;--gold-soft:#ead6a9;--white:#ffffff;--ink:#2a211d;--muted:#6f625b;
+      --green:#3d6b57;--red:#9b4c4c;--shadow:0 16px 40px rgba(46,33,28,.12);--radius:22px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:linear-gradient(180deg,#f8f0e6 0%,#fff 42%,#f5ecdf 100%);color:var(--ink);line-height:1.55}
+    button,input,textarea,select{font:inherit}
+    a{color:inherit}
+    .app{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+    .sidebar{position:sticky;top:0;height:100vh;background:linear-gradient(180deg,var(--espresso),#3e2c25);color:white;padding:28px 20px;overflow:auto}
+    .brand{display:flex;gap:12px;align-items:center;margin-bottom:28px}
+    .brand-mark{width:48px;height:48px;border-radius:16px;background:linear-gradient(135deg,var(--gold),#f0d79a);display:grid;place-items:center;color:var(--espresso);font-weight:900;font-size:22px;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+    .brand h1{font-size:17px;line-height:1.2;margin:0}.brand small{color:#dfd1c7}
+    .nav-title{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#bdaea4;margin:22px 10px 8px}
+    .nav a{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:12px;text-decoration:none;color:#f8eee8;font-size:14px;margin:3px 0;transition:.2s}
+    .nav a:hover,.nav a.active{background:rgba(255,255,255,.11);transform:translateX(2px)}
+    .nav .num{width:25px;height:25px;border-radius:8px;background:rgba(199,154,67,.18);color:#f0d79a;display:grid;place-items:center;font-size:11px;font-weight:800}
+    .side-card{margin-top:24px;padding:16px;border:1px solid rgba(255,255,255,.12);border-radius:16px;background:rgba(255,255,255,.06)}
+    .side-card strong{display:block;color:#f5d991}.side-card p{font-size:12px;color:#ddcec4;margin:7px 0 0}
+    main{min-width:0}
+    .hero{padding:64px clamp(22px,5vw,72px) 42px;background:radial-gradient(circle at top right,rgba(199,154,67,.28),transparent 34%),linear-gradient(135deg,#fffaf3,#f4e7d8)}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;background:#fff;border:1px solid var(--gold-soft);border-radius:999px;color:var(--mocha);font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    .hero h2{font-size:clamp(38px,6vw,74px);line-height:.98;letter-spacing:-.05em;margin:22px 0 18px;max-width:1000px;color:var(--espresso)}
+    .hero h2 span{color:var(--cocoa)}
+    .hero p{max-width:800px;font-size:18px;color:var(--muted)}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+    .btn{border:0;border-radius:12px;padding:12px 17px;font-weight:800;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+    .btn-primary{background:var(--espresso);color:white}.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(46,33,28,.18)}
+    .btn-secondary{background:white;color:var(--espresso);border:1px solid #ddcdbd}.btn-secondary:hover{background:#fff9f0}
+    .stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:36px;max-width:980px}
+    .stat{background:rgba(255,255,255,.78);backdrop-filter:blur(8px);border:1px solid rgba(138,103,82,.16);border-radius:16px;padding:16px}.stat b{display:block;font-size:26px;color:var(--mocha)}.stat span{font-size:12px;color:var(--muted)}
+    .content{padding:34px clamp(18px,4vw,64px) 80px;max-width:1500px;margin:auto}
+    section{scroll-margin-top:18px;margin:28px 0 44px}
+    .section-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:18px}.section-head h3{font-size:clamp(26px,3.5vw,42px);line-height:1.05;margin:0;color:var(--espresso);letter-spacing:-.03em}.section-head p{max-width:620px;color:var(--muted);margin:0}
+    .card{background:white;border:1px solid #eadfd3;border-radius:var(--radius);box-shadow:var(--shadow);padding:clamp(20px,3vw,32px)}
+    .notice{display:grid;grid-template-columns:auto 1fr;gap:14px;background:#fff7e7;border:1px solid #e7c679;border-radius:18px;padding:18px}.notice .icon{width:38px;height:38px;border-radius:12px;background:var(--gold-soft);display:grid;place-items:center;font-weight:900}.notice h4{margin:0 0 4px}.notice p{margin:0;color:#6f5a34;font-size:14px}
+    .grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .role-card{padding:20px;border-radius:18px;background:linear-gradient(180deg,#fff,#fbf5ed);border:1px solid #e7dacd}.role-card h4{margin:0 0 10px;color:var(--mocha)}.role-card ul{margin:0;padding-left:18px;color:var(--muted)}
+    .match-list{display:grid;gap:11px}.match-row{display:grid;grid-template-columns:minmax(170px,1fr) 2fr 58px;align-items:center;gap:14px}.bar{height:10px;background:#eee4da;border-radius:999px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--cocoa),var(--gold));border-radius:inherit}.score{font-weight:900;color:var(--mocha)}
+    .tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}.tab{border:1px solid #ddcfc2;background:#fff;border-radius:999px;padding:9px 13px;font-weight:800;color:var(--mocha);cursor:pointer}.tab.active{background:var(--espresso);color:white;border-color:var(--espresso)}
+    .tab-panel{display:none}.tab-panel.active{display:block}
+    .resume-sheet{background:white;border:1px solid #d9d1ca;border-radius:8px;box-shadow:0 12px 32px rgba(0,0,0,.08);padding:38px;max-width:900px;margin:auto;color:#191919}
+    .resume-name{text-align:center;font-size:27px;font-weight:900;letter-spacing:.04em}.resume-contact{text-align:center;font-size:12px;margin-top:5px}.resume-title{font-size:13px;font-weight:900;text-transform:uppercase;border-bottom:1.5px solid #222;padding-bottom:4px;margin:18px 0 8px;letter-spacing:.08em}.resume-sheet p,.resume-sheet li{font-size:12.4px;line-height:1.45}.resume-sheet ul{padding-left:18px;margin:5px 0}.resume-job{display:flex;justify-content:space-between;gap:10px;font-weight:900;font-size:13px}.resume-company{font-style:italic;font-size:12px}.skills-line{font-size:12px;line-height:1.55}
+    .annotated{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,.7fr);gap:18px}.callout{background:#f8efe4;border-left:5px solid var(--gold);padding:16px;border-radius:0 14px 14px 0;margin-bottom:12px}.callout h5{margin:0 0 5px;font-size:14px}.callout p{margin:0;color:var(--muted);font-size:13px}
+    .library-tools{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}.search{flex:1;min-width:230px;border:1px solid #d8cabe;border-radius:12px;padding:11px 13px;background:white}.pill-select{border:1px solid #d8cabe;border-radius:12px;padding:11px;background:white}
+    .library{display:grid;gap:10px}.library-item{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:start;border:1px solid #e5d9ce;border-radius:14px;padding:14px;background:#fff}.library-item strong{display:block;color:var(--mocha);font-size:13px;margin-bottom:3px}.library-item p{margin:0;font-size:14px}.copy{border:0;background:#f0e3d6;color:var(--mocha);font-weight:900;border-radius:10px;padding:8px 10px;cursor:pointer}.copy:hover{background:#e3d0bf}
+    .keyword-cloud{display:flex;flex-wrap:wrap;gap:9px}.keyword{padding:8px 11px;border-radius:999px;background:#f4e9df;border:1px solid #e4d3c5;color:#5b4538;font-weight:700;font-size:13px;cursor:pointer}.keyword.selected{background:var(--espresso);color:white;border-color:var(--espresso)}
+    .workshop{display:grid;grid-template-columns:1fr 1fr;gap:18px}.field label{display:block;font-size:12px;font-weight:900;color:var(--mocha);margin-bottom:6px}.field textarea,.field input{width:100%;border:1px solid #d8cabe;border-radius:12px;padding:12px;background:#fff;min-height:48px}.field textarea{min-height:120px;resize:vertical}.output{background:#2f241f;color:#fff;border-radius:16px;padding:18px;min-height:250px;white-space:pre-wrap;font-size:13px}.output small{color:#dfcfc3}
+    .checklist{display:grid;gap:10px}.check{display:flex;gap:11px;align-items:flex-start;padding:13px;border:1px solid #e5d8cc;border-radius:13px;background:white}.check input{width:19px;height:19px;accent-color:var(--mocha);margin-top:2px}.check.done{opacity:.65;text-decoration:line-through}.progress-wrap{height:12px;background:#eadfd4;border-radius:999px;overflow:hidden;margin:12px 0}.progress-wrap div{height:100%;width:0;background:linear-gradient(90deg,var(--green),var(--gold));transition:.3s}
+    .cover-letter{max-width:850px;margin:auto;background:white;border:1px solid #ded6ce;border-radius:8px;padding:40px;box-shadow:0 12px 32px rgba(0,0,0,.08)}.cover-letter p{font-size:14px}
+    .footer{text-align:center;color:var(--muted);padding:30px;font-size:12px}
+    .mobile-toggle{display:none;position:fixed;right:16px;bottom:16px;z-index:30;width:48px;height:48px;border:0;border-radius:50%;background:var(--espresso);color:white;font-size:20px;box-shadow:var(--shadow)}
+    .toast{position:fixed;right:20px;top:20px;background:var(--espresso);color:white;padding:12px 16px;border-radius:12px;opacity:0;transform:translateY(-10px);pointer-events:none;transition:.2s;z-index:99}.toast.show{opacity:1;transform:translateY(0)}
+    @media(max-width:980px){.app{grid-template-columns:1fr}.sidebar{position:fixed;left:-310px;width:280px;z-index:20;transition:.25s}.sidebar.open{left:0}.mobile-toggle{display:block}.stat-row,.grid-3{grid-template-columns:repeat(2,1fr)}.annotated,.workshop{grid-template-columns:1fr}}
+    @media(max-width:640px){.hero{padding-top:42px}.hero h2{font-size:42px}.stat-row,.grid-2,.grid-3{grid-template-columns:1fr}.match-row{grid-template-columns:1fr 52px}.match-row .bar{grid-column:1/-1;grid-row:2}.resume-sheet,.cover-letter{padding:22px}.section-head{display:block}.section-head p{margin-top:8px}}
+    @media print{.sidebar,.mobile-toggle,.hero-actions,.tabs,.library-tools,.copy,.workshop,.checklist-card,.footer{display:none!important}.app{display:block}.hero{padding:20px;background:white}.hero .eyebrow,.hero p,.stat-row{display:none}.hero h2{font-size:28px;margin:0}.content{padding:10px}.card{box-shadow:none;border:0;padding:0}.resume-sheet,.cover-letter{box-shadow:none;border:0;padding:0;max-width:none}.tab-panel{display:none!important}#resume-panel{display:block!important}section:not(#resume){display:none!important}}
+  </style>
+</head>
+<body>
+<div class="toast" id="toast">Copied</div>
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><div class="brand-mark">🦋</div><div><h1>Reeves Career Co.</h1><small>ButterflyOS Resource Center</small></div></div>
+    <div class="nav-title">Blueprint</div>
+    <nav class="nav">
+      <a href="#welcome"><span class="num">01</span>Welcome</a>
+      <a href="#roles"><span class="num">02</span>Role Alignment</a>
+      <a href="#hiring"><span class="num">03</span>Hiring Manager Lens</a>
+      <a href="#resume"><span class="num">04</span>ATS Resume</a>
+      <a href="#keywords"><span class="num">05</span>Keyword Library</a>
+      <a href="#achievements"><span class="num">06</span>Achievement Library</a>
+      <a href="#metrics"><span class="num">07</span>Metrics Guide</a>
+      <a href="#cover-letter"><span class="num">08</span>Cover Letter</a>
+      <a href="#workshop"><span class="num">09</span>Customization Workshop</a>
+      <a href="#checklist"><span class="num">10</span>Final Checklist</a>
+    </nav>
+    <div class="side-card"><strong>Your goal</strong><p>Build one ATS-ready resume that can be strategically customized across the charge resolution, revenue cycle, billing, and claims job family.</p></div>
+  </aside>
+
+  <main>
+    <header class="hero">
+      <span class="eyebrow">Premium Career Blueprint</span>
+      <h2>Charge Resolution <span>Specialist</span></h2>
+      <p>A complete, recruiter-informed resource for building an ATS-ready resume, identifying transferable roles, selecting measurable achievements, and customizing applications across the healthcare revenue cycle job family.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#resume">View the Resume</a>
+        <button class="btn btn-secondary" onclick="window.print()">Print / Save as PDF</button>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><b>20+</b><span>aligned job titles</span></div>
+        <div class="stat"><b>75+</b><span>ATS keywords</span></div>
+        <div class="stat"><b>40+</b><span>achievement examples</span></div>
+        <div class="stat"><b>10</b><span>guided sections</span></div>
+      </div>
+    </header>
+
+    <div class="content">
+      <section id="welcome">
+        <div class="section-head"><div><span class="eyebrow">Start here</span><h3>Welcome to your blueprint</h3></div><p>This resource is designed to help you move beyond generic healthcare resumes and demonstrate the operational accuracy, analytical judgment, and revenue impact employers expect.</p></div>
+        <div class="notice"><div class="icon">!</div><div><h4>Reeves Career Co. Disclaimer</h4><p>Reeves Career Co. is not affiliated with any employer referenced in this resource. This blueprint provides educational guidance and sample content only. It does not guarantee interviews, job offers, or employment. Replace all sample employers, systems, responsibilities, and metrics with information that accurately reflects your experience.</p></div></div>
+        <div class="grid-3" style="margin-top:18px">
+          <div class="role-card"><h4>Use this blueprint when you have:</h4><ul><li>Medical claims experience</li><li>Hospital or physician billing exposure</li><li>Revenue cycle or patient account experience</li><li>Charge review, coding support, or denial follow-up</li></ul></div>
+          <div class="role-card"><h4>What you will build:</h4><ul><li>Targeted professional summary</li><li>ATS-aligned competency section</li><li>Metric-driven experience bullets</li><li>Role-specific technical skills</li></ul></div>
+          <div class="role-card"><h4>How to use it:</h4><ul><li>Study the completed sample</li><li>Choose relevant keywords</li><li>Replace sample achievements</li><li>Run the final checklist</li></ul></div>
+        </div>
+      </section>
+
+      <section id="roles">
+        <div class="section-head"><div><span class="eyebrow">Career family</span><h3>Roles this resume can target</h3></div><p>The same core resume can support multiple titles when the summary, competencies, bullet order, and technical skills are adjusted to match the posting.</p></div>
+        <div class="grid-3">
+          <div class="role-card"><h4>Charge & Revenue Integrity</h4><ul><li>Charge Resolution Specialist</li><li>Charge Review Specialist</li><li>Charge Capture Specialist</li><li>Revenue Integrity Specialist</li><li>Revenue Integrity Analyst</li></ul></div>
+          <div class="role-card"><h4>Revenue Cycle</h4><ul><li>Revenue Cycle Specialist</li><li>Revenue Cycle Analyst</li><li>Revenue Cycle Coordinator</li><li>Financial Operations Specialist</li><li>Healthcare Revenue Specialist</li></ul></div>
+          <div class="role-card"><h4>Billing & Claims</h4><ul><li>Claims Resolution Specialist</li><li>Claims Analyst</li><li>Billing Resolution Specialist</li><li>Medical Billing Specialist</li><li>Professional Billing Specialist</li></ul></div>
+          <div class="role-card"><h4>Patient Financial Services</h4><ul><li>Patient Account Resolution Specialist</li><li>Patient Financial Services Specialist</li><li>Insurance Resolution Specialist</li><li>Patient Accounts Specialist</li></ul></div>
+          <div class="role-card"><h4>Quality & Audit</h4><ul><li>Claims Quality Analyst</li><li>Charge Audit Specialist</li><li>Billing Quality Specialist</li><li>Revenue Cycle Quality Analyst</li></ul></div>
+          <div class="role-card"><h4>Epic / Systems-Focused</h4><ul><li>Epic Charge Review Analyst</li><li>Epic Revenue Cycle Specialist</li><li>Charge Work Queue Specialist</li><li>Healthcare Systems Analyst</li></ul></div>
+        </div>
+        <div class="card" style="margin-top:18px">
+          <h4 style="margin-top:0">Estimated alignment by title</h4>
+          <div class="match-list">
+            <div class="match-row"><span>Charge Resolution Specialist</span><div class="bar"><i style="width:98%"></i></div><span class="score">98%</span></div>
+            <div class="match-row"><span>Revenue Cycle Specialist</span><div class="bar"><i style="width:96%"></i></div><span class="score">96%</span></div>
+            <div class="match-row"><span>Revenue Integrity Specialist</span><div class="bar"><i style="width:95%"></i></div><span class="score">95%</span></div>
+            <div class="match-row"><span>Claims Resolution Specialist</span><div class="bar"><i style="width:94%"></i></div><span class="score">94%</span></div>
+            <div class="match-row"><span>Medical Billing Specialist</span><div class="bar"><i style="width:91%"></i></div><span class="score">91%</span></div>
+          </div>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:0">These percentages are instructional estimates, not formal ATS scores. Actual alignment depends on the employer's job description and the candidate's verified experience.</p>
+        </div>
+      </section>
+
+      <section id="hiring">
+        <div class="section-head"><div><span class="eyebrow">Recruiter lens</span><h3>What hiring managers need to see</h3></div><p>Strong resumes prove the candidate can identify defects, resolve discrepancies, protect revenue, and maintain compliant billing workflows under production expectations.</p></div>
+        <div class="grid-2">
+          <div class="card"><h4>Core evidence</h4><ul><li>Pre-bill encounter or charge review</li><li>Work queue error and warning resolution</li><li>Claims analysis and discrepancy investigation</li><li>Root cause identification and escalation</li><li>Payer policy and reimbursement knowledge</li><li>Cross-functional collaboration with coding, clinical, and billing teams</li></ul></div>
+          <div class="card"><h4>Operational evidence</h4><ul><li>Daily claims, encounters, or account volume</li><li>Accuracy or quality scores</li><li>Turnaround time and backlog reduction</li><li>Dollar value of claims or charges reviewed</li><li>Denial reduction or first-pass claim improvement</li><li>Systems and work queues used</li></ul></div>
+        </div>
+        <div class="card" style="margin-top:18px"><div class="grid-2"><div><h4>Weak</h4><p>Responsible for reviewing claims and correcting errors.</p></div><div><h4>Stronger</h4><p>Reviewed 175+ pre-bill encounters daily, corrected charge and documentation discrepancies, and escalated recurring defects to support accurate claim submission.</p></div></div></div>
+      </section>
+
+      <section id="resume">
+        <div class="section-head"><div><span class="eyebrow">Completed example</span><h3>ATS resume blueprint</h3></div><p>Use the completed resume as a model. Do not copy metrics, software, payer experience, or technical knowledge unless they accurately reflect your background.</p></div>
+        <div class="tabs">
+          <button class="tab active" data-tab="resume-panel">Resume</button>
+          <button class="tab" data-tab="notes-panel">Recruiter Notes</button>
+        </div>
+        <div class="tab-panel active" id="resume-panel">
+          <div class="resume-sheet" id="resumeText">
+            <div class="resume-name">FIRST LAST NAME</div>
+            <div class="resume-contact">City, State 00000 | 555-123-4567 | email@email.com | LinkedIn URL</div>
+            <div class="resume-title">Professional Summary</div>
+            <p>Charge Resolution Specialist with experience reviewing pre-bill encounters, resolving charge review work queue errors, analyzing claims discrepancies, and supporting accurate professional and facility billing. Skilled in root cause analysis, payer guideline interpretation, charge validation, and collaboration with coding, clinical, and revenue cycle teams to prevent recurring defects. Maintains high productivity, precise documentation, and HIPAA-compliant handling of patient and financial information across high-volume healthcare operations.</p>
+            <div class="resume-title">Core Competencies</div>
+            <div class="skills-line">Charge Resolution | Pre-Bill Review | Revenue Cycle Operations | Charge Capture | Claims Analysis | Work Queue Resolution | Billing Accuracy | Root Cause Analysis | Denial Prevention | Payer Guidelines | Professional Billing | Facility Billing | Revenue Integrity | Corrective Action | Trend Analysis | HIPAA Compliance</div>
+            <div class="resume-title">Professional Experience</div>
+            <div class="resume-job"><span>REVENUE CYCLE ANALYST</span><span>Jan 2023 – Present</span></div>
+            <div class="resume-company">ABC Health System | City, State</div>
+            <ul>
+              <li>Review 175+ pre-bill encounters daily to resolve charge review errors, documentation gaps, and claim-routing discrepancies before submission.</li>
+              <li>Analyze claim edits and system discrepancies to identify root causes, implement corrective actions, and prevent recurring billing defects.</li>
+              <li>Partner with clinic charge champions, coders, specialty teams, and revenue cycle staff to validate charges and accelerate issue resolution.</li>
+              <li>Maintain 98%+ quality while documenting resolution activity, escalation rationale, and follow-up actions in Epic work queues.</li>
+              <li>Reduce aging inventory by prioritizing high-risk accounts and resolving time-sensitive charge exceptions within established turnaround standards.</li>
+            </ul>
+            <div class="resume-job"><span>CLAIMS RESOLUTION SPECIALIST</span><span>Jun 2021 – Jan 2023</span></div>
+            <div class="resume-company">Healthcare Organization | City, State</div>
+            <ul>
+              <li>Investigated 120+ commercial, Medicare, and Medicaid claims daily to resolve coding, eligibility, authorization, and billing discrepancies.</li>
+              <li>Reviewed CMS-1500 and UB-04 claim data, EOBs, medical records, and payer responses to determine corrective action and support reimbursement.</li>
+              <li>Escalated systemic defects and denial trends with supporting documentation, improving visibility into repeat claim-processing issues.</li>
+              <li>Managed claims valued up to $250K while meeting productivity, quality, compliance, and turnaround-time expectations.</li>
+            </ul>
+            <div class="resume-job"><span>MEDICAL BILLING SPECIALIST</span><span>Aug 2019 – Jun 2021</span></div>
+            <div class="resume-company">Medical Practice | City, State</div>
+            <ul>
+              <li>Submitted and followed up on professional and facility claims, verified patient responsibility, and corrected billing errors affecting payment.</li>
+              <li>Validated demographic, insurance, authorization, CPT, HCPCS, ICD-10, modifier, and revenue code information before claim release.</li>
+              <li>Resolved outstanding accounts through payer portals, telephone follow-up, documentation review, and coordinated patient account updates.</li>
+              <li>Protected PHI and maintained complete account notes in accordance with HIPAA, payer, and organizational requirements.</li>
+            </ul>
+            <div class="resume-title">Technical Skills</div>
+            <div class="skills-line">Epic | Cerner | Facets | Salesforce | ServiceNow | Microsoft Excel | Microsoft Office | EMR/EHR | Claims Processing Platforms | Payer Portals | CMS-1500 | UB-04</div>
+            <div class="resume-title">Education</div>
+            <p><strong>Degree or Diploma</strong> | School Name, City, State</p>
+          </div>
+        </div>
+        <div class="tab-panel" id="notes-panel">
+          <div class="annotated">
+            <div class="card"><h4>Why the resume works</h4><p>The resume creates a clear progression from billing to claims resolution to revenue cycle analysis. It uses standard ATS headings, prioritizes charge resolution language, names the documents and systems involved, and shows production scale.</p><div class="callout"><h5>Summary</h5><p>Names the target role immediately and establishes the candidate's value across pre-bill review, work queues, billing accuracy, and root cause analysis.</p></div><div class="callout"><h5>Competencies</h5><p>Uses searchable terminology without turning the section into an unstructured list of unrelated healthcare skills.</p></div><div class="callout"><h5>Experience</h5><p>Each bullet shows action, scope, technical context, and operational impact. Production volume and quality strengthen credibility.</p></div><div class="callout"><h5>Technical Skills</h5><p>Separates software, forms, and platforms so recruiters can verify system alignment quickly.</p></div></div>
+            <div><div class="callout"><h5>Recruiter checkpoint</h5><p>Can the candidate explain how an error moved from identification to resolution?</p></div><div class="callout"><h5>Interview checkpoint</h5><p>Can the candidate describe a recurring defect, its root cause, and the corrective action taken?</p></div><div class="callout"><h5>Accuracy checkpoint</h5><p>Are every system, payer, code set, volume, dollar amount, and result verifiable?</p></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="keywords">
+        <div class="section-head"><div><span class="eyebrow">ATS alignment</span><h3>Keyword library</h3></div><p>Select the terms supported by your experience and reflected in the target posting. Avoid adding terminology you cannot discuss in an interview.</p></div>
+        <div class="card"><div class="tabs keyword-tabs">
+          <button class="tab active" data-keycat="all">All</button><button class="tab" data-keycat="charge">Charge</button><button class="tab" data-keycat="claims">Claims</button><button class="tab" data-keycat="billing">Billing</button><button class="tab" data-keycat="technical">Technical</button><button class="tab" data-keycat="skills">Skills</button>
+        </div><div class="keyword-cloud" id="keywordCloud"></div><p id="selectedKeywords" style="margin:18px 0 0;color:var(--muted);font-size:13px">Selected keywords will appear here.</p></div>
+      </section>
+
+      <section id="achievements">
+        <div class="section-head"><div><span class="eyebrow">Bullet builder</span><h3>Achievement library</h3></div><p>Search by focus area, copy the closest example, and replace every sample detail with your verified experience.</p></div>
+        <div class="card"><div class="library-tools"><input class="search" id="achievementSearch" placeholder="Search achievements..."/><select class="pill-select" id="achievementFilter"><option value="all">All categories</option><option value="charge">Charge Resolution</option><option value="claims">Claims</option><option value="quality">Quality</option><option value="revenue">Revenue</option><option value="collaboration">Collaboration</option></select></div><div class="library" id="achievementLibrary"></div></div>
+      </section>
+
+      <section id="metrics">
+        <div class="section-head"><div><span class="eyebrow">Proof of scale</span><h3>Metrics hiring managers value</h3></div><p>Use metrics to establish production volume, complexity, accuracy, timeliness, financial exposure, and process improvement.</p></div>
+        <div class="grid-3">
+          <div class="role-card"><h4>Volume</h4><ul><li>Claims reviewed per day</li><li>Pre-bill encounters processed</li><li>Accounts resolved weekly</li><li>Work queue inventory</li><li>Providers or clinics supported</li></ul></div>
+          <div class="role-card"><h4>Quality</h4><ul><li>Accuracy percentage</li><li>Audit score</li><li>Error reduction</li><li>First-pass claim rate</li><li>Documentation completeness</li></ul></div>
+          <div class="role-card"><h4>Timeliness</h4><ul><li>Average turnaround time</li><li>Aging inventory reduced</li><li>Backlog eliminated</li><li>Response time improved</li><li>Deadlines met</li></ul></div>
+          <div class="role-card"><h4>Financial Scope</h4><ul><li>Claims dollar value</li><li>Charges corrected</li><li>Revenue recovered</li><li>Underpayments identified</li><li>High-dollar thresholds</li></ul></div>
+          <div class="role-card"><h4>Complexity</h4><ul><li>Payer types</li><li>Specialties supported</li><li>Claim forms reviewed</li><li>Code sets validated</li><li>Systems used</li></ul></div>
+          <div class="role-card"><h4>Improvement</h4><ul><li>Denials reduced</li><li>Recurring defects prevented</li><li>Workflow steps removed</li><li>Rework decreased</li><li>Productivity increased</li></ul></div>
+        </div>
+      </section>
+
+      <section id="cover-letter">
+        <div class="section-head"><div><span class="eyebrow">Application support</span><h3>Sample cover letter</h3></div><p>Customize the employer, role title, systems, payer exposure, metrics, and examples before using this letter.</p></div>
+        <div class="cover-letter" id="coverLetterText">
+          <p>Dear Hiring Manager,</p>
+          <p>I am applying for the Charge Resolution Specialist position with [Company Name]. My background includes reviewing high-volume healthcare claims, resolving charge and billing discrepancies, analyzing system and payer errors, and documenting corrective actions before claim submission. This experience has prepared me to support accurate charge capture, compliant billing, and efficient revenue cycle operations.</p>
+          <p>In my current role, I review more than 175 pre-bill encounters daily, investigate charge review work queue exceptions, and collaborate with coding, clinical, and revenue cycle partners to resolve documentation and routing issues. I maintain quality above 98% while identifying recurring error patterns and escalating systemic defects that may affect reimbursement. I have also analyzed commercial, Medicare, and Medicaid claims, reviewed CMS-1500 and UB-04 data, and managed high-dollar accounts requiring careful interpretation of payer guidelines.</p>
+          <p>I would bring strong attention to detail, root cause analysis, and disciplined follow-through to [Company Name]. I am especially interested in the opportunity to help resolve charge-related defects in real time, improve first-pass claim accuracy, and support more reliable revenue cycle performance.</p>
+          <p>Thank you for your consideration. I welcome the opportunity to discuss how my experience can support your charge resolution and financial operations team.</p>
+          <p>Sincerely,<br/>First Last Name</p>
+        </div>
+      </section>
+
+      <section id="workshop">
+        <div class="section-head"><div><span class="eyebrow">Hands-on tool</span><h3>Customization workshop</h3></div><p>Paste the target role information and your verified metrics. The tool creates a focused customization brief you can use to revise the sample resume.</p></div>
+        <div class="card workshop">
+          <div>
+            <div class="field"><label>Target job title</label><input id="targetTitle" value="Charge Resolution Specialist"/></div>
+            <div class="field" style="margin-top:12px"><label>Top job description keywords</label><textarea id="jdKeywords" placeholder="Example: pre-bill encounters, Epic charge review, root cause analysis, corrective action"></textarea></div>
+            <div class="field" style="margin-top:12px"><label>Your verified metrics and systems</label><textarea id="candidateProof" placeholder="Example: 170+ claims/day, 98% quality, Facets, Epic, CMS-1500, UB-04"></textarea></div>
+            <button class="btn btn-primary" style="margin-top:14px" id="generateBrief">Generate Customization Brief</button>
+          </div>
+          <div class="output" id="briefOutput"><small>Your customization brief will appear here.</small></div>
+        </div>
+      </section>
+
+      <section id="checklist">
+        <div class="section-head"><div><span class="eyebrow">Final review</span><h3>Resume completion checklist</h3></div><p>Complete every item before applying. Your progress is saved automatically in this browser.</p></div>
+        <div class="card checklist-card"><strong id="progressLabel">0% complete</strong><div class="progress-wrap"><div id="progressBar"></div></div><div class="checklist" id="checklistBox"></div><button class="btn btn-secondary" style="margin-top:14px" id="resetChecklist">Reset checklist</button></div>
+      </section>
+    </div>
+    <div class="footer">© 2026 Reeves Career Co. | ButterflyOS Career Resource | Educational use only</div>
+  </main>
+</div>
+<button class="mobile-toggle" id="mobileToggle" aria-label="Open navigation">☰</button>
+<script>
+  const toast=(msg='Copied')=>{const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1500)};
+  document.querySelectorAll('.tab[data-tab]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.tab[data-tab]').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById(btn.dataset.tab).classList.add('active')}));
+  document.getElementById('mobileToggle').onclick=()=>document.getElementById('sidebar').classList.toggle('open');
+  document.querySelectorAll('.nav a').forEach(a=>a.onclick=()=>document.getElementById('sidebar').classList.remove('open'));
+
+  const keywords=[
+    ['Charge Resolution','charge'],['Charge Review','charge'],['Charge Capture','charge'],['Charge Validation','charge'],['Charge Reconciliation','charge'],['Charge Audit','charge'],['Charge Review Work Queues','charge'],['Pre-Bill Encounters','charge'],['Revenue Integrity','charge'],['Revenue Recovery','charge'],['Revenue Optimization','charge'],['Charge Champions','charge'],
+    ['Claims Analysis','claims'],['Claims Resolution','claims'],['Claim Edits','claims'],['Claims Errors','claims'],['Claims Discrepancies','claims'],['Denial Prevention','claims'],['Denials Management','claims'],['Appeals','claims'],['Payer Guidelines','claims'],['Commercial Insurance','claims'],['Medicare','claims'],['Medicaid','claims'],['Coordination of Benefits','claims'],['Medical Necessity','claims'],
+    ['Professional Billing','billing'],['Facility Billing','billing'],['Hospital Billing','billing'],['Physician Billing','billing'],['Patient Accounts','billing'],['Insurance Follow-Up','billing'],['Billing Accuracy','billing'],['First-Pass Claim Rate','billing'],['Revenue Cycle Operations','billing'],['Patient Financial Services','billing'],['Reimbursement','billing'],['Underpayments','billing'],
+    ['Epic','technical'],['Cerner','technical'],['Facets','technical'],['Meditech','technical'],['Athenahealth','technical'],['ServiceNow','technical'],['Salesforce','technical'],['Microsoft Excel','technical'],['EMR','technical'],['EHR','technical'],['CMS-1500','technical'],['UB-04','technical'],['CPT','technical'],['HCPCS','technical'],['ICD-10','technical'],['Modifiers','technical'],['Revenue Codes','technical'],['Payer Portals','technical'],
+    ['Root Cause Analysis','skills'],['Corrective Action','skills'],['Trend Identification','skills'],['Systemic Defect Escalation','skills'],['Cross-Functional Collaboration','skills'],['Attention to Detail','skills'],['Critical Thinking','skills'],['Problem Solving','skills'],['Documentation Accuracy','skills'],['HIPAA Compliance','skills'],['Audit Readiness','skills'],['Time Management','skills'],['High-Volume Processing','skills'],['Quality Assurance','skills']
+  ];
+  const cloud=document.getElementById('keywordCloud');
+  function renderKeywords(cat='all'){cloud.innerHTML='';keywords.filter(k=>cat==='all'||k[1]===cat).forEach(([text])=>{const s=document.createElement('button');s.className='keyword';s.textContent=text;s.onclick=()=>{s.classList.toggle('selected');updateSelected()};cloud.appendChild(s)})}
+  function updateSelected(){const sel=[...document.querySelectorAll('.keyword.selected')].map(x=>x.textContent);document.getElementById('selectedKeywords').textContent=sel.length?'Selected: '+sel.join(' | '):'Selected keywords will appear here.'}
+  renderKeywords();
+  document.querySelectorAll('[data-keycat]').forEach(btn=>btn.onclick=()=>{document.querySelectorAll('[data-keycat]').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderKeywords(btn.dataset.keycat);updateSelected()});
+
+  const achievements=[
+    ['Charge Resolution','charge','Reviewed 175+ pre-bill encounters daily to resolve charge review errors, warnings, and documentation discrepancies before claim submission.'],
+    ['Charge Resolution','charge','Reconciled charges across clinical documentation, coding records, and billing systems to prevent incomplete or incorrectly routed claims.'],
+    ['Charge Resolution','charge','Reduced charge work queue aging by prioritizing high-risk encounters and resolving time-sensitive exceptions within 48 hours.'],
+    ['Charge Resolution','charge','Validated professional and facility charges against source documentation, payer requirements, and organizational billing policies.'],
+    ['Claims','claims','Analyzed 120+ commercial, Medicare, and Medicaid claims daily to identify coding, eligibility, authorization, and billing discrepancies.'],
+    ['Claims','claims','Reviewed EOBs, claim forms, medical records, and payer responses to determine root causes and initiate appropriate corrective action.'],
+    ['Claims','claims','Managed high-dollar claims valued up to $250K while maintaining documentation, quality, and escalation standards.'],
+    ['Claims','claims','Resolved claim edits before submission, reducing preventable denials and supporting stronger first-pass reimbursement.'],
+    ['Quality','quality','Maintained 98%+ quality while documenting investigation findings, resolution steps, and escalation rationale in designated work queues.'],
+    ['Quality','quality','Identified recurring error patterns through trend analysis and escalated systemic defects affecting multiple clinics or service lines.'],
+    ['Quality','quality','Completed monthly quality audits and delivered targeted feedback that reduced repeat processing errors by 18%.'],
+    ['Quality','quality','Cross-referenced source documentation and system data to preserve billing accuracy and audit readiness.'],
+    ['Revenue','revenue','Recovered $185K in delayed reimbursement by correcting charge discrepancies and coordinating timely claim resubmission.'],
+    ['Revenue','revenue','Improved first-pass claim acceptance by 12% through pre-bill validation and proactive correction of documentation defects.'],
+    ['Revenue','revenue','Reduced outstanding account inventory by 25% through disciplined prioritization, payer follow-up, and root cause resolution.'],
+    ['Revenue','revenue','Identified underpayments and charge omissions that supported accurate reimbursement and prevented avoidable revenue leakage.'],
+    ['Collaboration','collaboration','Partnered with charge champions, coders, providers, and revenue cycle teams to resolve complex encounter-level defects.'],
+    ['Collaboration','collaboration','Communicated recurring workflow issues to leadership with supporting examples, trend data, and recommended corrective actions.'],
+    ['Collaboration','collaboration','Coordinated with specialty service lines to clarify documentation, validate charge intent, and accelerate claim release.'],
+    ['Collaboration','collaboration','Served as a point of escalation for complex charge and claim discrepancies requiring cross-functional investigation.']
+  ];
+  const lib=document.getElementById('achievementLibrary');
+  function renderAchievements(){const q=document.getElementById('achievementSearch').value.toLowerCase();const f=document.getElementById('achievementFilter').value;lib.innerHTML='';achievements.filter(a=>(f==='all'||a[1]===f)&&a[2].toLowerCase().includes(q)).forEach(a=>{const d=document.createElement('div');d.className='library-item';d.innerHTML=`<div><strong>${a[0]}</strong><p>${a[2]}</p></div><button class="copy">Copy</button>`;d.querySelector('button').onclick=()=>navigator.clipboard.writeText(a[2]).then(()=>toast());lib.appendChild(d)});if(!lib.children.length)lib.innerHTML='<p>No matching achievement examples.</p>'}
+  renderAchievements();document.getElementById('achievementSearch').oninput=renderAchievements;document.getElementById('achievementFilter').onchange=renderAchievements;
+
+  document.getElementById('generateBrief').onclick=()=>{const title=document.getElementById('targetTitle').value.trim()||'Target Role';const keys=document.getElementById('jdKeywords').value.trim()||'[Add the employer’s priority keywords]';const proof=document.getElementById('candidateProof').value.trim()||'[Add verified metrics, systems, payer exposure, and outcomes]';document.getElementById('briefOutput').textContent=`CUSTOMIZATION BRIEF\n\nTARGET TITLE\n${title}\n\nSUMMARY DIRECTION\nOpen with “${title}” and establish experience in the employer’s highest-priority workflow. Incorporate only the keywords you can verify.\n\nPRIORITY KEYWORDS\n${keys}\n\nCANDIDATE PROOF\n${proof}\n\nRESUME CHANGES\n1. Replace the sample target title in the summary.\n2. Move the most relevant competencies to the front.\n3. Reorder experience bullets so the closest match appears first.\n4. Add verified systems, claim forms, payer types, and production metrics.\n5. Remove unsupported technical terms.\n6. Mirror the employer’s wording without copying full sentences.\n\nFINAL TEST\nCan every claim be explained with a specific example during an interview?`};
+
+  const checks=['The professional summary names the target role.','The summary reflects the employer’s top workflow and keywords.','Core Competencies use terminology from the job description.','Every listed system and code set reflects actual experience.','Each role includes 3–5 concise, high-value bullets.','At least three bullets demonstrate measurable scale or impact.','The most relevant achievements appear first under each role.','The resume includes standard ATS section headings.','Spelling, grammar, dates, and formatting have been verified.','All sample content and placeholder metrics have been replaced.'];
+  const box=document.getElementById('checklistBox');const saved=JSON.parse(localStorage.getItem('chargeBlueprintChecklist')||'[]');
+  function updateProgress(){const inputs=[...box.querySelectorAll('input')];const done=inputs.filter(i=>i.checked).length;const pct=Math.round(done/inputs.length*100);document.getElementById('progressBar').style.width=pct+'%';document.getElementById('progressLabel').textContent=pct+'% complete';localStorage.setItem('chargeBlueprintChecklist',JSON.stringify(inputs.map(i=>i.checked)))}
+  checks.forEach((text,i)=>{const row=document.createElement('label');row.className='check';row.innerHTML=`<input type="checkbox" ${saved[i]?'checked':''}><span>${text}</span>`;if(saved[i])row.classList.add('done');row.querySelector('input').onchange=e=>{row.classList.toggle('done',e.target.checked);updateProgress()};box.appendChild(row)});updateProgress();
+  document.getElementById('resetChecklist').onclick=()=>{box.querySelectorAll('input').forEach(i=>i.checked=false);box.querySelectorAll('.check').forEach(r=>r.classList.remove('done'));updateProgress()};
+
+  const sections=[...document.querySelectorAll('main section')];const navLinks=[...document.querySelectorAll('.nav a')];
+  window.addEventListener('scroll',()=>{let current=sections[0].id;sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)current=s.id});navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+current))});
+</script>
+</body>
+</html>
